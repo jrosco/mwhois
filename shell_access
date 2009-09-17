@@ -1,3 +1,0 @@
-Create Session: ssh -t jrosco,xwh0i5@shell.sourceforge.net create
-
-Direct Access:  ssh -p 23016 jrosco@shell3.sourceforge.net
