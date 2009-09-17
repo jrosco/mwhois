@@ -6,9 +6,9 @@ Updated 	- 2009-09-17
 
 Changes:
 2009-05-24
-	*	Added progress bar for Advanced Searches and added it to a new Class command_display()
+	*	Added progress bar for Advanced Searches and added it to a new Class command_display Class
 	* 	Added a count lines in a file for the progress bar to keep track of how many lines there are to be processed
-	* 	Moved format() Function into the commanddisplay() Class (Have not yet implentment it yet)
+	* 	Moved format() Function into the command_display Class
 
 2009-09-12
 	* 	Moved single_search, basic_search and advance_search classes into the whois_search class and defined them as methods
