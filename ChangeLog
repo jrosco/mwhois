@@ -1,0 +1,28 @@
+Project  	- Xwh0i5
+Author 		- Joel Cumberland
+Website		- http://xwh0i5.sourceforge.net/
+Created 	- 2009-05-24
+Updated 	- 2009-09-17
+
+Changes:
+2009-05-24
+	*	Added progress bar for Advanced Searches and added it to a new Class command_display()
+	* 	Added a count lines in a file for the progress bar to keep track of how many lines there are to be processed
+	* 	Moved format() Function into the commanddisplay() Class (Have not yet implentment it yet)
+
+2009-09-12
+	* 	Moved single_search, basic_search and advance_search classes into the whois_search class and defined them as methods
+	* 	Added option parser for command line interaction
+
+2009-09-16
+	*	Added -s option for single domain searching
+	
+Known Issues:
+	* 	Using a tld like .com.au will fail, need a better way to determine the tld, the domain.split(".") needs to be 
+		replaced with something better.
+	
+TODO:
+	*	Need to upgrade to Python Version 3 at some stage
+	* 	Remove type and dList global vars (Need a better way the access them from the whois_server class)
+	*	Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
+	*	Have a way to access a SQL server to perform whois queries (Future Release)
