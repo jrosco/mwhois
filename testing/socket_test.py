@@ -1,6 +1,5 @@
 import MySQLdb
-
-    
+  
 def db_conn(user, passwd, host, database, table, wordlist):
    
     db = MySQLdb.connect(host=host, user=user, passwd=passwd, db=database)
