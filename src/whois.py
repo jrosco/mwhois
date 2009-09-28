@@ -5,7 +5,7 @@
 
 @contact zeme_6@hotmail.com
 
-@version 0.1.5a
+@version 0.1.6a
 
 @status: Alpha, non-release
 
@@ -15,10 +15,10 @@
 
 """
 
-import sys, re, socket
+import sys, re, socket, MySQLdb, getpass, os
 from optparse import OptionParser
 
-_version = "0.1.5a"
+_version = "0.1.6a"
 """Global variables"""
 type = ""
 dlist = ""
@@ -104,6 +104,23 @@ class whois_server:
                 print domain + indent + domain_foundadv
                 s.close()
         return
+    
+    """Create a wordlist from a mysql database"""
+    def db_conn(self, user, passwd, host, port, database, table, column, file):
+    
+        if port == None: port = 3306
+        if host == None: host = '127.0.0.1'
+        
+        try:
+            db = MySQLdb.connect(host=host, port=port, user=user, passwd=passwd, db=database)
+            query = db.cursor()
+            query.execute("SELECT %s FROM %s" % (column, table) ) 
+            result = query.fetchall()
+            file = open(file, 'w')
+            for record in result:
+                    print >>file, record[0]
+        except Exception, e: print e
+            
 
 class command_display:
     
@@ -140,8 +157,7 @@ class command_display:
         whitespace = " "
         format = whitespace * num
         return format
-
-    
+  
 class whois_search:
     
     def __init__(self, domain, tld, wordlist, domainlist):
@@ -229,39 +245,48 @@ def main():
     try:
         parser.add_option("-t", "--tld", action="store", type="string", dest="tld",
                           help="--tld com/net/org/biz/edu/info - Search for these TLD's (Only use one of these tlds for each whois search")
-    
-        parser.add_option("-s", "--single", action="store_true", dest="single", help="Single Domain Search")
-        
-        parser.add_option("-a", "--advance", action="store_true", dest="advance", help="Advanced Domain Search")
-        
+        parser.add_option("-s", "--single", action="store_true", dest="single", help="Single domain search")
+        parser.add_option("-a", "--advance", action="store_true", dest="advance", help="Advanced domain search")
         parser.add_option("-i", "--file-in", dest="filein",  type="string", help="File to read from")
-        
         parser.add_option("-o", "--file-out", dest="fileout", type="string",  help="File to write to")
+        parser.add_option("--sql", action="store_true", dest="sql", help="Connect to a MySQL database")
+        parser.add_option("--host", dest="host", type="string", help="Host address for MySQL database connection")
+        parser.add_option("--port", dest="port", type="int", help="Port to use for MySQL database connection")
+        parser.add_option("--user", dest="user", type="string", help="User to use for MySQL database connection")
+        parser.add_option("-p", "--passwd", action='store_true', dest="passwd",  help="Prompt for a password to use with MySQL database connection")
+        parser.add_option("--database", dest="database", type="string", help="Database to use for MySQL database query")
+        parser.add_option("--table", dest="table", type="string", help="Table to use for MySQL database query")
+        parser.add_option("--column", dest="column", type="string", help="Column to use for MySQL database query")
 
         (options, args) = parser.parse_args()
         
-        strtld =  options.tld
-        strsin = options.single
-        stradv = options.advance
-        strfilein =  options.filein
-        strfileout = options.fileout
-        first = re.compile('[\w .\w]')
-        
-        if strsin == True:
-            w = whois_search(sys.argv[2], None, None, None)
+        if options.single == True:
+            w = whois_search(args.single, None, None, None)
             w.single_search()
         else:
-            w = whois_search(None, strtld, strfilein, strfileout)
-            if stradv == True:
+            if options.sql == True:
+                options.filein = options.fileout + ".tmp"
+                if options.passwd == True:
+                    options.passwd = getpass.getpass()
+                conn = whois_server()
+                conn.db_conn(options.user, options.passwd, options.host, options.port, options.database, options.table, \
+                                        options.column, options.filein)
+            w = whois_search(None, options.tld, options.filein, options.fileout)
+            if options.advance == True:
                 w.advance_search()
             else:
                 w.basic_search()
+                
+        try: os.remove(options.fileout + ".tmp")
+        except Exception, e: pass
+        
     except Exception, e: 
         print e
         print ""
         print parser.get_usage()
+        sys.exit()
+        
+
 
 if __name__ == "__main__":
         main()
-
-
