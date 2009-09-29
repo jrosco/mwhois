@@ -261,7 +261,7 @@ def main():
         (options, args) = parser.parse_args()
         
         if options.single == True:
-            w = whois_search(args.single, None, None, None)
+            w = whois_search(sys.argv[2], None, None, None)
             w.single_search()
         else:
             if options.sql == True:
