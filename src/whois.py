@@ -15,7 +15,7 @@
 
 """
 
-import sys, re, socket, MySQLdb, getpass, os
+import sys, re, socket,  MySQLdb, getpass, os
 from optparse import OptionParser
 
 _version = "0.1.6a"
@@ -229,8 +229,9 @@ class whois_search:
         dlist.close()
         return 
 
-def main():
-    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n xwhois -t net -i /tmp/wordlist -o /tmp/domains\n xwhois -s sourceforge.net\n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
+def main(): 
+    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n" \
+        "\n Examples:\n xwhois -t net -i /tmp/wordlist -o /tmp/domains\n xwhois -s sourceforge.net\n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
     parser = OptionParser(usage=usage)
 
     try:
