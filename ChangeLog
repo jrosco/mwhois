@@ -2,7 +2,7 @@ Project  	- Xwh0i5
 Author 		- Joel Cumberland
 Website		- http://xwh0i5.sourceforge.net/
 Created 	- 2009-05-24
-Updated 	- 2009-09-28
+Updated 	- 2009-09-30
 
 Changes:
 2009-05-24
@@ -19,13 +19,16 @@ Changes:
 
 2009-09-28
 	*	Added access to MySQL servers to perform whois queries for domain searching
-	 	
+
+2009-09-30
+	*	Removed type and dList global vars 	
+	
+	
 Known Issues:
 	* 	Using a tld like .com.au will fail, need a better way to determine the tld, the domain.split(".") needs to be 
 		replaced with something better.
 	
 TODO:
 	*	Need to upgrade to Python Version 3 at some stage
-	* 	Remove type and dList global vars (Need a better way the access them from the whois_server class)
 	*	Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
 	*	Parse single whois query to display a formatted output
