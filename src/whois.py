@@ -19,9 +19,6 @@ import sys, re, socket, MySQLdb, getpass, os
 from optparse import OptionParser
 
 _version = "0.1.6a"
-"""Global variables"""
-type = ""
-dlist = ""
 domain_found = "Domain Not Found"
 domain_foundadv = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 
@@ -61,49 +58,44 @@ class whois_server:
     
     """Whois connection"""
     def connection(self, domain, who, tld):
-        response = ''
+        self.domain = domain
+        self.tld = tld
+        self.response = ''
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
         s.connect((who, 43))
         s.send(domain + "\r\n")
         while True:
             d = s.recv(4096)
-            response += d
+            self.response += d
             if d == '': break     
+        s.close()   
         
-        global type, dlist
+    def single(self):
+        print self.response
     
-        """Display a single whois is search"""
-        if type == "single":
-            print response
-            s.close()     
+    """Print/Display and write a basic whois search to file """
+    def basic(self, file):
+        if re.search(self.ex(self.tld), self.response):
+            indent = command_display().format_this(self.domain, 30)
+            print >>file,  self.domain + indent + domain_found 
+            print self.domain + indent + domain_found
         
-        """Print/Display and write a basic whois search to file """
-        if type == "basic":
-            if re.search(self.ex(tld), response):
-                    indent = command_display().format_this(domain, 30)
-                    print >>dlist,  domain + indent + domain_found 
-                    print domain + indent + domain_found
-                    s.close()             
-            else:
-                    s.close()
-        
-        """Print/Display and write a advanced whois search to file """            
-        if type == "advance":
-            """Print domains that are not found on the whois server/s"""
-            indent = command_display().format_this(domain, 30)
-            if re.search(self.ex(tld), response):
-                    print >>dlist, domain + indent + domain_found
-                    print domain + indent + domain_found
-                    s.close()   
-            else:
-                """
-                Prints out the domains that are not found by the advanced domain search. These domains could be dead
-                sites, not being used on port 80 or could be parked domains. These domains are registred on the whois server
-                """
-                print >>dlist, domain + indent + domain_foundadv
-                print domain + indent + domain_foundadv
-                s.close()
-        return
+    """
+    Print/Display and write a advanced whois search to file           
+    Print domains that are not found on the whois server/s
+    """ 
+    def advance(self, file):
+        indent = command_display().format_this(self.domain, 30)
+        if re.search(self.ex(self.tld), self.response):
+            print >>file, self.domain + indent + domain_found
+            print self.domain + indent + domain_found   
+        else:
+            """
+            Prints out the domains that are not found by the advanced domain search. These domains could be dead
+            sites, not being used on port 80 or could be parked domains. These domains are registred on the whois server
+            """
+            print >>file, self.domain + indent + domain_foundadv
+            print self.domain + indent + domain_foundadv
     
     """Create a wordlist from a mysql database"""
     def db_conn(self, user, passwd, host, port, database, table, column, file):
@@ -168,22 +160,19 @@ class whois_search:
        self.domainlist = domainlist
 
     def single_search(self):
-        
-        global type, dlist
-        type = "single"
+
         try:
             domainame,tld = self.domain.split(".") #NOTE // If using a tld like .com.au this will fail, need a better way to determine the tld
             w = whois_server()
             whois = w.who(tld)
             w.connection(self.domain, whois, tld)
+            w.single()
         except Exception, e: print e
         return
 
     
     def basic_search(self):
         
-        global type, dlist
-        type = "basic"
         dlist = open(self.domainlist, 'w')
         fr = open(self.wordlist, 'r')
         for line in fr:
@@ -193,6 +182,7 @@ class whois_search:
                 w = whois_server()
                 whois = w.who(self.tld)
                 w.connection(line, whois, self.tld)
+                w.basic(dlist)
             except Exception, e: print e
         dlist.close()
         fr.close()
@@ -222,8 +212,6 @@ class whois_search:
         advfile.close()
         wordlist.close()
         
-        global type, dlist
-        type = "advance"
         dlist = open(self.domainlist, 'w')
         advfile = open(self.domainlist + ".adv", 'r')
         for advline in advfile:
@@ -233,6 +221,7 @@ class whois_search:
                 w = whois_server()
                 whois = w.who(self.tld)
                 w.connection(advline, whois, self.tld)
+                w.advance(dlist)
             except Exception, e: print e
         advfile.close()
         dlist.close()
@@ -250,8 +239,8 @@ def main():
         parser.add_option("-i", "--file-in", dest="filein",  type="string", help="File to read from")
         parser.add_option("-o", "--file-out", dest="fileout", type="string",  help="File to write to")
         parser.add_option("--sql", action="store_true", dest="sql", help="Connect to a MySQL database")
-        parser.add_option("--host", dest="host", type="string", help="Host address for MySQL database connection")
-        parser.add_option("--port", dest="port", type="int", help="Port to use for MySQL database connection")
+        parser.add_option("--host", dest="host", type="string", help="Host address for MySQL database connection (Default 127.0.0.1)")
+        parser.add_option("--port", dest="port", type="int", help="Port to use for MySQL database connection (Default 3306)")
         parser.add_option("--user", dest="user", type="string", help="User to use for MySQL database connection")
         parser.add_option("-p", "--passwd", action='store_true', dest="passwd",  help="Prompt for a password to use with MySQL database connection")
         parser.add_option("--database", dest="database", type="string", help="Database to use for MySQL database query")
