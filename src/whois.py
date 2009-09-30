@@ -63,12 +63,14 @@ class whois_server:
         self.response = ''
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
         s.connect((who, 43))
+        if tld == "com":
+            domain = "="+domain
         s.send(domain + "\r\n")
         while True:
             d = s.recv(4096)
             self.response += d
             if d == '': break     
-        s.close()   
+        s.close()
         
     def single(self):
         print self.response
