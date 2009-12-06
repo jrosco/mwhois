@@ -104,10 +104,10 @@ class whois_server:
     
         try:
             import MySQLdb
-            if port == None: port = 3306
-            if host == None: host = '127.0.0.1'
             
             try:
+                if port == None: port = 3306
+                if host == None: host = '127.0.0.1'
                 db = MySQLdb.connect(host=host, port=port, user=user, passwd=passwd, db=database)
                 query = db.cursor()
                 query.execute("SELECT %s FROM %s" % (column, table) ) 
@@ -116,6 +116,7 @@ class whois_server:
                 for record in result:
                         print >>file, record[0]
             except Exception, e: print e
+            
         except:
             print "\nPlease install the MySQL-python Package to use the mysql function\n"
             exit(1)
