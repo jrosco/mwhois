@@ -5,7 +5,7 @@
 
 @contact zeme_6@hotmail.com
 
-@version 0.1.6a
+@version 0.1.7a
 
 @status: Alpha, non-release
 
