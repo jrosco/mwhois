@@ -1,8 +1,8 @@
-Project  	- Xwh0i5
+Project  	- Multi-Whois
 Author 		- Joel Cumberland
 Website		- http://xwh0i5.sourceforge.net/
 Created 	- 2009-05-24
-Updated 	- 2009-09-30
+Updated 	- 2009-12-06
 
 Changes:
 2009-05-24
@@ -22,6 +22,13 @@ Changes:
 
 2009-09-30
 	*	Removed type and dList global vars 	
+	
+2009-12-06
+	* 	Fixed up help menu
+	* 	Add exception if MySQl package not install on users system
+	* 	Renamed whois.py to multi-whois.py
+	* 	Added wordlist-sample to project
+	* 	Removed whitespace from search string
 	
 	
 Known Issues:
