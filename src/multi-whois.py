@@ -18,7 +18,7 @@
 import sys, re, socket, getpass, os
 from optparse import OptionParser
 
-_version = "0.1.6a"
+_version = "0.1.7a"
 domain_found = "Domain Not Found"
 domain_foundadv = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 
