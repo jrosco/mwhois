@@ -5,7 +5,7 @@
 
 @contact zeme_6@hotmail.com
 
-@version 0.1.7a
+@version 0.1.8a
 
 @status: Alpha, non-release
 
@@ -18,9 +18,12 @@
 import sys, re, socket, getpass, os
 from optparse import OptionParser
 
-_version = "0.1.7a"
-domain_found = "Domain Not Found"
-domain_foundadv = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
+_version = "0.1.8a"
+
+DOMAIN_FOUND = "Domain Not Found"
+DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
+DOMAIN_DEAD = 0
+DOMAIN_ALIVE = 1
 
 class whois_server:
         
@@ -73,35 +76,22 @@ class whois_server:
         s.close()
         
     def single(self):
-        print self.response
+        return self.response
     
-    """Print/Display and write a basic whois search to file """
-    def basic(self, file):
+    def basic(self):
         if re.search(self.ex(self.tld), self.response):
-            indent = command_display().format_this(self.domain, 30)
-            print >>file,  self.domain + indent + domain_found 
-            print self.domain + indent + domain_found
-        
-    """
-    Print/Display and write a advanced whois search to file           
-    Print domains that are not found on the whois server/s
-    """ 
-    def advance(self, file):
-        indent = command_display().format_this(self.domain, 30)
-        if re.search(self.ex(self.tld), self.response):
-            print >>file, self.domain + indent + domain_found
-            print self.domain + indent + domain_found   
-        else:
-            """
-            Prints out the domains that are not found by the advanced domain search. These domains could be dead
-            sites, not being used on port 80 or could be parked domains. These domains are registred on the whois server
-            """
-            print >>file, self.domain + indent + domain_foundadv
-            print self.domain + indent + domain_foundadv
+            return self.domain
+   
+    def advance(self):
+        if re.search(self.ex(self.tld), self.response):return self.domain, DOMAIN_DEAD
+        else:return self.domain, DOMAIN_ALIVE
+    
+
+class db_conn:  
     
     """Create a wordlist from a mysql database"""
-    def db_conn(self, user, passwd, host, port, database, table, column, file):
-    
+    def connection(self, user, passwd, host, port, database, table, column, file):
+        
         try:
             import MySQLdb
             
@@ -122,6 +112,41 @@ class whois_server:
             exit(1)
 
 
+class write_file:
+    
+    def __init__(self, domain, file):
+        self.domain = domain
+        self.file = file
+        
+    def single(self):
+        print self.domain
+    
+    """Print/Display and write a basic whois search to file """
+    def basic(self):
+        indent = command_display().format_this(self.domain, 30)
+        print >>self.file,  self.domain + indent + DOMAIN_FOUND 
+        print self.domain + indent + DOMAIN_FOUND
+
+    """
+    Print/Display and write a advanced whois search to file           
+    Print domains that are not found on the whois server/s
+    """ 
+    def advance(self, status):
+        self.status = status
+        indent = command_display().format_this(self.domain, 30)
+        if self.status == DOMAIN_DEAD:    
+            print >>self.file, self.domain + indent + DOMAIN_FOUND
+            print self.domain + indent + DOMAIN_FOUND 
+        
+        """
+        Prints out the domains that are not found by the advanced domain search. These domains could be dead
+        sites, not being used on port 80 or could be parked domains. These domains are registred on the whois server
+        """
+        if self.status == DOMAIN_ALIVE:
+            print >>self.file, self.domain + indent + DOMAIN_FOUND_ADV
+            print self.domain + indent + DOMAIN_FOUND_ADV
+    
+          
 class command_display:
     
     def __init__(self):
@@ -179,7 +204,10 @@ class whois_search:
             w = whois_server()
             whois = w.who(tld)
             w.connection(self.domain, whois, tld)
-            w.single()
+            domain = w.single()
+            write = write_file(domain, None)
+            if not domain:del domain
+            else:write.single() 
         except Exception, e: print e
         return
 
@@ -196,7 +224,10 @@ class whois_search:
                 w = whois_server()
                 whois = w.who(self.tld)
                 w.connection(line, whois, self.tld)
-                w.basic(dlist)
+                domain = w.basic()
+                write = write_file(domain, dlist)
+                if not domain:del domain
+                else:write.basic() 
             except Exception, e: print e
         dlist.close()
         fr.close()
@@ -236,7 +267,10 @@ class whois_search:
                 w = whois_server()
                 whois = w.who(self.tld)
                 w.connection(advline, whois, self.tld)
-                w.advance(dlist)
+                domain, status = w.advance()
+                write = write_file(domain, dlist)
+                if not domain:del domain
+                else:write.advance(status) 
             except Exception, e: print e
         advfile.close()
         dlist.close()
@@ -273,7 +307,7 @@ def main():
                 if options.passwd == True:
                     options.passwd = getpass.getpass()
                 conn = whois_server()
-                conn.db_conn(options.user, options.passwd, options.host, options.port, options.database, options.table, \
+                db_conn().connection(options.user, options.passwd, options.host, options.port, options.database, options.table, \
                                         options.column, options.filein)
             w = whois_search(None, options.tld, options.filein, options.fileout)
             if options.advance == True:
