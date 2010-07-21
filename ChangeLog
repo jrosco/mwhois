@@ -35,6 +35,11 @@ Changes:
 	*	Removed the print to file function from the whois_server class to it own class(the whois_server class only returns the domain object now)
 	*	Moved the db connection to its own class
 	
+2010-07-21
+	* Added a usable gui 
+	* Cleaned up some code
+	* Removed unwanted files
+	
 TODO:
 	*	Need to upgrade to Python Version 3 at some stage
 	*	Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
