@@ -9,52 +9,49 @@ class app_window:
 
     def __init__(self, master):
         
-        global single_box
-        global text_box
-        
         frame = Frame(master)
         frame.pack()
         
         master.title("Multi Whois Widget")
+        master.wm_iconbitmap('../media/icon.ico')
         master["padx"] = 60
         master["pady"] = 20
         
-        single_label = Label(frame)
-        single_label["text"] = "Enter the domain name:"
-        single_label.pack(side=LEFT)
+        self.single_label = Label(frame, text="Enter the domain name:")
+        self.single_label.pack(side=LEFT)
+        #self.single_label.grid(row=1, column=1)
         
-        single_box = Entry(frame)
-        single_box["width"] = 30
-        single_box.pack(side=LEFT)
+        self.single_box = Entry(frame, width=30)
+        self.single_box.pack(side=LEFT)
 
-        self.single = Button(frame, text="Single Search", command=self.single_command)
-        self.single.pack(side=LEFT)
+        self.single_button = Button(frame, text="Single Search", command=self.single_command)
+        self.single_button.pack(side=LEFT)
         
-        self.button = Button(frame, text="QUIT", fg="red", command=frame.quit)
-        self.button.pack(side=LEFT)
+        self.quit_button = Button(frame, text="QUIT", fg="red", command=frame.quit).pack(side=LEFT)
         
-        scroll = Tkinter.Scrollbar(master)
-        text_box = Tkinter.Text(master)
+        self.scroll = Tkinter.Scrollbar(master)
+        self.text_box = Tkinter.Text(master)
         
-        scroll.pack(side=Tkinter.RIGHT, fill=Tkinter.Y)
-        text_box.pack(side=Tkinter.LEFT, fill=Tkinter.Y)
-        scroll.config(command=text_box.yview)
-        text_box.config(yscrollcommand=scroll.set)
+        self.scroll.pack(side=Tkinter.RIGHT, fill=Tkinter.Y)
+        self.text_box.pack(side=Tkinter.LEFT, fill=Tkinter.Y)
+        self.scroll.config(command=self.text_box.yview)
+        self.text_box.config(yscrollcommand=self.scroll.set)
 
     def single_command(self):
-        if single_box.get().strip() == "":
+        if self.single_box.get().strip() == "":
             print "Please enter a domain name"
             tkMessageBox.showerror("Tkinter Entry Widget", "Enter a domain name e.g example.com")
         else:
             print "Running whois single search"
-            domain = single_box.get().strip()
+            domain = self.single_box.get().strip()
             self.whois = whois_search(domain, None, None, None)
             insert = self.whois.single_search()
-            text_box.delete(1.0, END)
-            text_box.insert(END, insert)
+            self.text_box.delete(1.0, END)
+            self.text_box.insert(END, insert)
 
-
-if __name__ == "__main__":
-    root = Tk()
-    app = app_window(root)
-    root.mainloop()
+def main():
+    if __name__ == "__main__":
+        root = Tk()
+        app = app_window(root)
+        root.mainloop()
+main()

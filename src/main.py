@@ -17,6 +17,7 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
+from gui import main
 
 _version = "0.1.8a"
 
@@ -295,9 +296,13 @@ def main():
         parser.add_option("--database", dest="database", type="string", help="Database to use for MySQL database query")
         parser.add_option("--table", dest="table", type="string", help="Table to use for MySQL database query")
         parser.add_option("--column", dest="column", type="string", help="Column to use for MySQL database query")
+        parser.add_option("-g", "--gui", action="store_true", dest="gui", help="Start GUI Interface")
 
         (options, args) = parser.parse_args()
         
+        if options.gui == True:
+            gui.main()
+    
         if options.single == True:
             w = whois_search(sys.argv[2], None, None, None)
             w.single_search()
