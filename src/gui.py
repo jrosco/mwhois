@@ -43,8 +43,8 @@ class app_window:
             tkMessageBox.showerror("Tkinter Entry Widget", "Enter a domain name e.g example.com")
         else:
             print "Running whois single search"
-            domain = self.single_box.get().strip()
-            self.whois = whois_search(domain, None, None, None)
+            self.domain = self.single_box.get().strip()
+            self.whois = whois_search(self.domain, None, None, None)
             insert = self.whois.single_search()
             self.text_box.delete(1.0, END)
             self.text_box.insert(END, insert)
