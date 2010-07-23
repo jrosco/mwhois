@@ -54,7 +54,7 @@ class whois_server:
             return w
         except Exception, e:
             print "Error finding %s please use a different tld to search for." % (e) 
-            sys.exit()
+            return w
     
     def ex(self, regex):
         x = self.exmap[regex]
