@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 """
 @author Joel Cumberland
 
@@ -17,7 +18,8 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
-from gui import main
+#import mgui
+
 
 _version = "0.1.8a"
 
@@ -300,8 +302,9 @@ def main():
 
         (options, args) = parser.parse_args()
         
-        if options.gui == True:
-            gui.main()
+#        if options.gui == True:
+#            a=mwindow()
+#            a.main()
     
         if options.single == True:
             w = whois_search(sys.argv[2], None, None, None)

@@ -3,7 +3,7 @@
 from Tkinter import *
 import Tkinter
 import tkMessageBox
-from multi_whois import whois_search
+from mwhois import whois_search
 
 class app_window:
 
@@ -40,7 +40,7 @@ class app_window:
     def single_command(self):
         if self.single_box.get().strip() == "":
             print "Please enter a domain name"
-            tkMessageBox.showerror("Tkinter Entry Widget", "Enter a domain name e.g example.com")
+            tkMessageBox.showerror("Multi Whois Widget", "Enter a domain name e.g example.com")
         else:
             print "Running whois single search"
             self.domain = self.single_box.get().strip()
@@ -49,9 +49,11 @@ class app_window:
             self.text_box.delete(1.0, END)
             self.text_box.insert(END, insert)
 
-def main():
-    if __name__ == "__main__":
-        root = Tk()
-        app = app_window(root)
-        root.mainloop()
-main()
+class mwindow:
+    def main(self):
+        if __name__ == "__main__":
+            root = Tk()
+            app = app_window(root)
+            root.mainloop()
+a=mwindow()
+a.main()
