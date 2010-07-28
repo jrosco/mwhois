@@ -5,6 +5,8 @@
 import wx
 from wxPython.wx import *
 from mwhois import whois_search
+from mwhois import write_file
+
 
 # begin wxGlade: extracode
 # end wxGlade
@@ -82,6 +84,8 @@ class MyApp(wx.Frame):
         self.save_btn = wx.Button(self.notebook_1_pane_2, -1, "Save")
         self.adv_txt = wx.StaticText(self.notebook_1_pane_2, -1, "Advanced Search:")
         self.adv_chkbox = wx.CheckBox(self.notebook_1_pane_2, -1, "")
+        self.tld_lbl = wx.StaticText(self.notebook_1_pane_2, -1, "Select TLD:")
+        self.tld_cumbo = wx.ComboBox(self.notebook_1_pane_2, -1, choices=["com", "net", "edu", "biz"], style=wx.CB_DROPDOWN)
         self.adv_txt_area = wx.TextCtrl(self.notebook_1_pane_2, -1, "", style=wx.TE_MULTILINE)
         self.begin_btn = wx.Button(self.notebook_1_pane_2, -1, "Begin")
         self.adv_quit_btn = wx.Button(self.notebook_1_pane_2, -1, "Quit")
@@ -96,7 +100,8 @@ class MyApp(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.open_file, self.input_btn)
         self.Bind(wx.EVT_BUTTON, self.save_file, self.save_btn)
         self.Bind(wx.EVT_CHECKBOX, self.adv_search, self.adv_chkbox)
-        self.Bind(wx.EVT_BUTTON, self.perform_multi, self.begin_btn)
+        self.Bind(wx.EVT_COMBOBOX, self.get_tld, self.tld_cumbo)
+        self.Bind(wx.EVT_BUTTON, self.multi_search, self.begin_btn)
         self.Bind(wx.EVT_BUTTON, self.close_app, self.adv_quit_btn)
         # end wxGlade
 
@@ -121,11 +126,16 @@ class MyApp(wx.Frame):
         self.save_txt.SetMinSize((200, 21))
         self.adv_txt.SetMinSize((120, 20))
         self.adv_txt.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.BOLD, 0, ""))
-        self.adv_chkbox.SetMinSize((13, 13))
+        self.adv_chkbox.SetMinSize((25, 13))
+        self.tld_lbl.SetMinSize((80, 13))
+        self.tld_lbl.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.BOLD, 0, ""))
+        self.tld_cumbo.SetMinSize((50, 21))
+        self.tld_cumbo.SetForegroundColour(wx.SystemSettings_GetColour(wx.SYS_COLOUR_DESKTOP))
+        self.tld_cumbo.SetSelection(-1)
         self.adv_txt_area.SetMinSize((524,440))
         self.adv_txt_area.SetBackgroundColour(wx.Colour(0, 0, 0))
         self.adv_txt_area.SetForegroundColour(wx.Colour(0, 255, 0))
-        self.adv_txt_area.SetFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, ""))
+        self.adv_txt_area.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "Arial"))
         # end wxGlade
 
     def __do_layout(self):
@@ -159,6 +169,8 @@ class MyApp(wx.Frame):
         sizer_6.Add(sizer_8, 1, wx.EXPAND, 0)
         sizer_9.Add(self.adv_txt, 0, 0, 0)
         sizer_9.Add(self.adv_chkbox, 0, 0, 0)
+        sizer_9.Add(self.tld_lbl, 0, 0, 0)
+        sizer_9.Add(self.tld_cumbo, 0, 0, 0)
         sizer_6.Add(sizer_9, 1, wx.EXPAND, 0)
         sizer_11.Add(self.adv_txt_area, 60, wx.EXPAND, 0)
         sizer_6.Add(sizer_11, 0, wx.EXPAND, 0)
@@ -178,40 +190,42 @@ class MyApp(wx.Frame):
     def open_file(self, event): # wxGlade: MyApp.<event_handler>
         
         self.dialog = wxFileDialog (None, style=wxOPEN)
-
-        # Show the dialog and get user input
+        
         if self.dialog.ShowModal() == wxID_OK:
            print 'Selected:', self.dialog.GetPath()
-           # The user did not select anything
+           self.input_txt.SetValue(self.dialog.GetPath())
         else:
            print 'Nothing was selected.'
         
-        # Destroy the dialog
         self.dialog.Destroy()
 
 
     def save_file(self, event): # wxGlade: MyApp.<event_handler>
-        #self.dirname = ''
-        self.dlg = wx.FileDialog("Choose a file", "","","*.*", wx.SAVE)
-        if self.dlg.ShowModal()== wx.ID_OK:
-            self.filename = dlg.GetFilename()
-            self.dirname=dlg.GetDirectory()
-        self.dlg.Destroy()
+        
+        self.dialog = wxFileDialog (None, style=wxSAVE)
+        if self.dialog.ShowModal() == wxID_OK:
+           print 'Selected:', self.dialog.GetPath()
+           self.save_txt.SetValue(self.dialog.GetPath())
+        else:
+           print 'Nothing was selected.'
+        self.dialog.Destroy()
+
 
     def adv_search(self, event): # wxGlade: MyApp.<event_handler>
+        
         print "Event handler `adv_search' not implemented"
         event.Skip()
 
-    def perform_multi(self, event): # wxGlade: MyApp.<event_handler>
-        self.wordlist = self.input_txt.GetValue()
-        self.domainlist = self.save_txt.GetValue()
-        if len(self.wordlist) == 0 | len(self.domainlist) == 0:
-            print "Please enter files"
-            wx.MessageBox('Please Enter Files', 'Error', wx.OK | wx.ICON_ERROR)
-
+    def get_tld(self, event): # wxGlade: MyApp.<event_handler>
+    
+        print "Event handler `get_tld' not implemented"
+        event.Skip()
         
+    
     def single_search(self, event): # wxGlade: MyApp.<event_handler>
+       
         self.domain = self.single_txt.GetValue()
+        
         if len(self.domain) == 0:
             print "Please enter a domain name"
             wx.MessageBox('Please Enter a Domain Name', 'Error', wx.OK | wx.ICON_ERROR)
@@ -221,10 +235,31 @@ class MyApp(wx.Frame):
             self.single_txt_area.Clear()
             self.single_txt_area.SetValue(self.whois.single_search())
 
+
+    def multi_search(self, event): # wxGlade: MyApp.<event_handler>
+        
+        self.wordlist = self.input_txt.GetValue()
+        self.domainlist = self.save_txt.GetValue()
+        print "Performing a multi domain search"
+        self.adv_txt_area.Clear()
+        self.adv_txt_area.AppendText("Performing a multi domain search\n\n")
+        
+        if len(self.wordlist) == 0 | len(self.domainlist) == 0:
+            print "Please enter files"
+            wx.MessageBox('Please Enter Files', 'Error', wx.OK | wx.ICON_ERROR)
+        else:
+            self.whois = whois_search(None, 'com', self.wordlist, self.domainlist)
+            #self.whois.basic_search()
+            self.adv_txt_area.AppendText(self.whois.basic_search())
+
+
     def close_app(self, event): # wxGlade: MyApp.<event_handler>
+        
         wx.Window.Close(self, force=False)
         
+        
     def about_diag(self, event): # wxGlade: MyApp.<event_handler>
+        
         print "Event handler `about_diag' not implemented"
         event.Skip()
 

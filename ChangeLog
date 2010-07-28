@@ -39,6 +39,10 @@ Changes:
 	* Added a usable gui 
 	* Cleaned up some code
 	* Removed unwanted files
+
+2010-07-28
+	* Removed some test python scripts
+	* Updated gui toolkit from tk to wx
 	
 TODO:
 	*	Need to upgrade to Python Version 3 at some stage

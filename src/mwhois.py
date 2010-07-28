@@ -18,7 +18,6 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
-#import mgui
 
 
 _version = "0.1.8a"
@@ -126,9 +125,10 @@ class write_file:
     
     """Print/Display and write a basic whois search to file """
     def basic(self):
-        indent = command_display().format_this(self.domain, 30)
-        print >>self.file,  self.domain + indent + DOMAIN_FOUND 
-        print self.domain + indent + DOMAIN_FOUND
+        self.indent = command_display().format_this(self.domain, 30)
+        self.basic_print = self.domain + self.indent + DOMAIN_FOUND
+        print >>self.basic_print
+        return self.basic_print
 
     """
     Print/Display and write a advanced whois search to file           
@@ -217,24 +217,30 @@ class whois_search:
     
     def basic_search(self):
         
-        dlist = open(self.domainlist, 'w')
-        fr = open(self.wordlist, 'r')
-        for line in fr:
-            line = command_display().remove_whitespace(line)
-            line = line.rstrip() + "." + self.tld
-            if not line: break
+        self.dlist = open(self.domainlist, 'w')
+        self.fr = open(self.wordlist, 'r')
+        for self.line in self.fr:
+            self.line = command_display().remove_whitespace(self.line)
+            self.line = self.line.rstrip() + "." + self.tld
+            if not self.line: break
             try:
-                w = whois_server()
-                whois = w.who(self.tld)
-                w.connection(line, whois, self.tld)
-                domain = w.basic()
-                write = write_file(domain, dlist)
-                if not domain:del domain
-                else:write.basic() 
+                self.w = whois_server()
+                self.whois = self.w.who(self.tld)
+                self.w.connection(self.line, self.whois, self.tld)
+                self.domain = self.w.basic()
+                self.write = write_file(self.domain, self.dlist)
+                if not self.domain:del self.domain
+                else:
+                    #print self.domain
+                    #write.basic()
+                    #self.basic_domain = self.write.basic()
+                    #return self.basic_domain
+                    return "FOO\t\t\tBAR"
+                    
             except Exception, e: print e
-        dlist.close()
-        fr.close()
-        return domain     
+        self.dlist.close()
+        self.fr.close()
+        return
 
     
     def advance_search(self):
