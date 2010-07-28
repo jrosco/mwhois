@@ -10,6 +10,42 @@ from mwhois import whois_search
 # end wxGlade
 
 
+class AboutDialog(wx.Dialog):
+    def __init__(self, *args, **kwds):
+        # begin wxGlade: AboutDialog.__init__
+        kwds["style"] = wx.DEFAULT_DIALOG_STYLE
+        wx.Dialog.__init__(self, *args, **kwds)
+        self.bitmap_1 = wx.StaticBitmap(self, -1, wx.NullBitmap)
+        self.label_1 = wx.StaticText(self, -1, "label_1")
+        self.button_1 = wx.Button(self, -1, "button_1")
+
+        self.__set_properties()
+        self.__do_layout()
+        # end wxGlade
+
+    def __set_properties(self):
+        # begin wxGlade: AboutDialog.__set_properties
+        self.SetTitle("dialog_1")
+        # end wxGlade
+
+    def __do_layout(self):
+        # begin wxGlade: AboutDialog.__do_layout
+        sizer_12 = wx.BoxSizer(wx.VERTICAL)
+        sizer_14 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_13.Add(self.bitmap_1, 0, 0, 0)
+        sizer_13.Add(self.label_1, 0, 0, 0)
+        sizer_12.Add(sizer_13, 1, wx.EXPAND, 0)
+        sizer_14.Add(self.button_1, 0, 0, 0)
+        sizer_12.Add(sizer_14, 1, wx.EXPAND, 0)
+        self.SetSizer(sizer_12)
+        sizer_12.Fit(self)
+        self.Layout()
+        # end wxGlade
+
+# end of class AboutDialog
+
+
 class MyApp(wx.Frame):
     def __init__(self, *args, **kwds):
         # begin wxGlade: MyApp.__init__
@@ -141,7 +177,7 @@ class MyApp(wx.Frame):
     
     def open_file(self, event): # wxGlade: MyApp.<event_handler>
         
-        self.dialog = wxFileDialog (None, style=wxSAVE)
+        self.dialog = wxFileDialog (None, style=wxOPEN)
 
         # Show the dialog and get user input
         if self.dialog.ShowModal() == wxID_OK:
@@ -155,8 +191,12 @@ class MyApp(wx.Frame):
 
 
     def save_file(self, event): # wxGlade: MyApp.<event_handler>
-        print "Event handler `save_file' not implemented"
-        event.Skip()
+        #self.dirname = ''
+        self.dlg = wx.FileDialog("Choose a file", "","","*.*", wx.SAVE)
+        if self.dlg.ShowModal()== wx.ID_OK:
+            self.filename = dlg.GetFilename()
+            self.dirname=dlg.GetDirectory()
+        self.dlg.Destroy()
 
     def adv_search(self, event): # wxGlade: MyApp.<event_handler>
         print "Event handler `adv_search' not implemented"
@@ -165,7 +205,7 @@ class MyApp(wx.Frame):
     def perform_multi(self, event): # wxGlade: MyApp.<event_handler>
         self.wordlist = self.input_txt.GetValue()
         self.domainlist = self.save_txt.GetValue()
-        if len(self.wordlist) == 0 & len(self.domainlist) == 0:
+        if len(self.wordlist) == 0 | len(self.domainlist) == 0:
             print "Please enter files"
             wx.MessageBox('Please Enter Files', 'Error', wx.OK | wx.ICON_ERROR)
 
