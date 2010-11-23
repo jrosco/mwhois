@@ -202,7 +202,7 @@ class whois_search:
        self.tld = tld
        self.wordlist = wordlist
        self.domainlist = domainlist
-       
+	   
     def single_search(self):
 
         try:
@@ -234,9 +234,10 @@ class whois_search:
                 write = write_file(domain, dlist)
                 if not domain:del domain
                 else:
-                    indent = cl_display().format_this(domain, 30)
-                    self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-                    #print "Text Box Object Instance Address:" + get_text_box()
+                    if self.textbox:
+                        indent = cl_display().format_this(domain, 30)
+                        self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+                        #print "Text Box Object Instance Address:" + get_text_box()
                     write.basic()
             except Exception, e: print e
         dlist.close()
@@ -281,11 +282,12 @@ class whois_search:
                 write = write_file(domain, dlist)
                 if not domain:del domain
                 else:
-                    indent = cl_display().format_this(domain, 30)
-                    if status == DOMAIN_ALIVE:
-                        self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-                    if status == DOMAIN_DEAD:
-                        self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
+                    if self.textbox:
+						indent = cl_display().format_this(domain, 30)
+						if status == DOMAIN_ALIVE:
+							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+						if status == DOMAIN_DEAD:
+							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
                     write.advance(status) 
             except Exception, e: print e
         advfile.close()
