@@ -4,9 +4,8 @@
 
 import wx
 from wxPython.wx import *
-#from mwhois import whois_search
 from mwhois import *
-
+import tempfile
 
 # begin wxGlade: extracode
 # end wxGlade
@@ -243,13 +242,18 @@ class MyApp(wx.Frame):
         self.adv_txt_area.Clear()
         self.adv_txt_area.AppendText("Performing a multi domain search\n\n")
         
-        if len(self.wordlist) == 0 or len(self.domainlist) == 0:
+        if len(self.domainlist) == 0:
+            tmp_dir = tempfile.gettempdir()
+            self.domainlist = tmp_dir+"/mwhois_output.txt"
+            
+        if len(self.wordlist) == 0:
             print "Please enter files"
             wx.MessageBox('Please Enter Files', 'Error', wx.OK | wx.ICON_ERROR)
         else:
             self.whois = whois_search(None, self.tld, self.wordlist, self.domainlist)
             self.whois.set_text_box(self.adv_txt_area)
-            if self.adv_chkbox == True:
+            if self.adv_chkbox.GetValue:
+                self.adv_txt_area.AppendText("\nAdvanced Search...\n")
                 self.whois.advance_search()
                 self.adv_txt_area.AppendText("\nDone...")
             else:

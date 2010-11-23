@@ -43,6 +43,9 @@ Changes:
 2010-07-28
 	* Removed some test python scripts
 	* Updated gui toolkit from tk to wx
+
+2010-11-23
+	* GUI Improvements
 	
 TODO:
 	*	Need to upgrade to Python Version 3 at some stage

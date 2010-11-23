@@ -282,7 +282,10 @@ class whois_search:
                 if not domain:del domain
                 else:
                     indent = cl_display().format_this(domain, 30)
-                    self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+                    if status == DOMAIN_ALIVE:
+                        self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+                    if status == DOMAIN_DEAD:
+                        self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
                     write.advance(status) 
             except Exception, e: print e
         advfile.close()
