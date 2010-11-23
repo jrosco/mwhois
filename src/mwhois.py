@@ -6,7 +6,7 @@
 
 @contact zeme_6@hotmail.com
 
-@version 0.1.8a
+@version 0.1.9a
 
 @status: Alpha, non-release
 
@@ -20,7 +20,7 @@ import sys, re, socket, getpass, os
 from optparse import OptionParser
 from mgui import *
 
-_version = "0.1.8a"
+_version = "0.1.9a"
 
 DOMAIN_FOUND = "Domain Not Found"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
