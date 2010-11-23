@@ -34,14 +34,16 @@ class whois_server:
     A list of whois server to be used
     """
     whoismap = {        'com': 'whois.verisign-grs.com', \
+						'com.au': 'whois.verisign-grs.com', \
                         'org': 'whois.pir.org', \
                         'net': 'whois.internic.net', \
                         'biz': 'whois.neulevel.biz', \
                         'edu': 'whois.educause.net', \
                         'info': 'whois.afilias.info' } # Will add more Whois Servers later.
     
-    """Regular expression displayed by the output of the whois query performed"""
+    """Regular expression cl_displayed by the output of the whois query performed"""
     exmap =     {       'com': 'No match for', \
+						'com.au': 'No match for', \
                         'org': 'NOT FOUND', \
                         'net': 'No match for', \
                         'biz': 'Not found:', \
@@ -119,24 +121,25 @@ class write_file:
     def __init__(self, domain, file):
         self.domain = domain
         self.file = file
-        
+
+    
     def single(self):
         print self.domain
     
-    """Print/Display and write a basic whois search to file """
+    """Print/cl_display and write a basic whois search to file """
     def basic(self):
-        self.indent = command_display().format_this(self.domain, 30)
-        self.basic_print = self.domain + self.indent + DOMAIN_FOUND
-        print >>self.basic_print
-        return self.basic_print
+        indent = cl_display().format_this(self.domain, 30)
+        print >>self.file,  self.domain + indent + DOMAIN_FOUND 
+        print self.domain + indent + DOMAIN_FOUND
+    
 
     """
-    Print/Display and write a advanced whois search to file           
+    Print/cl_display and write a advanced whois search to file           
     Print domains that are not found on the whois server/s
     """ 
     def advance(self, status):
         self.status = status
-        indent = command_display().format_this(self.domain, 30)
+        indent = cl_display().format_this(self.domain, 30)
         if self.status == DOMAIN_DEAD:    
             print >>self.file, self.domain + indent + DOMAIN_FOUND
             print self.domain + indent + DOMAIN_FOUND 
@@ -150,7 +153,7 @@ class write_file:
             print self.domain + indent + DOMAIN_FOUND_ADV
     
           
-class command_display:
+class cl_display:
     
     def __init__(self):
        """Used by the progress_bar() to keep track of the percentage being used"""
@@ -178,7 +181,7 @@ class command_display:
                     pass
         return linecount
     
-    """Indents the command line display to make it look pretty"""
+    """Indents the command line cl_display to make it look pretty"""
     def format_this(self, word, indent):
         wcount = len(word)
         num = (indent - wcount)
@@ -199,11 +202,11 @@ class whois_search:
        self.tld = tld
        self.wordlist = wordlist
        self.domainlist = domainlist
-
+       
     def single_search(self):
 
         try:
-            domainame,tld = self.domain.split(".") #NOTE // If using a tld like .com.au this will fail, need a better way to determine the tld
+            domainame,tld = self.domain.split(".", 1) 
             w = whois_server()
             whois = w.who(tld)
             w.connection(self.domain, whois, tld)
@@ -217,44 +220,42 @@ class whois_search:
     
     def basic_search(self):
         
-        self.dlist = open(self.domainlist, 'w')
-        self.fr = open(self.wordlist, 'r')
-        for self.line in self.fr:
-            self.line = command_display().remove_whitespace(self.line)
-            self.line = self.line.rstrip() + "." + self.tld
-            if not self.line: break
+        dlist = open(self.domainlist, 'w')
+        fr = open(self.wordlist, 'r')
+        for line in fr:
+            line = cl_display().remove_whitespace(line)
+            line = line.rstrip() + "." + self.tld
+            if not line: break
             try:
-                self.w = whois_server()
-                self.whois = self.w.who(self.tld)
-                self.w.connection(self.line, self.whois, self.tld)
-                self.domain = self.w.basic()
-                self.write = write_file(self.domain, self.dlist)
-                if not self.domain:del self.domain
+                w = whois_server()
+                whois = w.who(self.tld)
+                w.connection(line, whois, self.tld)
+                domain = w.basic()
+                write = write_file(domain, dlist)
+                if not domain:del domain
                 else:
-                    #print self.domain
-                    #write.basic()
-                    #self.basic_domain = self.write.basic()
-                    #return self.basic_domain
-                    return "FOO\t\t\tBAR"
-                    
+                    indent = cl_display().format_this(domain, 30)
+                    self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+                    #print "Text Box Object Instance Address:" + get_text_box()
+                    write.basic()
             except Exception, e: print e
-        self.dlist.close()
-        self.fr.close()
-        return
+        dlist.close()
+        fr.close()
+        return 
 
     
     def advance_search(self):
      
         advfile = open(self.domainlist + ".adv", 'w')
         wordlist = open(self.wordlist, 'r')
-        c = command_display()
+        c = cl_display()
         countline = c.count_lines(self.wordlist)
         total = countline
         
         print "Performing a Advanced Search..."
         for line in wordlist:
             c.progress_bar(countline, total, "*")
-            line = command_display().remove_whitespace(line)
+            line = cl_display().remove_whitespace(line)
             line = line.rstrip() + "." + self.tld
             countline-=1
             if not line: break
@@ -279,11 +280,20 @@ class whois_search:
                 domain, status = w.advance()
                 write = write_file(domain, dlist)
                 if not domain:del domain
-                else:write.advance(status) 
+                else:
+                    indent = cl_display().format_this(domain, 30)
+                    self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
+                    write.advance(status) 
             except Exception, e: print e
         advfile.close()
         dlist.close()
-        return 
+        return     
+    
+
+    def set_text_box(self, object):
+        self.textbox = object
+        
+        
 
 def main():
     usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n whois -t net -i /tmp/wordlist -o /tmp/domains\n whois -s sourceforge.net\n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
