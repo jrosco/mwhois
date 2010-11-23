@@ -18,7 +18,7 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
-
+from mgui import *
 
 _version = "0.1.8a"
 
@@ -296,7 +296,7 @@ class whois_search:
         
 
 def main():
-    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n whois -t net -i /tmp/wordlist -o /tmp/domains\n whois -s sourceforge.net\n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
+    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n mwhois -t net -i /tmp/wordlist -o /tmp/domains\n mwhois -s sourceforge.net\n mwhois --gui \n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
     parser = OptionParser(usage=usage)
 
     try:
@@ -318,10 +318,12 @@ def main():
 
         (options, args) = parser.parse_args()
         
-#        if options.gui == True:
-#            a=mwindow()
-#            a.main()
-    
+        if options.gui == True:
+            print "GUI Loading...."
+            window = StartGUI()
+            window.main()
+           
+            
         if options.single == True:
             w = whois_search(sys.argv[2], None, None, None)
             w.single_search()

@@ -212,11 +212,11 @@ class MyApp(wx.Frame):
 
 
     def adv_search(self, event): # wxGlade: MyApp.<event_handler>
-        
+        print "Checked"
         return
 
     def get_tld(self, event): # wxGlade: MyApp.<event_handler>
-       
+        
         return
     
     def single_search(self, event): # wxGlade: MyApp.<event_handler>
@@ -271,11 +271,12 @@ class MyApp(wx.Frame):
 
 # end of class MyApp
 
-
-if __name__ == "__main__":
-    app = wx.PySimpleApp(0)
-    wx.InitAllImageHandlers()
-    mwhois_frame = MyApp(None, -1, "")
-    app.SetTopWindow(mwhois_frame)
-    mwhois_frame.Show()
-    app.MainLoop()
+class StartGUI():
+    
+    def main(self):
+        app = wx.PySimpleApp(0)
+        wx.InitAllImageHandlers()
+        mwhois_frame = MyApp(None, -1, "")
+        app.SetTopWindow(mwhois_frame)
+        mwhois_frame.Show()
+        app.MainLoop()
