@@ -202,6 +202,7 @@ class whois_search:
        self.tld = tld
        self.wordlist = wordlist
        self.domainlist = domainlist
+       self.textbox = None
 	   
     def single_search(self):
 
