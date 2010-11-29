@@ -19,10 +19,11 @@
 import sys, re, socket, getpass, os
 from optparse import OptionParser
 from mgui import *
+from threading import Thread
 
 _version = "0.1.9a"
 
-DOMAIN_FOUND = "Domain Not Found"
+DOMAIN_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
@@ -68,16 +69,19 @@ class whois_server:
         self.domain = domain
         self.tld = tld
         self.response = ''
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
-        s.connect((who, 43))
-        if tld == "com":
-            domain = "="+domain
-        s.send(domain + "\r\n")
-        while True:
-            d = s.recv(4096)
-            self.response += d
-            if d == '': break     
-        s.close()
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
+            s.connect((who, 43))
+            if tld == "com":
+                domain = "="+domain
+                s.send(domain + "\r\n")
+            while True:
+                d = s.recv(4096)
+                self.response += d
+                if d == '': break     
+            s.close()
+        except Exception, e:
+            print e
         
     def single(self):
         return self.response
@@ -194,16 +198,19 @@ class cl_display:
         return self.str
         
         
-class whois_search:
+class whois_search(Thread):
     
     def __init__(self, domain, tld, wordlist, domainlist):
        
+       Thread.__init__(self)
        self.domain = domain
        self.tld = tld
        self.wordlist = wordlist
        self.domainlist = domainlist
        self.textbox = None
-	   
+       self.start()
+       self.join()
+       
     def single_search(self):
 
         try:
@@ -221,7 +228,6 @@ class whois_search:
     
     def basic_search(self):
         
-        dlist = open(self.domainlist, 'w')
         fr = open(self.wordlist, 'r')
         for line in fr:
             line = cl_display().remove_whitespace(line)
@@ -232,16 +238,17 @@ class whois_search:
                 whois = w.who(self.tld)
                 w.connection(line, whois, self.tld)
                 domain = w.basic()
-                write = write_file(domain, dlist)
                 if not domain:del domain
                 else:
                     if self.textbox:
                         indent = cl_display().format_this(domain, 30)
                         self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-                        #print "Text Box Object Instance Address:" + get_text_box()
-                    write.basic()
+                    else:
+                        dlist = open(self.domainlist, 'w')
+                        write = write_file(domain, dlist)
+                        write.basic()
+                        dlist.close()
             except Exception, e: print e
-        dlist.close()
         fr.close()
         return 
 
@@ -289,7 +296,8 @@ class whois_search:
 							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
 						if status == DOMAIN_DEAD:
 							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
-                    write.advance(status) 
+                    else:
+                        write.advance(status) 
             except Exception, e: print e
         advfile.close()
         dlist.close()

@@ -5,6 +5,7 @@
 import wx
 from mwhois import *
 import tempfile
+from threading import *
 
 # begin wxGlade: extracode
 # end wxGlade
@@ -236,7 +237,6 @@ class MyApp(wx.Frame):
         self.wordlist = self.input_txt.GetValue()
         self.domainlist = self.save_txt.GetValue()
         self.tld = self.tld_combo.GetValue()
-        print self.tld
         print "Performing a multi domain search"
         self.adv_txt_area.Clear()
         self.adv_txt_area.AppendText("Performing a multi domain search\n\n")
@@ -251,13 +251,12 @@ class MyApp(wx.Frame):
         else:
             self.whois = whois_search(None, self.tld, self.wordlist, self.domainlist)
             self.whois.set_text_box(self.adv_txt_area)
-			#print self.adv_chkbox.GetValue
-            if self.adv_chkbox.GetValue == True:
+            if self.adv_chkbox.GetValue() == True:
                 self.adv_txt_area.AppendText("\nAdvanced Search...\n")
                 self.whois.advance_search()
                 self.adv_txt_area.AppendText("\nDone...")
             else:
-                self.whois.basic_search() 
+                self.whois.basic_search()
                 self.adv_txt_area.AppendText("\nDone...")
 
 
@@ -278,9 +277,12 @@ class MyApp(wx.Frame):
 class StartGUI():
     
     def main(self):
-        app = wx.PySimpleApp(0)
-        wx.InitAllImageHandlers()
-        mwhois_frame = MyApp(None, -1, "")
-        app.SetTopWindow(mwhois_frame)
-        mwhois_frame.Show()
-        app.MainLoop()
+        try:
+            app = wx.PySimpleApp(0)
+            wx.InitAllImageHandlers()
+            mwhois_frame = MyApp(None, -1, "")
+            app.SetTopWindow(mwhois_frame)
+            mwhois_frame.Show()
+            app.MainLoop()
+        except Exception, e:
+            print e
