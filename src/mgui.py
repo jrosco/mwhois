@@ -48,6 +48,8 @@ class AboutDialog(wx.Dialog):
 
 
 class MyApp(wx.Frame):
+    
+        
     def __init__(self, *args, **kwds):
         # begin wxGlade: MyApp.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
@@ -256,7 +258,8 @@ class MyApp(wx.Frame):
                 self.whois.advance_search()
                 self.adv_txt_area.AppendText("\nDone...")
             else:
-                self.whois.basic_search()
+				threading.start_new_thread(self.whois.basic_search(), args, kwargs)
+                #self.whois.basic_search().start()
                 self.adv_txt_area.AppendText("\nDone...")
 
 
