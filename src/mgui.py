@@ -5,7 +5,7 @@
 import wx
 from mwhois import *
 import tempfile
-from threading import *
+import threading
 
 # begin wxGlade: extracode
 # end wxGlade
@@ -258,8 +258,7 @@ class MyApp(wx.Frame):
                 self.whois.advance_search()
                 self.adv_txt_area.AppendText("\nDone...")
             else:
-				threading.start_new_thread(self.whois.basic_search(), args, kwargs)
-                #self.whois.basic_search().start()
+                self.whois.basic_search()
                 self.adv_txt_area.AppendText("\nDone...")
 
 
@@ -278,7 +277,7 @@ class MyApp(wx.Frame):
 # end of class MyApp
 
 class StartGUI():
-    
+        
     def main(self):
         try:
             app = wx.PySimpleApp(0)

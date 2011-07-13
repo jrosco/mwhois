@@ -18,7 +18,7 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
-from compiler.pycodegen import EXCEPT
+import threading
 
 """
 Check if WX Module installed 
@@ -65,7 +65,7 @@ class whois_server:
             return w
         except Exception, e:
             print "Error finding %s please use a different tld to search for." % (e) 
-            return w
+            sys.exit()
     
     def ex(self, regex):
         x = self.exmap[regex]
@@ -202,7 +202,7 @@ class cl_display:
         return self.str
         
         
-class whois_search:
+class whois_search():
     
     def __init__(self, domain, tld, wordlist, domainlist):
        
@@ -211,6 +211,7 @@ class whois_search:
        self.wordlist = wordlist
        self.domainlist = domainlist
        self.textbox = None
+
 	   
     def single_search(self):
 
@@ -246,7 +247,6 @@ class whois_search:
                     if self.textbox:
                         indent = cl_display().format_this(domain, 30)
                         self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-                        #print "Text Box Object Instance Address:" + get_text_box()
                     write.basic()
             except Exception, e: print e
         dlist.close()
@@ -309,6 +309,22 @@ class whois_search:
         
         
 
+class startWindowGUI(threading.Thread):
+    
+    def __init__(self, notify_window):
+        threading.Thread.__init__(self)
+        self._notify_window = notify_window
+        self._want_abort = 0
+        self.start() 
+    
+    def run(self):
+        print "GUI Loading...."
+        self.window = StartGUI()
+        #wx.CallAfter(self.window.main, 1)
+        self.window.main()
+
+
+
 def main():
     usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n mwhois -t net -i /tmp/wordlist -o /tmp/domains\n mwhois -s sourceforge.net\n mwhois --gui \n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
     parser = OptionParser(usage=usage)
@@ -333,9 +349,8 @@ def main():
         (options, args) = parser.parse_args()
         
         if options.gui == True:
-            print "GUI Loading...."
-            window = StartGUI()
-            window.main()
+           win = startWindowGUI()
+           win.start()
            
             
         if options.single == True:
@@ -358,8 +373,16 @@ def main():
         try: os.remove(options.fileout + ".tmp")
         except Exception, e: pass
         
-    except: 
-        print ""
+    except IOError as (errno, strerror):
+        print "\nI/O error({0}): {1}".format(errno, strerror) +"\n"
+        print parser.get_usage()
+        sys.exit()
+    
+    except KeyboardInterrupt:
+        sys.exit()
+   
+    except:
+        print "\nParameter Error\n"
         print parser.get_usage()
         sys.exit()
         
