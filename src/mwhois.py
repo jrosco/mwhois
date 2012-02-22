@@ -18,7 +18,6 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
-import threading
 
 """
 Check if WX Module installed 
@@ -307,22 +306,6 @@ class whois_search():
     def set_text_box(self, object):
         self.textbox = object
         
-        
-
-class startWindowGUI(threading.Thread):
-    
-    def __init__(self, notify_window):
-        threading.Thread.__init__(self)
-        self._notify_window = notify_window
-        self._want_abort = 0
-        self.start() 
-    
-    def run(self):
-        print "GUI Loading...."
-        self.window = StartGUI()
-        #wx.CallAfter(self.window.main, 1)
-        self.window.main()
-
 
 
 def main():
@@ -349,8 +332,9 @@ def main():
         (options, args) = parser.parse_args()
         
         if options.gui == True:
-           win = startWindowGUI()
-           win.start()
+            print "GUI Loading...."
+            window = StartGUI()
+            window.main()
            
             
         if options.single == True:
