@@ -17,11 +17,15 @@ class AboutDialog(wx.Dialog):
         kwds["style"] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
         self.bitmap_1 = wx.StaticBitmap(self, -1, wx.NullBitmap)
-        self.label_1 = wx.StaticText(self, -1, "label_1")
-        self.button_1 = wx.Button(self, -1, "button_1")
-
+        self.label_txt = wx.StaticText(self, -1, "Author: JOEL CUMBERLAND\n" \
+            "Version: v0.1 Beta\n" \
+            "Website:jrosco.com")
+        self.button_close = wx.Button(self, -1, "Close")
+        
         self.__set_properties()
         self.__do_layout()
+         
+        self.Bind(wx.EVT_BUTTON, self.close_app, self.button_close)
         # end wxGlade
 
     def __set_properties(self):
@@ -35,16 +39,21 @@ class AboutDialog(wx.Dialog):
         sizer_14 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_13 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_13.Add(self.bitmap_1, 0, 0, 0)
-        sizer_13.Add(self.label_1, 0, 0, 0)
+        sizer_13.Add(self.label_txt, 0, 0, 0)
         sizer_12.Add(sizer_13, 1, wx.EXPAND, 0)
-        sizer_14.Add(self.button_1, 0, 0, 0)
+        sizer_14.Add(self.button_close, 0, 0, 0)
         sizer_12.Add(sizer_14, 1, wx.EXPAND, 0)
         self.SetSizer(sizer_12)
         sizer_12.Fit(self)
         self.Layout()
         # end wxGlade
+    
+    def close_app(self, event): # wxGlade: MyApp.<event_handler>
+        
+        #wx.Window.Close(self, force=False)
+        wx.Dialog.Close(self, force=True);
 
-# end of class AboutDialog
+        # end of class AboutDialog
 
 
 class MyApp(wx.Frame):
@@ -270,7 +279,7 @@ class MyApp(wx.Frame):
     def about_diag(self, event): # wxGlade: MyApp.<event_handler>
         about = wx.PySimpleApp(0)
         about_frame = AboutDialog(None, -1, "")
-        app.SetTopWindow(about_frame)
+        #app.SetTopWindow(about_frame)
         about_frame.Show()
         about.MainLoop()
 
