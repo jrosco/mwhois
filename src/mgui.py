@@ -271,7 +271,7 @@ class MyApp(wx.Frame):
                 self.adv_txt_area.AppendText("\nDone...")
 
 
-    def close_app(self, event): # wxGlade: MyApp.<event_handler>
+    def close_app(self, event): # wxGlade: MyApp.<event_handler> ff
         
         wx.Window.Close(self, force=False)
         
