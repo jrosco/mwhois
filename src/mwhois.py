@@ -18,13 +18,14 @@
 
 import sys, re, socket, getpass, os
 from optparse import OptionParser
+from threading import *
 
 """
 Check if WX Module installed 
 """
 try:import wx
 except ImportError:pass 
-else:from mgui import *
+else:from gui import *
 
 
 _version = "0.1.9a"
@@ -33,6 +34,10 @@ DOMAIN_FOUND = "Domain Not Found"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
+SINGLE_TYPE=1
+BASIC_TYPE=2
+ADV_TYPE=3
+
 
 class whois_server:
         
@@ -203,15 +208,15 @@ class cl_display:
         
 class whois_search():
     
-    def __init__(self, domain, tld, wordlist, domainlist):
+    def __init__(self, domain, tld, wordlist, domainlist, obj):
+    
+        self.domain = domain
+        self.tld = tld
+        self.wordlist = wordlist
+        self.domainlist = domainlist
+        self.textbox = obj
        
-       self.domain = domain
-       self.tld = tld
-       self.wordlist = wordlist
-       self.domainlist = domainlist
-       self.textbox = None
-
-	   
+       
     def single_search(self):
 
         try:
@@ -246,7 +251,8 @@ class whois_search():
                     if self.textbox:
                         indent = cl_display().format_this(domain, 30)
                         self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-                    write.basic()
+                    else:
+                        write.basic()
             except Exception, e: print e
         dlist.close()
         fr.close()
@@ -348,7 +354,7 @@ def main():
                 conn = whois_server()
                 db_conn().connection(options.user, options.passwd, options.host, options.port, options.database, options.table, \
                                         options.column, options.filein)
-            w = whois_search(None, options.tld, options.filein, options.fileout)
+            w = whois_search(None, options.tld, options.filein, options.fileout, None)
             if options.advance == True:
                 w.advance_search()
             else:
