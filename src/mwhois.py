@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python -W
 
 
 """
@@ -30,7 +30,7 @@ else:from gui import *
 
 _version = "0.1.9a"
 
-DOMAIN_FOUND = "Domain Not Found"
+DOMAIN_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
@@ -224,12 +224,17 @@ class whois_search():
             w = whois_server()
             whois = w.who(tld)
             w.connection(self.domain, whois, tld)
-            domain = w.single()
-            write = write_file(domain, None)
-            if not domain:del domain
-            else:write.single() 
+            self.domain = w.single()
+            write = write_file(self.domain, None)
+            if not self.domain:
+                del self.domain
+            else:
+                if self.textbox:
+                    self.textbox.SetValue(self.domain)
+                else:
+                    write.single() 
         except Exception, e: print e
-        return domain
+        return self.domain
 
     
     def basic_search(self):
@@ -256,6 +261,10 @@ class whois_search():
             except Exception, e: print e
         dlist.close()
         fr.close()
+        
+        if self.textbox:
+            self.textbox.AppendText("Finished\n")
+            
         return 
 
     
@@ -338,7 +347,6 @@ def main():
         (options, args) = parser.parse_args()
         
         if options.gui == True:
-            print "GUI Loading...."
             window = StartGUI()
             window.main()
            
