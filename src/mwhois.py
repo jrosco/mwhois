@@ -39,7 +39,7 @@ BASIC_TYPE=2
 ADV_TYPE=3
 
 
-class whois_server:
+class WhoisServer:
         
     """
     TODO // Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
@@ -103,7 +103,7 @@ class whois_server:
         else:return self.domain, DOMAIN_ALIVE
     
 
-class db_conn:  
+class DBConnection:  
     
     """Create a wordlist from a mysql database"""
     def connection(self, user, passwd, host, port, database, table, column, file):
@@ -128,33 +128,34 @@ class db_conn:
             exit(1)
 
 
-class write_file:
+class WriteFile:
     
-    def __init__(self, domain, file):
+    def __init__(self, domain, file, display):
         self.domain = domain
         self.file = file
+        self.display = display
 
     
     def single(self):
         print self.domain
     
-    """Print/cl_display and write a basic whois search to file """
+    """Print/CLDisplay and write a basic whois search to file """
     def basic(self):
-        indent = cl_display().format_this(self.domain, 30)
+        indent = CLDisplay().format_this(self.domain, 30)
         print >>self.file,  self.domain + indent + DOMAIN_FOUND 
-        print self.domain + indent + DOMAIN_FOUND
+        if self.display == True: print self.domain + indent + DOMAIN_FOUND
     
 
     """
-    Print/cl_display and write a advanced whois search to file           
+    Print/CLDisplay and write a advanced whois search to file           
     Print domains that are not found on the whois server/s
     """ 
     def advance(self, status):
         self.status = status
-        indent = cl_display().format_this(self.domain, 30)
+        indent = CLDisplay().format_this(self.domain, 30)
         if self.status == DOMAIN_DEAD:    
             print >>self.file, self.domain + indent + DOMAIN_FOUND
-            print self.domain + indent + DOMAIN_FOUND 
+            if self.display == True: print self.domain + indent + DOMAIN_FOUND 
         
         """
         Prints out the domains that are not found by the advanced domain search. These domains could be dead
@@ -162,10 +163,10 @@ class write_file:
         """
         if self.status == DOMAIN_ALIVE:
             print >>self.file, self.domain + indent + DOMAIN_FOUND_ADV
-            print self.domain + indent + DOMAIN_FOUND_ADV
+            if self.display == True: print self.domain + indent + DOMAIN_FOUND_ADV
     
           
-class cl_display:
+class CLDisplay:
     
     def __init__(self):
        """Used by the progress_bar() to keep track of the percentage being used"""
@@ -193,7 +194,7 @@ class cl_display:
                     pass
         return linecount
     
-    """Indents the command line cl_display to make it look pretty"""
+    """Indents the command line CLDisplay to make it look pretty"""
     def format_this(self, word, indent):
         wcount = len(word)
         num = (indent - wcount)
@@ -206,7 +207,7 @@ class cl_display:
         return self.str
         
         
-class whois_search():
+class WhoisSearch():
     
     def __init__(self, domain, tld, wordlist, domainlist, obj):
     
@@ -221,11 +222,11 @@ class whois_search():
 
         try:
             domainame,tld = self.domain.split(".", 1) 
-            w = whois_server()
+            w = WhoisServer()
             whois = w.who(tld)
             w.connection(self.domain, whois, tld)
             self.domain = w.single()
-            write = write_file(self.domain, None)
+            write = WriteFile(self.domain, None, True)
             if not self.domain:
                 del self.domain
             else:
@@ -242,19 +243,19 @@ class whois_search():
         dlist = open(self.domainlist, 'w')
         fr = open(self.wordlist, 'r')
         for line in fr:
-            line = cl_display().remove_whitespace(line)
+            line = CLDisplay().remove_whitespace(line)
             line = line.rstrip() + "." + self.tld
             if not line: break
             try:
-                w = whois_server()
+                w = WhoisServer()
                 whois = w.who(self.tld)
                 w.connection(line, whois, self.tld)
                 domain = w.basic()
-                write = write_file(domain, dlist)
+                write = WriteFile(domain, dlist, True)
                 if not domain:del domain
                 else:
                     if self.textbox:
-                        indent = cl_display().format_this(domain, 30)
+                        indent = CLDisplay().format_this(domain, 30)
                         self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
                     else:
                         write.basic()
@@ -262,8 +263,7 @@ class whois_search():
         dlist.close()
         fr.close()
         
-        if self.textbox:
-            self.textbox.AppendText("Finished\n")
+        if self.textbox:self.textbox.AppendText("\nFinished")
             
         return 
 
@@ -272,14 +272,14 @@ class whois_search():
      
         advfile = open(self.domainlist + ".adv", 'w')
         wordlist = open(self.wordlist, 'r')
-        c = cl_display()
+        c = CLDisplay()
         countline = c.count_lines(self.wordlist)
         total = countline
         
         print "Performing a Advanced Search..."
         for line in wordlist:
             c.progress_bar(countline, total, "*")
-            line = cl_display().remove_whitespace(line)
+            line = CLDisplay().remove_whitespace(line)
             line = line.rstrip() + "." + self.tld
             countline-=1
             if not line: break
@@ -298,20 +298,20 @@ class whois_search():
             advline = advline.rstrip()
             if not advline: break
             try:
-                w = whois_server()
+                w = WhoisServer()
                 whois = w.who(self.tld)
                 w.connection(advline, whois, self.tld)
                 domain, status = w.advance()
-                write = write_file(domain, dlist)
+                write = WriteFile(domain, dlist, True)
                 if not domain:del domain
                 else:
                     if self.textbox:
-						indent = cl_display().format_this(domain, 30)
+						indent = CLDisplay().format_this(domain, 30)
 						if status == DOMAIN_ALIVE:
 							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
 						if status == DOMAIN_DEAD:
 							self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
-                    write.advance(status) 
+                    else:write.advance(status) 
             except Exception, e: print e
         advfile.close()
         dlist.close()
@@ -352,17 +352,17 @@ def main():
            
             
         if options.single == True:
-            w = whois_search(sys.argv[2], None, None, None)
+            w = WhoisSearch(sys.argv[2], None, None, None)
             w.single_search()
         else:
             if options.sql == True:
                 options.filein = options.fileout + ".tmp"
                 if options.passwd == True:
                     options.passwd = getpass.getpass()
-                conn = whois_server()
-                db_conn().connection(options.user, options.passwd, options.host, options.port, options.database, options.table, \
+                conn = WhoisServer()
+                DBConnection().connection(options.user, options.passwd, options.host, options.port, options.database, options.table, \
                                         options.column, options.filein)
-            w = whois_search(None, options.tld, options.filein, options.fileout, None)
+            w = WhoisSearch(None, options.tld, options.filein, options.fileout, None)
             if options.advance == True:
                 w.advance_search()
             else:

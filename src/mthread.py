@@ -17,13 +17,13 @@ class WorkerThread(Thread):
     def run(self):
         
         if self.type == SINGLE_TYPE:
-            whois_search(self.data, None, None, None, self.obj).single_search()
+            WhoisSearch(self.data, None, None, None, self.obj).single_search()
         else:
             self.tld = self.data[0]
             self.wordlist = self.data[1]
             self.domainlist = self.data[2]
             
-            mwhois = whois_search(None, self.tld, self.wordlist, self.domainlist,self.obj)
+            mwhois = WhoisSearch(None, self.tld, self.wordlist, self.domainlist,self.obj)
             if self.type == BASIC_TYPE:
                 mwhois.basic_search()
             else:
