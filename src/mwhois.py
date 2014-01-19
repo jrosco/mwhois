@@ -6,7 +6,7 @@
 
 @contact zeme_6@hotmail.com
 
-@version 0.1.9a
+@version 0.1.9b
 
 @status: Alpha, non-release
 
@@ -28,7 +28,7 @@ except ImportError:pass
 else:from gui import *
 
 
-_version = "0.1.9a"
+_version = "0.1.9b"
 
 DOMAIN_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
