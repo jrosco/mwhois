@@ -47,6 +47,14 @@ Changes:
 2010-11-23
 	* GUI Improvements
 	
+214-01-19
+	* GUI Improvements
+	* Added Threading to GUI
+	* Open GUI from cmd line if no option given
+	* Added __init__.py file to src directory
+	* Rename Class names
+	* Added about dialog box with info about app and developer
+	
 TODO:
 	*	Need to upgrade to Python Version 3 at some stage
 	*	Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
