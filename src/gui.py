@@ -116,7 +116,7 @@ class MyApp(wx.Frame):
 
     def __set_properties(self):
         # begin wxGlade: MyApp.__set_properties
-        self.SetTitle("mwhois widget")
+        self.SetTitle("mwhois")
         _icon = wx.EmptyIcon()
         #_icon.CopyFromBitmap(wx.Bitmap("D:\\My Documents\\development\\xwh0i5\\media\\icon.ico", wx.BITMAP_TYPE_ANY))
         self.SetIcon(_icon)
@@ -204,23 +204,18 @@ class MyApp(wx.Frame):
         self.dialog = wx.FileDialog (None, style=wx.OPEN)
         
         if self.dialog.ShowModal() == wx.ID_OK:
-           print 'Selected:', self.dialog.GetPath()
            self.input_txt.SetValue(self.dialog.GetPath())
         else:
-           print 'Nothing was selected.'
-        
-        self.dialog.Destroy()
+            self.dialog.Destroy()
 
 
     def save_file(self, event): # wxGlade: MyApp.<event_handler>
         
         self.dialog = wx.FileDialog (None, style=wx.SAVE)
         if self.dialog.ShowModal() == wx.ID_OK:
-           print 'Selected:', self.dialog.GetPath()
            self.save_txt.SetValue(self.dialog.GetPath())
         else:
-           print 'Nothing was selected.'
-        self.dialog.Destroy()
+           self.dialog.Destroy()
 
 
     def adv_search(self, event): # wxGlade: MyApp.<event_handler>
@@ -262,7 +257,6 @@ class MyApp(wx.Frame):
         else:
             
             self.domain_array = ([self.tld, self.wordlist, self.domainlist])
-            print self.domain_array[0]
             
             if self.adv_chkbox.GetValue() == True:
                 self.type = ADV_TYPE

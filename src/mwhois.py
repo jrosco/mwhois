@@ -219,7 +219,7 @@ class WhoisSearch():
        
        
     def single_search(self):
-
+        
         try:
             domainame,tld = self.domain.split(".", 1) 
             w = WhoisServer()
@@ -276,7 +276,7 @@ class WhoisSearch():
         countline = c.count_lines(self.wordlist)
         total = countline
         
-        print "Performing a Advanced Search..."
+        if not self.textbox: print "Performing a Advanced Search..."
         for line in wordlist:
             c.progress_bar(countline, total, "*")
             line = CLDisplay().remove_whitespace(line)
@@ -346,13 +346,12 @@ def main():
 
         (options, args) = parser.parse_args()
         
-        if options.gui == True:
+        if len(sys.argv) == 1 or options.gui == True:
             window = StartGUI()
             window.main()
-           
             
         if options.single == True:
-            w = WhoisSearch(sys.argv[2], None, None, None)
+            w = WhoisSearch(sys.argv[2], None, None, None, None)
             w.single_search()
         else:
             if options.sql == True:
