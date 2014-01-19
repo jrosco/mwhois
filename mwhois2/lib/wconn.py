@@ -1,8 +1,8 @@
 #!/usr/bin/env python 
 
-import socket
+import socket, sys
 
-class whoisConn():
+class WhoisServerConnection():
     
     def __init__(self, domain, who, tld):
         
@@ -13,15 +13,24 @@ class whoisConn():
         
     def connection(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
-        s.connect((self.who, 43))
-        if tld == "com":
-            domain = "="+domain
-        s.send(domain + "\r\n")
-        while True:
-            d = s.recv(4096)
-            self.response += d
-            if d == '': break     
-        s.close()
+        
+        print "Using Domain:", self.domain
+        print "Using Server:", self.who
+        print "Using TLDs:", self.tld
+        
+        try:
+            s.connect((self.who, 43))
+            if self.tld == "com":
+                self.domain = "="+self.domain
+            s.send(self.domain + "\r\n")
+            while True:
+                d = s.recv(4096)
+                self.response += d
+                if d == '': break     
+            s.close()
+        except Exception, e:
+            print "Error: %s" % (e) 
+            sys.exit()
         
     def single(self):
         return self.response

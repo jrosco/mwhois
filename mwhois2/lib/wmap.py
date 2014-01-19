@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import sys
-from wconn import whoisConn
+from wconn import WhoisServerConnection
 
-class wserverMap:
+class WhoisServerMap:
         
     def __init__(self, tld):
         
@@ -28,8 +28,7 @@ class wserverMap:
     
     def wserver(self):
         try:
-            w = self.wserverismap[self.tld]
-            return w
+            return self.wserverismap[self.tld]
         except Exception, e:
             print "Error finding %s please use a different tld to search for." % (e) 
             sys.exit()
@@ -40,11 +39,3 @@ class wserverMap:
             return x
         except Exception, e:
             sys.exit()
-    
-if __name__ == "__main__":
-        x = wserverMap('net')
-        w = x.wserver()
-        print 'Using server', w
-        who = whoisConn('google.net', w, 'net')
-        who.connection()
-        print who.single()
