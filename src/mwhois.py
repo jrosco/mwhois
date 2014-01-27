@@ -27,7 +27,6 @@ try:import wx
 except ImportError:pass 
 else:from gui import *
 
-
 _version = "0.1.9b"
 
 DOMAIN_FOUND = "Domain Available"
@@ -45,22 +44,24 @@ class WhoisServer:
     TODO // Have a way to produce a fall-back/Redundant server if the default one FAILS!!!
     A list of whois server to be used
     """
-    whoismap = {        'com': 'whois.verisign-grs.com', \
-						'com.au': 'whois.verisign-grs.com', \
+    whoismap = {        'com': 'whois.crsnic.net', \
+						'com.au': 'whois.aunic.net', \
                         'org': 'whois.pir.org', \
                         'net': 'whois.internic.net', \
                         'biz': 'whois.neulevel.biz', \
                         'edu': 'whois.educause.net', \
-                        'info': 'whois.afilias.info' } # Will add more Whois Servers later.
+                        'info': 'whois.afilias.info', \
+                        'de': 'whois.nic.de'} # Will add more Whois Servers later.
     
     """Regular expression cl_displayed by the output of the whois query performed"""
     exmap =     {       'com': 'No match for', \
-						'com.au': 'No match for', \
+						'com.au': 'no entries found', \
                         'org': 'NOT FOUND', \
                         'net': 'No match for', \
                         'biz': 'Not found:', \
                         'edu': 'No Match', \
-                        'info': 'NOT FOUND' }
+                        'info': 'NOT FOUND',
+                        'de' : 'status: free' }
     
     
     def who(self, tld):
@@ -69,6 +70,7 @@ class WhoisServer:
             return w
         except Exception, e:
             print "Error finding %s please use a different tld to search for." % (e) 
+            return False
             sys.exit()
     
     def ex(self, regex):
@@ -224,6 +226,9 @@ class WhoisSearch():
             domainame,tld = self.domain.split(".", 1) 
             w = WhoisServer()
             whois = w.who(tld)
+            
+            if self.textbox and whois == False:
+                self.textbox.SetValue("Error finding %s please use a different tld to search for." % (tld))
             w.connection(self.domain, whois, tld)
             self.domain = w.single()
             write = WriteFile(self.domain, None, True)
