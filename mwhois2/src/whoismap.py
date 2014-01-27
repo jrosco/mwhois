@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 
+import re
 import sys
-from wconn import WhoisServerConnection
 
-class WhoisServerMap():
+
+class WhoisServerMap(object):
         
-    def __init__(self, tld):
+    def __init__(self, domain=None):
         
-        self.tld = tld
-        
-        self.wserverismap = {   'de' : 'whois.denic.de', \
+        self.domain = domain
+       
+        self.servermap = {   'de' : 'whois.denic.de', \
                         'de' : 'whois.nic.de', \
                         'uk' : 'whois.nic.uk', \
                         'com' : 'whois.verisign-grs.com', \
@@ -125,9 +126,9 @@ class WhoisServerMap():
                         'yt' : 'whois.nic.yt' }
     
     
-        self.exmap = {   'de' : 'status: free', \
+        self.exmap = {   'de' : 'Status: free', \
                         'uk' : 'no match', \
-                        'com' : 'no match for', \
+                        'com' : 'No match for', \
                         'biz' : 'not found', \
                         'biz' : 'not found', \
                         'info' : 'not found', \
@@ -164,10 +165,10 @@ class WhoisServerMap():
                         'edu' : 'no match for', \
                         'lu' : '% no such domain', \
                         'cx' : 'no match for', \
-                        'jp' : 'no match!!', \
+                        'jp' : 'No match!!', \
                         'nu' : 'no match for', \
                         'si' : 'no entries found', \
-                        'au' : 'no entries found', \
+                        'au' : 'No Data Found', \
                         'st' : 'no entries found', \
                         'ua' : '% no entries found', \
                         'gov' : 'ready please', \
@@ -190,17 +191,30 @@ class WhoisServerMap():
                         'tj' : 'no match' }
 
     
-    def whois_server(self):
+    def get_whois_server(self):
+        
         try:
-            return self.wserverismap[self.tld]
+            self.get_domain_tld()
+            self.whoisserver =  self.servermap[self.tld]
+            return self.whoisserver
         except Exception, e:
-            print "Error finding %s please use a different tld to search for." % (e) 
+            print("Error finding %s please use a different tld to search for." % (e)) 
             return False
-            sys.exit()
     
-    def regex(self):
+    def tld_not_found_text(self):
+        
         try:
-            x = self.exmap[self.tld]
-            return x
+            self.not_found_text = self.exmap[self.tld]
+            return self.not_found_text
         except Exception, e:
             return "Error not found: %s" % (e)
+        
+    
+    def get_domain_tld(self):
+        
+        self.tld = re.split('[. :]', self.domain)
+        self.tld = self.tld[-1]
+        return
+        
+        
+        
