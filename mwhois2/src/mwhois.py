@@ -2,12 +2,13 @@
 
 import sys, os
 sys.path.append(os.path.abspath("../lib"))
-from wconn import WhoisServerConnection
-from wmap import WhoisServerMap
+from whoisconn import WhoisServerConnection
+from whoismap import WhoisServerMap
 
 if __name__ == "__main__":
         x = WhoisServerMap('info')
-        y = x.wserver()
+        y = x.whois_server()
         who = WhoisServerConnection('google.info', y, 'net')
         who.connection()
-        print who.single()
+        x.regex()
+        #print who.single()

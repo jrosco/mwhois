@@ -14,9 +14,9 @@ class WhoisServerConnection():
     def connection(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
         
-        print "Using Domain:", self.domain
-        print "Using Server:", self.who
-        print "Using TLDs:", self.tld
+        print "Using Domain: %s" % (self.domain)
+        print "Using Server: %s" % (self.who)
+        print "Using TLDs: %s" % (self.tld)
         
         try:
             s.connect((self.who, 43))
