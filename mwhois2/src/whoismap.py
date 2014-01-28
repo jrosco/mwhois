@@ -15,6 +15,7 @@ class WhoisServerMap(object):
                         'uk' : 'whois.nic.uk', \
                         'com' : 'whois.verisign-grs.com', \
                         'com' : 'whois.crsnic.net', \
+                        'net': 'whois.internic.net', \
                         'biz' : 'whois.biz', \
                         'biz' : 'whois.nic.biz', \
                         'info' : 'whois.afilias.net', \
@@ -129,6 +130,7 @@ class WhoisServerMap(object):
         self.exmap = {   'de' : 'Status: free', \
                         'uk' : 'no match', \
                         'com' : 'No match for', \
+                        'net': 'No match for', \
                         'biz' : 'not found', \
                         'biz' : 'not found', \
                         'info' : 'not found', \

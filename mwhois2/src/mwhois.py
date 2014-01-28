@@ -9,7 +9,7 @@ from whoissearch import WhoisSearch
 
 if __name__ == "__main__":
     
-    search = WhoisSearch(dname='porsdsdn.com').single_search()
+    #search = WhoisSearch(dname='google.de').single_search()
     
     basic = WhoisSearch(tld='com', wordlist='./wordlist.txt').basic_search()
     

@@ -8,12 +8,13 @@ import const as CONST
 
 class WhoisSearch():
     
-    def __init__(self, wordlist=None, domainlist=None, dname=None, tld=None):
+    def __init__(self, wordlist=None, domainlist=None, dname=None, tld=None, deadonly=False):
     
         self.wordlist = wordlist
         self.domainlist = domainlist
         self.dname = dname
         self.tld = tld
+        self.deadonly = deadonly
         
       
     def single_search(self):
@@ -28,25 +29,25 @@ class WhoisSearch():
 
     
     def basic_search(self):
-        
+    
         w = WhoisServerConnection()
         w.tld = self.tld
-         
-        #dlist = open(self.domainlist, 'w')
-        fr = open(self.wordlist, 'r')
-        for line in fr:
+        #fwrite = open(self.domainlist, 'w')
+        
+        fread = open(self.wordlist, 'r')
+        for line in fread:
             w.domain = line.rstrip() + "." + self.tld
             w.get_whois_server()
             w.connection()
             alive = w.is_domain_alive()
             if alive == CONST.DOMAIN_DEAD:
-                print "Domain %s is dead!" % w.domain
-            elif alive == CONST.DOMAIN_ALIVE:
-                print "Domain %s is alive!" % w.domain
-            else:
-                print "Error getting domain %s and file line %s" % (w.domain, line)
-        
-        fr.close()
+                print "Domain %s is dead! provided by whois server %s" % (w.domain, w.whoisserver)
+            elif alive == CONST.DOMAIN_ALIVE and self.deadonly == False or self.deadonly == None:
+                print "Domain %s is alive! provided by whois server %s" % (w.domain, w.whoisserver)
+#             else:
+#                 print "Error getting domain %s and file line %s" % (w.domain, line)
+#         
+        fread.close()
         return 
  
      

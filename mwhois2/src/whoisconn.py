@@ -13,9 +13,10 @@ class WhoisServerConnection(WhoisServerMap):
     def __init__(self):
         
         WhoisServerMap.__init__(self)
-        self.response = ''
         
     def connection(self):
+        
+        self.response = ''
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
 
         try:
