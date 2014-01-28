@@ -21,7 +21,7 @@ Note: For help run 'python mwhois.py --help' via the command line (without quote
 how to use
 ==================
 
-You can either search for a single domain or use a list of names to search for and provide a tld to use e.g .com. A sample file can be found in files/wordlist-sample from the download. To search multiple domains select the "Multi Search" tab and open the file to use, don't worry about selecting a save file this will be done for you, but if you would like to specify a file for saving the the output use the save file function. Now select a tld to use (ATM only a few to choose from) then hit the begin button. Now you'll see all available domains from the wordlist you selected top search.  
+You can either search for a single domain or use a list of names to search for and provide a tld to use e.g .com. A sample file can be found in files/wordlist-sample from the download. To search multiple domains select the "Multi Search" tab and open the file to use, don't worry about selecting a save file this will be done for you, but if you would like to specify a file for saving the the output use the save file function. Now select a tld to use (ATM only a few to choose from) then hit the begin button. Now you'll see all available domains from the wordlist you selected to search.  
 
 contact
 ==================
