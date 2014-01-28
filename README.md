@@ -7,8 +7,8 @@ install
 ==================
 
 Dependencies:
-Python >= 2.7.3
-Python Module wx (can still run mwhois without this module, but only via the command line)
+* Python >= 2.7.3 (Python 3 not supported yet)
+* Python Module wx (can still run mwhois without this module, but only via the command line)
 
 1. Download zip file mwhois.zip 
 2. Unzip mwhois.zip 
