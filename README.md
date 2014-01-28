@@ -52,17 +52,6 @@ Options:
                         File to read from
   -o FILEOUT, --file-out=FILEOUT
                         File to write to
-  --sql                 Connect to a MySQL database
-  --host=HOST           Host address for MySQL database connection (Default
-                        127.0.0.1)
-  --port=PORT           Port to use for MySQL database connection (Default
-                        3306)
-  --user=USER           User to use for MySQL database connection
-  -p, --passwd          Prompt for a password to use with MySQL database
-                        connection
-  --database=DATABASE   Database to use for MySQL database query
-  --table=TABLE         Table to use for MySQL database query
-  --column=COLUMN       Column to use for MySQL database query
   -g, --gui             Start GUI Interface
 
 </pre>
