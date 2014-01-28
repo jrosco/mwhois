@@ -1,11 +1,13 @@
-mwhois
-==================
+Multi Whois Client
+=====
+*** 
 
 Multi-Whois is a small whois domain name search program capable of finding multiple available domains via a file or a MySQL query. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
 
 
-install 
-==================
+Install 
+====
+***
 
 Dependencies:
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
@@ -18,15 +20,21 @@ Dependencies:
 
 Note: For help run 'python mwhois.py --help' via the command line (without quotes). 
 
-how to use
-==================
+How to use
+====
 
-GUI: Run run.bat (windows) or run.sh (Linux)
+* * * 
+
+Run with GUI: 
+---
+<code> Run run.bat (windows) or run.sh (Linux) </code>
 
 You can either search for a single domain or use a list of names to search for and provide a tld to use e.g .com. A sample file can be found in files/wordlist-sample from the download. To search multiple domains select the "Multi Search" tab and open the file to use, don't worry about selecting a save file this will be done for you, but if you would like to specify a file for saving the the output use the save file function. Now select a tld to use (ATM only a few to choose from) then hit the begin button. Now you'll see all available domains from the wordlist you selected to search.  
 
-Command Line: 
 
+Run via command line: 
+---
+<pre>
 Usage: mwhois.py [options] -i [file-to-read-from] -o [file-to-write-too] 
  
 Examples:
@@ -57,8 +65,10 @@ Options:
   --column=COLUMN       Column to use for MySQL database query
   -g, --gui             Start GUI Interface
 
+</pre>
 
-contact
-==================
+Contact
+===
+***
 
 joel_c at zoho dot com
