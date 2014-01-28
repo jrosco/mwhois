@@ -31,14 +31,9 @@
       </header>
       <section>
         <h1>
-<a name="mwhois" class="anchor" href="#mwhois"><span class="octicon octicon-link"></span></a>mwhois</h1>
+<a name="install-" class="anchor" href="#install-"><span class="octicon octicon-link"></span></a>Install </h1>
 
-<p>Multi-Whois is a small whois domain name search program capable of finding multiple available domains via a file or a MySQL query. It's a good way to search for domains that are available to buy. (<a href="http://jrosco.github.io/mwhois">http://jrosco.github.io/mwhois</a>)</p>
-
-<h1>
-<a name="install-" class="anchor" href="#install-"><span class="octicon octicon-link"></span></a>install </h1>
-
-<p>Dependencies:</p>
+<hr><p>Dependencies:</p>
 
 <ul>
 <li>Python &gt;= 2.7.3 (Python 3 not supported yet) Download from <a href="http://www.python.org/download/">http://www.python.org/download/</a>
@@ -53,21 +48,26 @@
 </ol><p>Note: For help run 'python mwhois.py --help' via the command line (without quotes). </p>
 
 <h1>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>how to use</h1>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h1>
 
-<p>GUI: Run run.bat (windows) or run.sh (Linux)</p>
+<hr><h2>
+<a name="run-with-gui-" class="anchor" href="#run-with-gui-"><span class="octicon octicon-link"></span></a>Run with GUI: </h2>
+
+<p><code> Run run.bat (windows) or run.sh (Linux) </code></p>
 
 <p>You can either search for a single domain or use a list of names to search for and provide a tld to use e.g .com. A sample file can be found in files/wordlist-sample from the download. To search multiple domains select the "Multi Search" tab and open the file to use, don't worry about selecting a save file this will be done for you, but if you would like to specify a file for saving the the output use the save file function. Now select a tld to use (ATM only a few to choose from) then hit the begin button. Now you'll see all available domains from the wordlist you selected to search.  </p>
 
-<p>Command Line: </p>
+<h2>
+<a name="run-via-command-line-" class="anchor" href="#run-via-command-line-"><span class="octicon octicon-link"></span></a>Run via command line: </h2>
 
-<p>Usage: mwhois.py [options] -i [file-to-read-from] -o [file-to-write-too] </p>
-
-<p>Examples:
+<pre>
+Usage: mwhois.py [options] -i [file-to-read-from] -o [file-to-write-too] 
+ 
+Examples:
 mwhois -t net -i /tmp/wordlist -o /tmp/domains
-mwhois -s sourceforge.net</p>
+mwhois -s sourceforge.net
 
-<p>Options:
+Options:
   -h, --help            show this help message and exit
   -t TLD, --tld=TLD     --tld com/net/org/biz/edu/info - Search for these
                         TLD's (Only use one of these tlds for each whois
@@ -89,12 +89,14 @@ mwhois -s sourceforge.net</p>
   --database=DATABASE   Database to use for MySQL database query
   --table=TABLE         Table to use for MySQL database query
   --column=COLUMN       Column to use for MySQL database query
-  -g, --gui             Start GUI Interface</p>
+  -g, --gui             Start GUI Interface
+
+</pre>
 
 <h1>
-<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>contact</h1>
+<a name="contact" class="anchor" href="#contact"><span class="octicon octicon-link"></span></a>Contact</h1>
 
-<p>joel_c at zoho dot com</p>
+<hr><p>joel_c at zoho dot com</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
