@@ -11,7 +11,7 @@ Install
 
 Dependencies:
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
-* Python Module wx (can still run mwhois without this module, but only with command line support)
+* Python Module wx (can still run mwhois without this module, but only with command line support) Donwload from http://wxpython.org/
 
 1. Download zip file mwhois.zip https://github.com/jrosco/mwhois/archive/master.zip
 2. Unzip mwhois.zip 
