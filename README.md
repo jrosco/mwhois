@@ -12,7 +12,7 @@ Dependencies:
 
 1. Download zip file mwhois.zip 
 2. Unzip mwhois.zip 
-3. Windows Only. Ensure that python in in your environment variables e.g C:\Python27 
+3. Windows Only. Ensure that python is in your environment variables e.g C:\Python27 
 3. Run run.bat (windows) or run.sh (linux)
 
 Note: For help run 'python mwhois.py --help' via the command line (without quotes). 
