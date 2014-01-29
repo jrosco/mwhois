@@ -1,17 +1,12 @@
-#!/usr/bin/env python -W
+#!/usr/bin/env python
 
 
 """
 @author Joel Cumberland
-
-@contact zeme_6@hotmail.com
-
-@version 0.1.9b
-
+@contact joel_c@zoho.com
+@version 0.1.10a
 @status: Alpha, non-release
-
 @copyright 2009
-
 @license: GPL
 
 """
@@ -25,9 +20,9 @@ Check if WX Module installed
 """
 try:import wx
 except ImportError:pass 
-else:from gui import *
+else:from mgui import *
 
-_version = "0.1.9b"
+_version = "0.1.10a"
 
 DOMAIN_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 

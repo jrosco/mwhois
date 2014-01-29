@@ -1,4 +1,4 @@
-#!/usr/bin/env python -W
+#!/usr/bin/env python
 
 from threading import *
 from mwhois import *

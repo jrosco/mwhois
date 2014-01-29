@@ -1,5 +1,4 @@
-#!/usr/bin/env python -W
-
+#!/usr/bin/env python
 
 from mthread import *
 from mwhois import *
@@ -17,9 +16,9 @@ class AboutDialog(wx.Dialog):
         wx.Dialog.__init__(self, *args, **kwds)
         self.bitmap_1 = wx.StaticBitmap(self, -1, wx.NullBitmap)
         self.label_txt = wx.StaticText(self, -1, "Author: Joel Cumberland\n" \
-            "Version: 0.1.9a Alpha\n" \
-            "Website: jrosco.com\n" \
-            "Email: zeme_6@hotmail.com")
+            "Version: 0.1.10a Alpha\n" \
+            "Website: jrosco.github.io/mwhois/\n" \
+            "Email: joel_c@zoho.com")
         self.button_close = wx.Button(self, -1, "Close")
         
         self.__set_properties()
