@@ -32,3 +32,10 @@ class WorkerThread(Thread):
     def abort(self):
         print "Stopping Thread"
         self.daemon = True
+
+
+class Controller():
+    
+    def __init__(self):
+        
+        return
