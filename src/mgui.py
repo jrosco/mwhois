@@ -1,7 +1,7 @@
 #!/usr/bin/env python -W
 
 
-from mthread import WorkerThread
+from mthread import *
 from mwhois import *
 import tempfile
 import threading
@@ -237,7 +237,7 @@ class MyApp(wx.Frame):
         
         if not self.worker and len(self.domain) != 0:
             self.worker = WorkerThread(self.type,self.domain,self.single_txt_area)
-        
+         
         self.worker = None
 
     def multi_search(self, event): # wxGlade: MyApp.<event_handler>
