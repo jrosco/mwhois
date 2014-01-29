@@ -2,16 +2,16 @@
 
 import os
 import sys
+from types import ListType
 
 from whoisconn import WhoisServerConnection
 import const as CONST
 
 class WhoisSearch():
     
-    def __init__(self, wordlist=None, domainlist=None, dname=None, tld=None, deadonly=False):
+    def __init__(self, wordlist=None, dname=None, tld=None, deadonly=False):
     
         self.wordlist = wordlist
-        self.domainlist = domainlist
         self.dname = dname
         self.tld = tld
         self.deadonly = deadonly
@@ -32,75 +32,55 @@ class WhoisSearch():
     
         w = WhoisServerConnection()
         w.tld = self.tld
-        #fwrite = open(self.domainlist, 'w')
         
-        fread = open(self.wordlist, 'r')
-        for line in fread:
+        try:
+            search_list = open(self.wordlist, 'r')
+        except:
+            search_list = self.wordlist
+            
+        for line in search_list:
             w.domain = line.rstrip() + "." + self.tld
             w.get_whois_server()
             w.connection()
             alive = w.is_domain_alive()
             if alive == CONST.DOMAIN_DEAD:
-                print "Domain %s is dead! provided by whois server %s" % (w.domain, w.whoisserver)
+                d_dict = {CONST.DOMAIN_DEAD : w.domain}
+                yield d_dict
             elif alive == CONST.DOMAIN_ALIVE and self.deadonly == False or self.deadonly == None:
-                print "Domain %s is alive! provided by whois server %s" % (w.domain, w.whoisserver)
-#             else:
-#                 print "Error getting domain %s and file line %s" % (w.domain, line)
-#         
-        fread.close()
+                d_dict = {CONST.DOMAIN_ALIVE : w.domain}
+                yield d_dict
+
+        if type(search_list) is ListType:
+            return
+        else:
+            search_list.close()
+        
         return 
+    
  
-     
-#     def advance_search(self):
-#      
-#         advfile = open(self.domainlist + ".adv", 'w')
-#         wordlist = open(self.wordlist, 'r')
-#         c = CLDisplay()
-#         countline = c.count_lines(self.wordlist)
-#         total = countline
-#         
-#         if not self.textbox: print "Performing a Advanced Search..."
-#         for line in wordlist:
-#             c.progress_bar(countline, total, "*")
-#             line = CLDisplay().remove_whitespace(line)
-#             line = line.rstrip() + "." + self.tld
-#             countline-=1
-#             if not line: break
-#             try: socket.getaddrinfo(line, socket.AF_INET, 0, socket.SOCK_STREAM)
-#             except Exception, e:
-#                 while True:
-#                     print >>advfile,line
-#             break 
-#         print "100%"
-#         advfile.close()
-#         wordlist.close()
-#         
-#         dlist = open(self.domainlist, 'w')
-#         advfile = open(self.domainlist + ".adv", 'r')
-#         for advline in advfile:
-#             advline = advline.rstrip()
-#             if not advline: break
-#             try:
-#                 w = WhoisServer()
-#                 whois = w.who(self.tld)
-#                 w.connection(advline, whois, self.tld)
-#                 domain, status = w.advance()
-#                 write = WriteFile(domain, dlist, True)
-#                 if not domain:del domain
-#                 else:
-#                     if self.textbox:
-#                         indent = CLDisplay().format_this(domain, 30)
-#                         if status == DOMAIN_ALIVE:
-#                             self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND+"\n")
-#                         if status == DOMAIN_DEAD:
-#                             self.textbox.AppendText(domain+indent+"\t"+DOMAIN_FOUND_ADV+"\n")
-#                     else:write.advance(status) 
-#             except Exception, e: print e
-#         advfile.close()
-#         dlist.close()
-#         return     
-#     
-# 
-#     def set_text_box(self, object):
-#         self.textbox = object
-#         
+    def deeper_search(self):
+        
+        import socket
+        d_list = []
+        
+        try:
+            search_list = open(self.wordlist, 'r')
+        except:
+            search_list = self.wordlist
+        
+        for line in search_list:
+            d_line = line.rstrip() + "." + self.tld
+            try: socket.getaddrinfo(d_line, socket.AF_INET, 0, socket.SOCK_STREAM)
+            except Exception, e:
+                d_list.append(line+"|AV")
+        
+        if type(search_list) is ListType:
+            pass
+        else:
+            search_list.close()
+        
+        self.wordlist = d_list
+        x = self.basic_search()
+        return x     
+    
+    
