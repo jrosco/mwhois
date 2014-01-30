@@ -2,7 +2,7 @@ Multi Whois Client
 =====
 *** 
 
-Multi-Whois is a small whois domain name search program capable of finding multiple available domains via a file or a MySQL query. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
+Multi-Whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
 
 
 Install 
@@ -11,7 +11,7 @@ Install
 
 Dependencies:
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
-* Python Module wx (can still run mwhois without this module, but only with command line support) Donwload from http://wxpython.org/
+* If you want to run the GUI applaction you'll need the python module wx (can still run mwhois without this module, but only with command line support) Download from http://wxpython.org/
 
 1. Download zip file mwhois.zip https://github.com/jrosco/mwhois/archive/master.zip
 2. Unzip mwhois.zip 
@@ -56,7 +56,7 @@ Options:
 
 </pre>
 
-How to use mwhois py modules 
+How to use mwhois python module 
 ====
 ![](http://www.dojoportal.com/static/site-images/icons/warn-icon.gif)WARNING: Still in Alpha state, use with caution
 
