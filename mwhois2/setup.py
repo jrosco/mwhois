@@ -4,5 +4,6 @@ setup(  name='mwhois',
         version='0.1.10b',
         author='Joel Cumberland',
         license='GPL',
-        py_modules=['mwhois', 'mthread', 'mgui']
+        package_dir={'': 'src'},
+        py_modules=['whoisconn', 'whoismap', 'whoissearch','const']
       )
