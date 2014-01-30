@@ -9,7 +9,7 @@ import const as CONST
 
 class WhoisSearch():
     
-    def __init__(self, wordlist=None, dname=None, tld=None, deadonly=False):
+    def __init__(self, wordlist=None, dname=None, tld=CONST.DEFAULT_TLD, deadonly=False):
     
         self.wordlist = wordlist
         self.dname = dname
@@ -39,7 +39,11 @@ class WhoisSearch():
             search_list = self.wordlist
             
         for line in search_list:
-            w.domain = line.rstrip() + "." + self.tld
+            if ('.' in line):
+                w.domain = line
+                #self.tld = w.get_domain_tld()
+            else:
+                w.domain = line.rstrip() + "." + self.tld
             w.get_whois_server()
             w.connection()
             alive = w.is_domain_alive()
