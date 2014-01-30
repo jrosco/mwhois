@@ -1,4 +1,5 @@
-DOMAIN_FOUND = "Domain Available"
+DOMAIN_FOUND = "Domain Taken"
+DOMAIN_NOT_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
@@ -6,3 +7,9 @@ SINGLE_TYPE = 1
 BASIC_TYPE = 2
 ADV_TYPE = 3
 DEFAULT_TLD='com'
+HEADER = '\033[95m'
+OKBLUE = '\033[94m'
+OKGREEN = '\033[92m'
+WARNING = '\033[93m'
+FAIL = '\033[91m'
+ENDC = '\033[0m'

@@ -48,11 +48,11 @@ class WhoisSearch():
             w.connection()
             alive = w.is_domain_alive()
             if alive == CONST.DOMAIN_DEAD:
-                d_dict = {CONST.DOMAIN_DEAD : w.domain}
-                yield d_dict
+                d_list = [CONST.DOMAIN_DEAD, w.domain]
+                yield d_list
             elif alive == CONST.DOMAIN_ALIVE and self.deadonly == False or self.deadonly == None:
-                d_dict = {CONST.DOMAIN_ALIVE : w.domain}
-                yield d_dict
+                d_list = [CONST.DOMAIN_ALIVE, w.domain]
+                yield d_list
 
         if type(search_list) is ListType:
             return
