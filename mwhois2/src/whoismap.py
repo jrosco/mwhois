@@ -141,7 +141,7 @@ class WhoisServerMap(object):
                         'nl' : 'is free', \
                         'us' : 'not found:', \
                         'ws' : 'no match for', \
-                        'it' : 'no entries found', \
+                        'it' : 'AVAILABLE', \
                         'ru' : 'no entries found', \
                         'be' : 'no such domain', \
                         'pl' : 'no information about', \
