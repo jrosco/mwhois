@@ -76,7 +76,7 @@ class WhoisSearch():
             d_line = line.rstrip() + "." + self.tld
             try: socket.getaddrinfo(d_line, socket.AF_INET, 0, socket.SOCK_STREAM)
             except Exception, e:
-                d_list.append(line+"|AV")
+                d_list.append(line)
         
         if type(search_list) is ListType:
             pass
