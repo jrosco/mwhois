@@ -32,28 +32,28 @@
 # 
 # """ Search for multiple domains """
 # from whoissearch import WhoisSearch
-#  
-# domain_list = ['google','doesnotexist123','yahoo']
-#  
+#   
+# domain_list = ['google.com','doesnotexist123.net','yahoo']
+#   
 # """ deadonly will only show dead domains if set to true otherwise all domains are shown """
-# m = WhoisSearch(tld='com', wordlist=domain_list, deadonly=False)
-# multi = m.basic_search()
+# m = WhoisSearch(wordlist=domain_list, deadonly=False)
+#multi = m.basic_search()
 #  
-# """Returns True(1) if found or False(0) is not found"""
-# for i in multi:
-#     print i
+#"""Returns True(1) if found or False(0) is not found"""
+#for i in multi:
+#    print i
 #  
 # """ Your can also use a file as a wordlist """
 # m.wordlist='./wordlist.txt'
 # txt_file = m.basic_search()
 # for x in txt_file:
 #     print x
-""" Deeper multiple search """
-from whoissearch import WhoisSearch
-
-domain_list = ['google','doesnotexist123','yahoo']
-
-d = WhoisSearch(tld='com', wordlist='./wordlist.txt', deadonly=False)
-dmulti = d.deeper_search()
-for f in  dmulti:
-    print f
+# """ Deeper multiple search (Experimental)"""
+# from whoissearch import WhoisSearch
+# 
+# domain_list = ['google','doesnotexist123','yahoo']
+# 
+# d = WhoisSearch(tld='com', wordlist='./wordlist.txt', deadonly=False)
+# dmulti = d.deeper_search()
+# for f in  dmulti:
+#     print f
