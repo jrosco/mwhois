@@ -196,7 +196,8 @@ class WhoisServerMap(object):
     def get_whois_server(self):
         
         try:
-            self.get_domain_tld()
+            if self.domain != None:
+                self.get_domain_tld()
             self.whoisserver =  self.servermap[self.tld]
             return self.whoisserver
         except Exception, e:
