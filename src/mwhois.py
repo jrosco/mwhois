@@ -31,6 +31,7 @@ DOMAIN_ALIVE = 1
 SINGLE_TYPE=1
 BASIC_TYPE=2
 ADV_TYPE=3
+START_WITH_GUI=1
 
 
 class WhoisServer:
@@ -346,7 +347,7 @@ def main():
 
         (options, args) = parser.parse_args()
         
-        if len(sys.argv) == 1 or options.gui == True:
+        if START_WITH_GUI == 1 or options.gui == True:
             window = StartGUI()
             window.main()
             

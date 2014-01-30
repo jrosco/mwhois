@@ -64,9 +64,10 @@ How to use mwhois py modules
 1. Clone repo(requires git to be installed): <code>git clone https://github.com/jrosco/mwhois.git mwhois </code>
    or
    Download Zip File to the right (https://github.com/jrosco/mwhois/archive/master.zip)
-2. cd mwhois/mwhois2
-3. Run: python setup.py install
-4. See examples below on how to use this these modules (These are also shown in mwhois2/src/examples.py)
+2. Unzip mwhois-master.zip
+3. cd mwhois-master/mwhois2
+4. Run: python setup.py install
+5. See examples below on how to use this these modules (These are also shown in mwhois2/src/examples.py)
 
 <pre>
 # """Get the whois server url by providing a domain name"""
