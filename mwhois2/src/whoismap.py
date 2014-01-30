@@ -217,7 +217,7 @@ class WhoisServerMap(object):
         
         self.tld = re.split('[. :]', self.domain)
         self.tld = self.tld[-1]
-        return
+        return self.tld
         
         
         
