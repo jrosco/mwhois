@@ -5,12 +5,15 @@ import sys
 from types import ListType
 
 from whoisconn import WhoisServerConnection
+from whoismap import WhoisServerMap
 import const as CONST
 
-class WhoisSearch():
+class WhoisSearch(WhoisServerMap):
     
     def __init__(self, wordlist=None, dname=None, tld=CONST.DEFAULT_TLD, deadonly=False):
-    
+        
+        WhoisServerMap.__init__(self)
+        
         self.wordlist = wordlist
         self.dname = dname
         self.tld = tld

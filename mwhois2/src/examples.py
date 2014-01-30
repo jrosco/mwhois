@@ -30,19 +30,19 @@
 # s = WhoisSearch(dname='on.net')
 # print s.single_search()
 # 
-# """ Search for multiple domains """
-# from whoissearch import WhoisSearch
-#   
-# domain_list = ['google.com','doesnotexist123.net','yahoo']
-#   
-# """ deadonly will only show dead domains if set to true otherwise all domains are shown """
-# m = WhoisSearch(wordlist=domain_list, deadonly=False)
-#multi = m.basic_search()
-#  
-#"""Returns True(1) if found or False(0) is not found"""
-#for i in multi:
-#    print i
-#  
+""" Search for multiple domains """
+from whoissearch import WhoisSearch
+    
+domain_list = ['google','doesnotexist123','yahoo']
+
+""" deadonly will only show dead domains if set to true otherwise all domains are shown """
+m = WhoisSearch(tld='de',wordlist=domain_list, deadonly=False)
+multi = m.basic_search()
+   
+"""Returns True(1) if found or False(0) is not found"""
+for i in multi:
+    print i
+   
 # """ Your can also use a file as a wordlist """
 # m.wordlist='./wordlist.txt'
 # txt_file = m.basic_search()

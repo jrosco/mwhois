@@ -13,8 +13,7 @@ class WhoisServerMap(object):
         self.servermap = {   'de' : 'whois.denic.de', \
                         'de' : 'whois.nic.de', \
                         'uk' : 'whois.nic.uk', \
-                        'com' : 'whois.verisign-grs.com', \
-                        'com' : 'whois.crsnic.net', \
+                        'com' : 'whois.markmonitor.com', \
                         'net': 'whois.internic.net', \
                         'biz' : 'whois.biz', \
                         'biz' : 'whois.nic.biz', \
