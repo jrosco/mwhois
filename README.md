@@ -4,7 +4,7 @@ Multi Whois Client
 
 Multi-Whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
 
-<code>for x in $(cat ./wordlist.txt); do jwhois $x.com | grep 'No match for' ; done</code
+<code>for x in $(cat ./wordlist.txt); do jwhois $x.com | grep 'No match for' ; done</code>
 
 Install 
 ====
