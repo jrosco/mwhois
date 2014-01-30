@@ -190,7 +190,8 @@ class WhoisServerMap(object):
                         'cd' : 'no match', \
                         'gf' : 'not found in our database', \
                         'kz' : 'no entries found', \
-                        'tj' : 'no match' }
+                        'tj' : 'no match',
+                        'hk' : 'The domain has not been registered.'}
 
     
     def get_whois_server(self):
