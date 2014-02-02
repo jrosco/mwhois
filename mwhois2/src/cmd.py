@@ -1,9 +1,10 @@
+import getpass
 from optparse import OptionParser
 import sys
-import getpass
 
-from whoissearch import WhoisSearch
 import const as CONST
+from whosearch import WhoisSearch
+from exception import WhoException
 
 class CLDisplay:
     
@@ -104,7 +105,7 @@ def main():
 #             window.main()
         
         if options.single == True:
-            search = WhoisSearch(dname=sys.argv[2]).single_search()
+            search = WhoisSearch(dname=sys.argv[2]).whois_search()
             print(search)
            
         else:
@@ -123,7 +124,7 @@ def main():
             if options.advance == True:
                 multi_search = w.deeper_search()
             else:
-                multi_search = w.basic_search()
+                multi_search = w.whois_multi_search()
             
             for i in multi_search:
                 if options.fileout:
@@ -131,19 +132,19 @@ def main():
                     write_to_file = open(options.fileout, 'a').write(file_output+"\n")
                     #write_to_file.close()
                 #cl_txt = cl.format_this(i,30)
-                print cl.format_output(i)
+                print(cl.format_output(i))
 
     except IOError as (errno, strerror):
-        print "\nI/O error({0}): {1}".format(errno, strerror) +"\n"
-        print parser.get_usage()
+        print("\nI/O error({0}): {1}".format(errno, strerror) +"\n")
+        print(parser.get_usage())
         sys.exit()
     
     except KeyboardInterrupt:
         sys.exit()
    
-    except Exception, e:
-        print "\nParameter Error %s\n" % (e)
-        print parser.get_usage()
+    except WhoException as e:
+        print("\nParameter Error %s\n" % (e))
+        print(parser.get_usage())
         sys.exit()
         
         
