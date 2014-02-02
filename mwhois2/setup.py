@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = '0.1.10a'
+version = '1.0.0a'
 
 long_description = '''\
 Multi-Whois is a small whois domain name search program capable of finding multiple available domains via a file or a list. 
@@ -13,6 +13,7 @@ setup( name='mwhois',
 	   author_email='joel_c@zoho.com',
 	   url='http://jrosco.github.io/mwhois/',
        license='GPL',
-       package_dir={'': 'src'},
-       py_modules=['whoisconn', 'whoismap', 'whoissearch','const']
+       package_dir={'mwhois': 'src'},
+       packages=['mwhois'],
+       #py_modules=['whois', 'whoconnect', 'whomap', 'whosearch','const']
       )
