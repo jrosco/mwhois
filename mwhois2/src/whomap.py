@@ -11,12 +11,12 @@ class WhoisServerMap(object):
                                         'com' : 'whois.verisign-grs.com', \
                                         'net': 'whois.internic.net', \
                                         'biz' : 'whois.biz', \
-                                        'biz' : 'whois.nic.biz', \
+                                        #'biz' : 'whois.nic.biz', \
                                         'info' : 'whois.afilias.info', \
                                         'org' : 'whois.publicinterestregistry.net', \
-                                        'org' : 'whois.pir.org', \
+                                        #'org' : 'whois.pir.org', \
                                         'at' : 'whois.nic.at', \
-                                        'tv' : 'whois.www.tv', \
+                                        'tv' : 'whois.nic.tv', \
                                         'ch' : 'whois.nic.ch', \
                                         'nl' : 'whois.domain-registry.nl', \
                                         'us' : 'whois.nic.us', \
@@ -48,7 +48,7 @@ class WhoisServerMap(object):
                                         'mx' : 'whois.nic.mx', \
                                         'cn' : 'whois.cnnic.net.cn', \
                                         'edu' : 'whois.educause.edu', \
-                                        'edu' : 'whois.internic.net', \
+                                        #'edu' : 'whois.internic.net', \
                                         'lu' : 'whois.dns.lu', \
                                         'tf' : 'whois.nic.tf', \
                                         'cx' : 'whois.nic.cx', \
@@ -70,29 +70,29 @@ class WhoisServerMap(object):
                                         'as' : 'whois.nic.as', \
                                         'il' : 'whois.isoc.org.il', \
                                         'mil' : 'whois.nic.mil', \
-                                        'bz' : 'mhpwhois1.verisign-grs.net', \
+                                        'bz' : 'whois.belizenic.bz', \
                                         'cl' : 'whois.nic.cl', \
                                         'kr' : 'whois.nic.or.kr', \
                                         'is' : 'whois.isnic.is', \
-                                        'af' : 'whois.netnames.net', \
+                                        'af' : 'whois.nic.af', \
                                         'aero' : 'whois.aero', \
-                                        'aero' : 'whois.information.aero', \
+                                        #'aero' : 'whois.information.aero', \
                                         'sh' : 'whois.nic.sh', \
                                         'sg' : 'whois.nic.net.sg', \
                                         'tm' : 'whois.nic.tm', \
                                         'bj' : 'whois.nic.bj', \
                                         'cat' : 'whois.cat', \
-                                        'cd' : 'whois.cd', \
+                                        'cd' : 'whois.nic.cd', \
                                         'ci' : 'whois.nic.ci', \
                                         'coop' : 'whois.nic.coop', \
                                         'ee' : 'whois.eenet.ee', \
                                         'eu' : 'whois.eu', \
                                         'fi' : 'whois.ficora.fi', \
-                                        'gf' : 'whois.nplus.gf', \
+                                        'gf' : 'whois.internic.net', \
                                         'gg' : 'whois.channelisles.net', \
-                                        'hk' : 'whois.hkirc.net', \
+                                        #'hk' : 'whois.hkirc.net', \
                                         'hk' : 'whois.hkirc.net.hk', \
-                                        'hk' : 'whois.hkirc.hk', \
+                                        #'hk' : 'whois.hkirc.hk', \
                                         'hn' : 'whois2.afilias-grs.net', \
                                         'hu' : 'whois.nic.hu', \
                                         'in' : 'whois.inregistry.net', \
@@ -122,7 +122,8 @@ class WhoisServerMap(object):
     
     
         self.backup_server_map =    {'com' : 'whois.domain.com', \
-                                     'org': 'whois.publicinterestregistry.net'}
+                                     'org': 'whois.publicinterestregistry.net', \
+                                     'au' : 'whois.melbourneit.com.au'}
         
         
         self.not_found_map =        {'de' : 'Status: free', \
@@ -133,63 +134,64 @@ class WhoisServerMap(object):
                                         'info' : 'NOT FOUND', \
                                         'org' : 'NOT FOUND', \
                                         'at' : 'nothing found', \
-                                        'tv' : '.tv you have used', \
+                                        'tv' : 'No match for', \
                                         'ch' : 'not have an entry', \
                                         'nl' : 'is free', \
-                                        'us' : 'not found:', \
-                                        'ws' : 'no match for', \
+                                        'us' : 'Not found:', \
+                                        'ws' : 'No match for', \
                                         'it' : 'AVAILABLE', \
-                                        'ru' : 'no entries found', \
-                                        'be' : 'no such domain', \
+                                        'ru' : 'No entries found', \
+                                        'be' : 'Status:    AVAILABLE',  #Causing Issues 
                                         'pl' : 'No information available', \
-                                        'br' : 'no match for', \
-                                        'name' : 'no match', \
-                                        'cc' : 'no match', \
-                                        'to' : 'no match for', \
-                                        'tk' : 'not known', \
-                                        'ag' : 'not found', \
-                                        'se' : 'no data found', \
-                                        'fr' : 'no entries found', \
-                                        'dk' : 'no entries found', \
-                                        'ro' : 'no entries found', \
-                                        'cz' : 'no data found', \
-                                        'ac' : 'no match for', \
-                                        'ms' : 'is not registered', \
+                                        'br' : 'No match for', \
+                                        'name' : 'No match', \
+                                        'cc' : 'No match', \
+                                        'to' : 'No match for', \
+                                        'tk' : 'domain name not known', \
+                                        'ag' : 'NOT FOUND', \
+                                        'se' : 'not found', \
+                                        'fr' : 'No entries found', \
+                                        'dk' : 'No entries found', \
+                                        'ro' : 'No entries found', \
+                                        'cz' : 'No data found', \
+                                        'ac' : 'is available', \
+                                        'ms' : 'is not registered', # Not found text unmapped
                                         'li' : 'not have an entry', \
-                                        'am' : 'no match', \
+                                        'am' : 'No match', \
                                         'gr' : 'no entries found', \
-                                        'ca' : 'avail', \
-                                        'mx' : 'referencias de organization no encontradas', \
+                                        'ca' : 'Domain status:         available', \
+                                        'mx' : 'Object_Not_Found', \
                                         'cn' : 'no matching record', \
-                                        'edu' : 'no match for', \
-                                        'lu' : '% no such domain', \
-                                        'cx' : 'no match for', \
+                                        'edu' : 'No Match', \
+                                        'lu' : '% No such domain', #Something wrong with this
+                                        'cx' : 'No Object Found', \
                                         'jp' : 'No match!!', \
-                                        'nu' : 'no match for', \
-                                        'si' : 'no entries found', \
+                                        'nu' : 'not found', \
+                                        'si' : 'No entries found', #Need to test further
                                         'au' : 'No Data Found', \
-                                        'st' : 'no entries found', \
-                                        'ua' : '% no entries found', \
-                                        'gov' : 'ready please', \
-                                        'ie' : '% there was no match in the ie domain', \
-                                        'no' : 'no matches', \
-                                        'as' : 'domain not found', \
-                                        'il' : 'no data was found', \
-                                        'bz' : 'no match', \
+                                        'st' : 'No entries found', \
+                                        'gov' : 'No match', #Test a gov live site
+                                        'ie' : 'Not Registered ', \
+                                        'no' : '% No match', \
+                                        'as' : 'Not Registered', \
+                                        'il' : '% No data was found', \
+                                        'bz' : 'No Match', \
                                         'cl' : 'no existe', \
                                         'kr' : 'is not registered', \
-                                        'is' : 'no entries found', \
-                                        'af' : 'no match', \
-                                        'aero' : 'not registered', \
-                                        'sh' : 'no match', \
-                                        'sg' : 'nomatch', \
-                                        'tm' : 'no match', \
-                                        'cd' : 'no match', \
-                                        'gf' : 'not found in our database', \
-                                        'kz' : 'no entries found', \
+                                        'is' : 'No entries found', \
+                                        'af' : 'No Object Found', \
+                                        'aero' : 'NOT FOUND', \
+                                        'sh' : 'is available', \
+                                        'sg' : 'Domain Not Found', \
+                                        'tm' : 'is available', \
+                                        'cd' : 'Domain Status: Available', \
+                                        'gf' : 'No match for domain', \
+                                        'kz' : 'Nothing found for this query', \
                                         'tj' : 'no match',
                                         'hk' : 'The domain has not been registered.', \
-                                        'nz' : '220 Available'}
+                                        'nz' : '220 Available', \
+                                        'yt' : 'No entries found', \
+                                        'ug' : 'No entries found'}
         
         
         
@@ -218,6 +220,11 @@ class WhoisServerMap(object):
         self.execeed_map =          {'com' : 'You have exceeded your quota of queries', \
                                         'org' : 'WHOIS LIMIT EXCEEDED', \
                                         'nz' : '440 Request Denied', \
-                                        'jp' : 'Cannot process your search request'}
+                                        'jp' : 'Cannot process your search request', \
+                                        'de' : 'onnection refused; access control limit exceeded', \
+                                        'au' : 'BLACKLISTED:', \
+                                        'cz' : 'Your connection limit exceeded',
+                                        'ms' : 'Lookup quota exceeded', \
+                                        'si' : 'Too many queries'}
 
     
