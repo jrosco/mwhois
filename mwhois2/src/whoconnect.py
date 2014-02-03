@@ -61,6 +61,10 @@ class WhoisServerConnection():
                 sock.close();sys.exit()
                     
             try:
+                
+                self.logger.debug('socket: lets clear self.response so we get fresh data')
+                self.whoinfo.response = ''
+                
                 while True:
                     data = sock.recv(4096)
                     self.logger.debug('socket: receiving data')
