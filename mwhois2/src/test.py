@@ -1,12 +1,20 @@
 from whosearch import WhoisSearch
-
-dlist = ['foo', 'goololololo', 'lolololo', 'dfdfgfgfgf', 'insp']
-x = WhoisSearch(debug=True)
-
-x.wordlist=dlist
-x.tld='org'
-s = x.whois_multi_search()
-
-for i in s:
-    print(i)
  
+s = WhoisSearch(debug=False)
+s.dname = 'yahoo.org'
+ 
+s.whois_search()
+ 
+print(s.creation_date())
+ 
+print(s.expiry_date())
+ 
+print(s.update_date())
+ 
+print(s.nameservers())
+ 
+print(s.registrant())
+ 
+print(s.whois_status())
+
+#print(s.response())
