@@ -175,10 +175,18 @@ class WhoisSearch():
         
         return self.whois_info.get_whois_attr(CONST.NAMESERVER)
     
+#     def whois_status(self):
+#         
+#         self.logger.debug('called whois_status()')
+#         
+#         return self.whois_info.get_whois_attr(CONST.WHOIS_STATUS)
+#     
     def response(self):
         
         self.logger.debug('called response()')
         
         return self.whois_info.response
+    
+    
     
         

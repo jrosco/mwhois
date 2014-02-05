@@ -130,7 +130,7 @@ class WhoisServerMap(object):
                          'ci' : ['N/A', 'Expiration date:\s*(.+)', 'N/A', 'N/A', 'Nameserver:\s*(.+)'], \
                          'cl' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'cn' : ['N/A', 'Expiration Date:\s*(.+)', 'N/A', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
-                         'com' : ['N/A', ' Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
+                         'com' : ['Creation Date:\s*(.+)', ' Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'coop' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'cx' : ['Creation Date\s*(.+)', 'Registry Expiry Date\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'cz' : ['created:\s*(.+)', 'N/A', 'N/A', 'registrant:\s*(.+)', 'N/A'], \
@@ -178,7 +178,7 @@ class WhoisServerMap(object):
                          'no' : ['N/A', 'N/A', 'Last updated:\s*(.+)', 'N/A', 'N/A'], \
                          'nu' : ['N/A', 'expires:\s*(.+)', 'N/A', 'N/A', 'N/A'], \
                          'nz' : ['domain_date registered:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
-                         'org' : ['Creation Date\s*(.+)', 'Expiry Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
+                         'org' : ['Creation Date:\s*(.+)', 'Expiry Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'pl' : ['option created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'pm' : ['created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'pr' : ['N/A', 'expiration date:       \s*(.+)', 'N/A', 'N/A', 'N/A'], \

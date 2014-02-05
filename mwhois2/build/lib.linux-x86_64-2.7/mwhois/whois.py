@@ -6,6 +6,7 @@ import logging
 
 from whomap import WhoisServerMap
 import const as CONST
+from exception import WhoException
 
 class WhoisInfo(WhoisServerMap):
     
@@ -33,19 +34,22 @@ class WhoisInfo(WhoisServerMap):
         if self.second_server == False:
             
             self.logger.debug('no second server needed')
-            server_map = self.server_map
+            list_number = 0
+            #server_map = self.server_map
         
         else:
             
             self.logger.debug('second server needed, must have exceeded limit!!')
-            server_map = self.backup_server_map
+            list_number = 1
+            #server_map = self.backup_server_map
         
         try:
            if self.domain != None:
                self.logger.debug('%s domain is set', self.domain)
                self.get_domain_tld()
            
-           self.whoisserver =  server_map[self.tld]
+           self.whoisserver =  self.all_server_map[self.tld][list_number]
+           #self.whoisserver =  server_map[self.tld]
            self.logger.debug('return %s', self.whoisserver)
            
            return self.whoisserver
@@ -63,7 +67,7 @@ class WhoisInfo(WhoisServerMap):
         self.logger.debug('called tld_not_found_text()')
         
         try:
-            self.not_found = self.not_found_map[self.tld]
+            self.not_found = self.all_server_map[self.tld][2]
             self.logger.debug('return not found text = %s', self.not_found)
             
             return self.not_found
@@ -77,7 +81,7 @@ class WhoisInfo(WhoisServerMap):
         self.logger.debug('called exceeded_limit()')
         
         try:
-            self.exceeded = self.execeed_map[self.tld]
+            self.exceeded = self.all_server_map[self.tld][3]
             self.logger.debug('return exceeded text = %s for tld %s', self.exceeded, self.tld)
 
         
@@ -98,6 +102,10 @@ class WhoisInfo(WhoisServerMap):
         return self.tld
         
     
+    def get_list_supported_tlds(self):
+    
+        return self.all_server_map
+    
     def get_repsonse(self):
         
         self.logger.debug('called get_repsonse()')
@@ -114,29 +122,36 @@ class WhoisInfo(WhoisServerMap):
         try:
             
             if whois_attr == CONST.CDATE: 
-                self.whois_attr =  self.creation_date_map[self.tld]
+                self.whois_attr =  self.all_info_map[self.tld][0]
             
             elif whois_attr == CONST.EDATE:
-                self.whois_attr =  self.expiry_date_map[self.tld]
+                self.whois_attr =  self.all_info_map[self.tld][1]
                 
             elif whois_attr == CONST.UPDATE:
-                self.whois_attr =  self.updated_date_map[self.tld]
+                self.whois_attr =  self.all_info_map[self.tld][2]
             
             elif whois_attr == CONST.REGISTRANT:
-                self.whois_attr =  self.registrant_map[self.tld]
+                self.whois_attr =  self.all_info_map[self.tld][3]
             
             elif whois_attr == CONST.NAMESERVER:
-                self.whois_attr =  self.nameserver_map[self.tld]
+                self.whois_attr =  self.all_info_map[self.tld][4]
                     
+            elif whois_attr == CONST.WHOIS_STATUS:
+                self.whois_attr = self.all_info_map[self.tld][5]
+            
             self.logger.debug('return %s', self.whois_attr)
+            
+            self.whois_attr_list = []
+            
             for item in re.findall(self.whois_attr, self.response):
-                self.whois_attr = item
+                
+                self.whois_attr_list.append(item)
         
-        except:
+        except WhoException, e:
             
             self.logger.info('No attr %s', self.whois_attr)
         
-        return self.whois_attr
+        return self.whois_attr_list
         
     
     def is_domain_alive(self):

@@ -1,0 +1,43 @@
+<!DOCTYPE servers SYSTEM "server.dtd">
+<servers>
+	<host tld="com" hostname="whois.verisign-grs.com" secondhostname="whois.domain.com">
+		<domaininfo>
+			<cdate>Creation Date:\s*(.+)</cdate>
+			<edate>Expiry Date:\s*(.+)</edate>
+			<update>Updated Date:\s*(.+)</update>
+			<emails>Email:\s*(.+)</emails>
+			<nameserver>Name Server:\s*(.+)</nameserver>
+			<notfound>No match for</notfound>
+			<exceeded>You have exceeded your quota of queries</exceeded>
+		</domaininfo>
+		<backupinfo>
+			<cdate>Creation Date:\s*(.+)</cdate>
+			<edate>Expiry Date:\s*(.+)</edate>
+			<update>Updated Date:\s*(.+)</update>
+			<emails>Email:\s*(.+)</emails>
+			<nameserver>Name Server:\s*(.+)</nameserver>
+			<notfound>No match for</notfound>
+			<exceeded>You have exceeded your quota of queries</exceeded>	
+		</backupinfo>
+	</host>
+	<host tld="org" hostname="whois.publicinterestregistry.net" secondhostname="whois.pir.org">
+		<domaininfo>
+			<cdate>Creation Date:\s*(.+)</cdate>
+			<edate>Expiry Date:\s*(.+)</edate>
+			<update>Updated Date:\s*(.+)</update>
+			<emails>Email:\s*(.+)</emails>
+			<nameserver>Name Server:\s*(.+)</nameserver>
+			<notfound>NOT FOUND</notfound>
+			<exceeded>WHOIS LIMIT EXCEEDED</exceeded>
+		</domaininfo>
+		<backupinfo>
+			<cdate>Creation Date:\s*(.+)</cdate>
+			<edate>Expiry Date:\s*(.+)</edate>
+			<update>Updated Date:\s*(.+)</update>
+			<emails>Email:\s*(.+)</emails>
+			<nameserver>Name Server:\s*(.+)</nameserver>
+			<notfound>No match for</notfound>
+			<exceeded>WHOIS LIMIT EXCEEDED</exceeded>	
+		</backupinfo>
+	</host>
+</servers>
