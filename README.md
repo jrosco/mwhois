@@ -25,16 +25,16 @@ Install
 1. Clone repo(requires git to be installed): <code>git clone https://github.com/jrosco/mwhois.git mwhois </code>
    or
    Download Zip File to the right (https://github.com/jrosco/mwhois/archive/master.zip)
-2. Unzip mwhois-master.zip
-3. cd mwhois-master/mwhois2
-4. Run: python setup.py install
+2. If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/mwhois2"
+3. If you used git clone ("cd mwhois/mwhois2")
+4. Now Run: python setup.py install
 5. See examples below on how to use this these modules (These are also shown in mwhois2/examples/examples.py)
 
 Examples 
 ----
 Search for single domain 
 <code> 
-python mwhois/examples/cmd.py github.com 
+python mwhois2/examples/cmd.py github.com 
 </code>
 
 Search for multiple domains using one liner wordlist 
