@@ -1,18 +1,14 @@
 ac
 aero
-aero
 af
 ag
-am
 am
 as
 at
 au
 be
 biz
-biz
 bj
-br
 br
 bz
 ca
@@ -30,7 +26,6 @@ cz
 de
 dk
 edu
-edu
 ee
 eu
 fi
@@ -38,10 +33,7 @@ fr
 gf
 gg
 gov
-gov
 gr
-hk
-hk
 hk
 hn
 hu
@@ -54,10 +46,8 @@ io
 is
 it
 jp
-jp
 ke
 kr
-kz
 kz
 li
 lt
@@ -78,7 +68,6 @@ no
 nu
 nz
 org
-org
 pl
 pm
 pr
@@ -86,8 +75,6 @@ pro
 re
 ro
 ru
-se
-se
 se
 sg
 sh
