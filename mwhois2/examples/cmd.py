@@ -2,9 +2,9 @@ import getpass
 from optparse import OptionParser
 import sys
 
-import const as CONST
-from whosearch import WhoisSearch
-from exception import WhoException
+import mwhois.const as CONST
+from mwhois.whosearch import WhoisSearch
+from mwhois.exception import WhoException
 
 class CLDisplay:
     
@@ -75,19 +75,21 @@ class CLDisplay:
 
 
 def main():
-    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n mwhois -t net -i /tmp/wordlist -o /tmp/domains\n mwhois -s sourceforge.net\n mwhois --gui \n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
+    usage = "usage: %prog [options] -i [file-to-read-from] -o [file-to-write-too]\n \n Examples:\n mwhois -t net -i /tmp/wordlist -o /tmp/domains\n mwhois sourceforge.net\n mwhois --gui \n\nWordlists Found @ http://www.packetstormsecurity.org/Crackers/wordlists/"
     parser = OptionParser(usage=usage)
 
     try:
         parser.add_option("-t", "--tld", action="store", type="string", dest="tld",
                           help="--tld com/net/org/biz/edu/info - Search for these TLD's (Only use one of these tlds for each whois search")
-        parser.add_option("-s", "--single", action="store_true", dest="single", help="Single domain search")
-        parser.add_option("-a", "--advance", action="store_true", dest="advance", help="Advanced domain search")
+        #parser.add_option("-s", "--single", action="store_true", dest="single", help="Single domain search")
+ #       parser.add_option("-a", "--advance", action="store_true", dest="advance", help="Advanced domain search")
         parser.add_option("-i", "--file-in", dest="filein",  type="string", help="File to read from")
         parser.add_option("-o", "--file-out", dest="fileout", type="string",  help="File to write to (csv format)")
 #        parser.add_option("--sql", action="store_true", dest="sql", help="Connect to a MySQL database")
         
         parser.add_option("-d", action="store_true", dest="dead", help="Only display dead domains")
+        parser.add_option("-v", action="store_true", dest="debug", help="Verbose output")
+        parser.add_option("-z","--sleep", dest="sleep", type="float", default=0, help="Time to sleep between queries")
         
 #         parser.add_option("--host", dest="host", type="string", help="Host address for MySQL database connection (Default 127.0.0.1)")
 #         parser.add_option("--port", dest="port", type="int", help="Port to use for MySQL database connection (Default 3306)")
@@ -100,13 +102,29 @@ def main():
 
         (options, args) = parser.parse_args()
         
+        if len(sys.argv) == 1:
+            print(usage)
+            sys.exit()
+        
+        
+        search = WhoisSearch(debug=options.debug)
+        
+        #search.debug = options.debug
+        search.deadonly = options.dead
+        search.sleep = options.sleep
+        
+        if len(args) == 1:
+            search.dname = args[0]
+            search.whois_search()
+            print(search.response())
+            
 #         if len(sys.argv) == 1 or options.gui == True:
 #             window = StartGUI()
 #             window.main()
         
-        if options.single == True:
-            search = WhoisSearch(dname=sys.argv[2]).whois_search()
-            print(search)
+#         if options.single == True:
+#             search = WhoisSearch(dname=sys.argv[2]).whois_search()
+#             print(search)
            
         else:
 #             if options.sql == True:
@@ -117,14 +135,19 @@ def main():
 #                 DBConnection().connection(options.user, options.passwd, options.host, options.port, options.database, options.table, \
 #                                         options.column, options.filein)
             
-            w = WhoisSearch(tld=options.tld,wordlist=options.filein,deadonly=options.dead)
+            
+            search.tld = options.tld
+            search.wordlist = options.filein
+            #w = WhoisSearch(tld=options.tld,wordlist=options.filein,deadonly=options.dead,debug=options.debug)
+            
+            #w.sleep = options.sleep
             
             cl = CLDisplay()
             
-            if options.advance == True:
-                multi_search = w.deeper_search()
-            else:
-                multi_search = w.whois_multi_search()
+            #if options.advance == True:
+            #    multi_search = w.deeper_search()
+            #else:
+            multi_search = search.whois_multi_search()
             
             for i in multi_search:
                 if options.fileout:
