@@ -28,7 +28,7 @@ Install
 2. Unzip mwhois-master.zip
 3. cd mwhois-master/mwhois2
 4. Run: python setup.py install
-5. See examples below on how to use this these modules (These are also shown in mwhois2/src/examples/examples.py)
+5. See examples below on how to use this these modules (These are also shown in mwhois2/examples/examples.py)
 
 Examples 
 ----
