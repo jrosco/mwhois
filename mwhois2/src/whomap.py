@@ -7,6 +7,9 @@ class WhoisServerMap(object):
     def __init__(self):
         
         
+        #Structure
+        # ['first_server, 'second _server', 'status', 'exceeded']
+        
         self.all_server_map = { 'ac': ['whois.nic.ac','', 'is available'    ,''], \
                         'aero': ['whois.aero','', 'NOT FOUND' ,''], \
                         'af': ['whois.nic.af','', 'No Object Found',''], \
@@ -32,7 +35,7 @@ class WhoisServerMap(object):
                         'coop': ['whois.nic.coop','', ''], \
                         'cx': ['whois.nic.cx','', 'No Object Found' ,''], \
                         'cz': ['whois.nic.cz','', 'No data found' ,''], \
-                        'de': ['whois.denic.de','', 'Status: free' ,''], \
+                        'de': ['whois.denic.de','', 'Status: free' ,'access control limit exceeded'], \
                         'dk': ['whois.dk-hostmaster.dk','', 'No entries found' ,''], \
                         'edu': ['whois.educause.edu','', 'No Match' ,''], \
                         'ee': ['whois.eenet.ee','', ''], \
