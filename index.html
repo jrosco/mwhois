@@ -50,7 +50,7 @@
 <li>TODO: Caching results for quicker responses and avoid exceeding query limits</li>
 <li>TODO: Print results to csv and pdf</li>
 <li>TODO: Search second whois server if first one fails</li>
-<li>TODO: Ability to connect to whois proxy</li>
+<li>TODO: Ability to connect to whois server via a proxy</li>
 </ul><h2>
 <a name="how-to-use-mwhois-python-module-" class="anchor" href="#how-to-use-mwhois-python-module-"><span class="octicon octicon-link"></span></a>How to use mwhois python module </h2>
 
@@ -68,6 +68,19 @@ Download Zip File to the right (<a href="https://github.com/jrosco/mwhois/archiv
 <li>Run: python setup.py install</li>
 <li>See examples below on how to use this these modules (These are also shown in mwhois2/src/examples/examples.py)</li>
 </ol><h2>
+<a name="examples-" class="anchor" href="#examples-"><span class="octicon octicon-link"></span></a>Examples </h2>
+
+<p>Search for single domain 
+<code> 
+python mwhois/examples/cmd.py github.com 
+</code></p>
+
+<p>Search for multiple domains using one liner wordlist 
+<code>
+python mwhois2/examples/cmd.py -t com -i files/wordlist-sample
+</code></p>
+
+<h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <pre>
