@@ -30,6 +30,18 @@ Install
 4. Run: python setup.py install
 5. See examples below on how to use this these modules (These are also shown in mwhois2/src/examples/examples.py)
 
+Examples 
+----
+Search for single domain 
+<code> 
+python mwhois/examples/cmd.py github.com 
+</code>
+
+Search for multiple domains using one liner wordlist 
+<code>
+python mwhois2/examples/cmd.py -t com -i files/wordlist-sample
+</code>
+
 Usage
 ---
 <pre>
