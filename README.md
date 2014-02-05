@@ -4,6 +4,18 @@ mwhois
 
 whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
 
+Features 
+* Search for Single domains 
+* Search for multiple domains 
+* Show only available domains   
+* 100 searchable tld's 
+
+Features to come
+* TODO: Caching results for quicker responses and avoid exceeding query limits
+* TODO: Print results to csv and pdf
+* TODO: Search second whois server if first one fails
+* TODO: Ability to connect to whois server via a proxy
+
 How to use mwhois python module 
 ---
 ![](http://www.sbg.bio.ic.ac.uk/phyre2/html/images/infoIcon.gif)Note: In beta, use with caution, criticism welcomed
