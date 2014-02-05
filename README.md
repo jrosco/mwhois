@@ -50,7 +50,7 @@ Usage
 # """Single domain search"""
 # from mwhois.whosearch import WhoisSearch
 #  
-# s = WhoisSearch(dname='google.org', debug=True)
+# s = WhoisSearch(dname='google.org')
 # s.whois_search()
 # print(s.response())
 # 
