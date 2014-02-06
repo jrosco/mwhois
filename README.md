@@ -6,7 +6,7 @@ whois is a small python whois search module capable of finding multiple availabl
 
 Dependencies
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
-* Note: If you want to run the example GUI application you'll need the python module wx (can still run cms.py without this module, but only with command line support) Download from http://wxpython.org/
+* Note: If you want to run the example GUI application you'll need the python module wx (can still run cmd.py without this module, but only with command line support) Download wx from http://wxpython.org/
 
 Features 
 * Search for Single domains 
