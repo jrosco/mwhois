@@ -1,4 +1,4 @@
-mwhois - beta
+![](https://raw2.github.com/jrosco/mwhois/master/media/logo.png) 
 =====
 *** 
 
