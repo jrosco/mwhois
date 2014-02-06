@@ -3,7 +3,7 @@ from distutils.core import setup
 version = '0.1.0b'
 
 long_description = '''\
-Multi-Whois is a small whois domain name search program capable of finding multiple available domains via a file or a list. 
+mwhois is a small python whois search module capable of finding multiple available domains via a file or list type. 
 It's a good way to search for domains that are available to buy.'''
 
 setup( name='mwhois',
