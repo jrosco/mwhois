@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="mwhois" class="anchor" href="#mwhois"><span class="octicon octicon-link"></span></a>mwhois</h1>
+<a name="mwhois---beta" class="anchor" href="#mwhois---beta"><span class="octicon octicon-link"></span></a>mwhois - beta</h1>
 
 <hr><p>whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (<a href="http://jrosco.github.io/mwhois">http://jrosco.github.io/mwhois</a>)</p>
 
@@ -43,13 +43,13 @@
 <li>Search for multiple domains </li>
 <li>Show only available domains<br>
 </li>
-<li>100 searchable tld's </li>
+<li>101 searchable tld's </li>
+<li>Search second whois server if first one fails (limited to certain tld's)</li>
 </ul><p>Features to come</p>
 
 <ul>
 <li>TODO: Caching results for quicker responses and avoid exceeding query limits</li>
 <li>TODO: Print results to csv and pdf</li>
-<li>TODO: Search second whois server if first one fails</li>
 <li>TODO: Ability to connect to whois server via a proxy</li>
 </ul><h2>
 <a name="how-to-use-mwhois-python-module-" class="anchor" href="#how-to-use-mwhois-python-module-"><span class="octicon octicon-link"></span></a>How to use mwhois python module </h2>
@@ -63,21 +63,21 @@
 <li>Clone repo(requires git to be installed): <code>git clone <a href="https://github.com/jrosco/mwhois.git">https://github.com/jrosco/mwhois.git</a> mwhois </code>
 or
 Download Zip File to the right (<a href="https://github.com/jrosco/mwhois/archive/master.zip">https://github.com/jrosco/mwhois/archive/master.zip</a>)</li>
-<li>If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/mwhois2"</li>
-<li>If you used git clone ("cd mwhois/mwhois2")</li>
+<li>If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/src"</li>
+<li>If you used git clone ("cd mwhois/src")</li>
 <li>Now Run: python setup.py install</li>
-<li>See examples below on how to use this these modules (These are also shown in mwhois2/examples/examples.py)</li>
+<li>See examples below on how to use this these modules (These are also shown in examples/examples.py)</li>
 </ol><h2>
 <a name="examples-" class="anchor" href="#examples-"><span class="octicon octicon-link"></span></a>Examples </h2>
 
 <p>Search for single domain 
 <code> 
-python mwhois2/examples/cmd.py github.com 
+python examples/cmd.py github.com 
 </code></p>
 
 <p>Search for multiple domains using one liner wordlist 
 <code>
-python mwhois2/examples/cmd.py -t com -i files/wordlist-sample
+python examples/cmd.py -t com -i files/wordlist-sample
 </code></p>
 
 <h2>
