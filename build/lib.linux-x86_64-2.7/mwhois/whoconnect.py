@@ -29,8 +29,7 @@ class WhoisServerConnection():
         
         self.whoinfo.get_whois_server()
         
-        
-        if self.whoinfo.whoisserver != None:
+        if self.whoinfo.whoisserver != None or self.whoinfo.whoiserver == '':
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)

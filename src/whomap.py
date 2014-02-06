@@ -7,6 +7,9 @@ class WhoisServerMap(object):
     def __init__(self):
         
         
+        #Structure
+        # ['first_server, 'second _server', 'status', 'exceeded']
+        
         self.all_server_map = { 'ac': ['whois.nic.ac','', 'is available'    ,''], \
                         'aero': ['whois.aero','', 'NOT FOUND' ,''], \
                         'af': ['whois.nic.af','', 'No Object Found',''], \
@@ -32,7 +35,7 @@ class WhoisServerMap(object):
                         'coop': ['whois.nic.coop','', ''], \
                         'cx': ['whois.nic.cx','', 'No Object Found' ,''], \
                         'cz': ['whois.nic.cz','', 'No data found' ,''], \
-                        'de': ['whois.denic.de','', 'Status: free' ,''], \
+                        'de': ['whois.denic.de','', 'Status: free' ,'access control limit exceeded'], \
                         'dk': ['whois.dk-hostmaster.dk','', 'No entries found' ,''], \
                         'edu': ['whois.educause.edu','', 'No Match' ,''], \
                         'ee': ['whois.eenet.ee','', ''], \
@@ -106,7 +109,8 @@ class WhoisServerMap(object):
                         've': ['whois.nic.ve','', ''], \
                         'wf': ['whois.nic.wf','', ''], \
                         'ws': ['whois.nic.ws','', 'No match for' ,''], \
-                        'yt': ['whois.nic.yt','', 'No entries found' ,''] }
+                        'yt': ['whois.nic.yt','', 'No entries found' ,''], \
+                        'xxx': ['whois.nic.xxx','whois.internic.net','NOT FOUND','']}
         
         
         self.all_info_map = { 'ac' : ['N/A', 'Expiry :\s*(.+)', 'N/A', 'N/A', 'N/A'], \
@@ -208,7 +212,8 @@ class WhoisServerMap(object):
                          've' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'wf' : ['created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'ws' : ['Creation Date\s*(.+)', 'Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
-                         'yt' : ['created:\s*(.+)', 'anniversary:\s*(.+)', 'last-update:\s*(.+)', 'N/A', 'N/A' ] }
+                         'yt' : ['created:\s*(.+)', 'anniversary:\s*(.+)', 'last-update:\s*(.+)', 'N/A', 'N/A' ], \
+                         'xxx': ['Creation Date:\s*(.+)','Updated Date:\s*(.+)','Expiry Date:\s*(.+)','Registrant\s*(.+)','Name Server:\s*(.+)']}
                          
 
         

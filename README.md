@@ -1,4 +1,4 @@
-mwhois
+mwhois - beta
 =====
 *** 
 
@@ -8,12 +8,12 @@ Features
 * Search for Single domains 
 * Search for multiple domains 
 * Show only available domains   
-* 100 searchable tld's 
+* 101 searchable tld's 
+* Search second whois server if first one fails (limited to certain tld's)
 
 Features to come
 * TODO: Caching results for quicker responses and avoid exceeding query limits
 * TODO: Print results to csv and pdf
-* TODO: Search second whois server if first one fails
 * TODO: Ability to connect to whois server via a proxy
 
 How to use mwhois python module 
@@ -25,21 +25,21 @@ Install
 1. Clone repo(requires git to be installed): <code>git clone https://github.com/jrosco/mwhois.git mwhois </code>
    or
    Download Zip File to the right (https://github.com/jrosco/mwhois/archive/master.zip)
-2. If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/mwhois2"
-3. If you used git clone ("cd mwhois/mwhois2")
+2. If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/src"
+3. If you used git clone ("cd mwhois/src")
 4. Now Run: python setup.py install
-5. See examples below on how to use this these modules (These are also shown in mwhois2/examples/examples.py)
+5. See examples below on how to use this these modules (These are also shown in examples/examples.py)
 
 Examples 
 ----
 Search for single domain 
 <code> 
-python mwhois2/examples/cmd.py github.com 
+python examples/cmd.py github.com 
 </code>
 
 Search for multiple domains using one liner wordlist 
 <code>
-python mwhois2/examples/cmd.py -t com -i files/wordlist-sample
+python examples/cmd.py -t com -i files/wordlist-sample
 </code>
 
 Usage
