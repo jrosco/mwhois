@@ -12,7 +12,8 @@ Features
 * Search for Single domains 
 * Search for multiple domains 
 * Show only available domains   
-* 101 searchable tld's 
+* 105 searchable TLDS 
+* 4 new gTLDS .graphics, .guru, .technology, .today
 * Search second whois server if first one fails (limited to certain tld's)
 
 Features to come
