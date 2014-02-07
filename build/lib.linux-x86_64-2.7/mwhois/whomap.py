@@ -46,6 +46,8 @@ class WhoisServerMap(object):
                         'gg': ['whois.channelisles.net','', ''], \
                         'gov': ['whois.dotgov.gov','', 'No match',''], \
                         'gr': ['whois.ripe.net','', 'no entries found' ,''], \
+                        'graphics' : ['whois.donuts.co','','Domain not found',''], \
+                        'guru' : ['whois.donuts.co','','Domain not found',''], \
                         'hk': ['whois.hkirc.net.hk','', 'The domain has not been registered.' ,''], \
                         'hn': ['whois2.afilias-grs.net','', ''], \
                         'hu': ['whois.nic.hu','', ''], \
@@ -92,12 +94,14 @@ class WhoisServerMap(object):
                         'sh': ['whois.nic.sh','', 'is available' ,''], \
                         'si': ['whois.arnes.si','', 'No entries found' ,''], \
                         'st': ['whois.nic.st','', 'No entries found' ,''], \
+                        'technology' : ['whois.donuts.co','','Domain not found',''], \
                         'tf': ['whois.nic.tf','', ''], \
                         'tj': ['whois.nic.tj','', 'no match' ,''], \
                         'tk': ['whois.dot.tk','', 'domain name not known' ,''], \
                         'tl': ['whois.nic.tl','', ''], \
                         'tm': ['whois.nic.tm','', 'is available' ,''], \
                         'to': ['monarch.tonic.to','', 'No match for' ,''], \
+                        'today' : ['whois.donuts.co','','Domain not found',''], \
                         'tr': ['whois.nic.tr','', ''], \
                         'tv': ['whois.nic.tv','', 'No match for' ,''], \
                         'tw': ['whois.twnic.net.tw','', ''], \
@@ -149,6 +153,8 @@ class WhoisServerMap(object):
                          'gg' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'gov' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'gr' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
+                         'graphics' : ['Creation Date:\s*(.+)','Expiry Date:\s*(.+)','Updated Date:\s*(.+)','Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
+                         'guru' : ['Creation Date:\s*(.+)','Expiry Date:\s*(.+)','Updated Date:\s*(.+)','Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'hk' : ['N/A', 'Expiry Date:\s*(.+)', 'N/A', 'N/A', 'Name Server:\s*(.+)'], \
                          'hn' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'hu' : ['record created\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
@@ -195,12 +201,14 @@ class WhoisServerMap(object):
                          'sh' : ['N/A', 'Expiry :\s*(.+)', 'N/A', 'N/A', 'N/A'], \
                          'si' : ['created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'nameserver:\s*(.+)'], \
                          'st' : ['created-date:\s*(.+)', 'expiration-date:\s*(.+)', 'updated-date:\s*(.+)', 'registrant-\s*(.+)', 'Name Server:\s*(.+)'], \
+                         'technology' : ['Creation Date:\s*(.+)','Expiry Date:\s*(.+)','Updated Date:\s*(.+)','Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'tf' : ['created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'tj' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'tk' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'tl' : ['Creation Date\s*(.+)', 'Expiry Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'tm' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'to' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
+                         'today' : ['Creation Date:\s*(.+)','Expiry Date:\s*(.+)','Updated Date:\s*(.+)','Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'tr' : ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'tv' : ['Creation Date\s*(.+)', 'N/A', 'Updated Date:\s*(.+)', 'N/A', 'Name Server:\s*(.+)'], \
                          'tw' : ['Record created on\s*(.+)', 'expires on\s*(.+)', 'N/A', 'Registrant\s*(.+)', 'N/A'], \
@@ -213,7 +221,7 @@ class WhoisServerMap(object):
                          'wf' : ['created:\s*(.+)', 'N/A', 'N/A', 'N/A', 'N/A'], \
                          'ws' : ['Creation Date\s*(.+)', 'Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'yt' : ['created:\s*(.+)', 'anniversary:\s*(.+)', 'last-update:\s*(.+)', 'N/A', 'N/A' ], \
-                         ':xxx': ['Creation Date:\s*(.+)','Updated Date:\s*(.+)','Expiry Date:\s*(.+)','Registrant\s*(.+)','Name Server:\s*(.+)']}
+                         'xxx': ['Creation Date:\s*(.+)','Updated Date:\s*(.+)','Expiry Date:\s*(.+)','Registrant\s*(.+)','Name Server:\s*(.+)']}
                          
 
         
