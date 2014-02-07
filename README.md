@@ -2,16 +2,15 @@
 =====
 *** 
 
-whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
+m-whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (http://jrosco.github.io/mwhois)
 
 Dependencies
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
 * Note: If you want to run the example GUI application you'll need the python module wx (can still run cmd.py without this module, but only with command line support) Download wx from http://wxpython.org/
 
 Features 
-* Search for Single domains 
-* Search for multiple domains 
-* Show only available domains   
+* Search for single/multiple domains with direct connection to a large list of  whois servers  
+* Show only available domains 
 * 105 searchable TLDS 
 * 4 new gTLDS .graphics, .guru, .technology, .today
 * Search second whois server if first one fails (limited to certain tld's)
