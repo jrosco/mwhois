@@ -187,6 +187,12 @@ class WhoisSearch():
         
         return self.whois_info.response
     
+    def emails(self):
+        
+        self.logger.debug('called emails()')
+        
+        return self.whois_info.get_all_emails()
+    
     
     
         

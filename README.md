@@ -88,6 +88,7 @@ Usage
 # print(s.update_date())
 # print(s.registrant())
 # print(s.nameservers())
+# print(s.emails())
 #  
 # """ Search for multiple domains """
 #from mwhois.whosearch import WhoisSearch

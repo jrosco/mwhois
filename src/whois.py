@@ -25,6 +25,7 @@ class WhoisInfo(WhoisServerMap):
         self.response = ''
         self.not_found = ''
         self.exceeded = ''
+        self.emails = ''
         self.second_server = False
         
     def get_whois_server(self):
@@ -157,6 +158,15 @@ class WhoisInfo(WhoisServerMap):
         
         return self.whois_attr_list
         
+    
+    def get_all_emails(self):
+        
+        self.logger.debug('called get_all_emails()')
+        
+        self.emails = re.findall(self.list_of_emails, self.response)
+        
+        return self.emails
+    
     
     def is_domain_alive(self):
         

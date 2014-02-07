@@ -7,6 +7,8 @@ class WhoisServerMap(object):
     def __init__(self):
         
         
+        self.list_of_emails = r'[\w.-]+@[\w.-]+'
+        
         #Structure
         # ['first_server, 'second _server', 'status', 'exceeded']
         
@@ -222,9 +224,8 @@ class WhoisServerMap(object):
                          'ws' : ['Creation Date\s*(.+)', 'Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'yt' : ['created:\s*(.+)', 'anniversary:\s*(.+)', 'last-update:\s*(.+)', 'N/A', 'N/A' ], \
                          'xxx': ['Creation Date:\s*(.+)','Updated Date:\s*(.+)','Expiry Date:\s*(.+)','Registrant\s*(.+)','Name Server:\s*(.+)']}
-                         
-
-        
+           
+                
 #         self.server_map =            {'de' : 'whois.denic.de', \
 #                                         'uk' : 'whois.nic.uk', \
 #                                         'com' : 'whois.verisign-grs.com', \
