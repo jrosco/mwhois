@@ -120,8 +120,8 @@ class MyFrame ( wx.Frame ):
 		self.m_staticText7.Wrap( -1 )
 		bSizer11.Add( self.m_staticText7, 0, wx.ALL, 5 )
 		
-		m_listbox_historyChoices = [ u"foo", u"bar" ]
-		self.m_listbox_history = wx.ListBox( self.m_panel_single_search, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listbox_historyChoices, wx.LB_NEEDED_SB|wx.LB_SINGLE )
+		self.m_listbox_historyChoices = []
+		self.m_listbox_history = wx.ListBox( self.m_panel_single_search, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, self.m_listbox_historyChoices, wx.LB_NEEDED_SB|wx.LB_SINGLE )
 		self.m_listbox_history.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 90, False, wx.EmptyString ) )
 		
 		bSizer11.Add( self.m_listbox_history, 1, wx.ALL|wx.EXPAND, 5 )

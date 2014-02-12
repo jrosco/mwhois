@@ -1,35 +1,44 @@
 #!/usr/bin/env python
 
-from threading import *
 from mwhois.whosearch import WhoisSearch
-import mwhois.const as CONST
+from threading import *
 
-class WorkerThread(Thread):
+
+class SingleSearchThread(Thread):
     
-    def __init__(self, type, data, obj):
-        
-	Thread.__init__(self)
-        self._want_abort = 0
-        self.type = type
-        self.data = data
-        self.obj = obj
-        
-        self.start()
+    def __init__(self, obj, event):
+       
+        Thread.__init__(self)
+        self._obj = obj
+        self._event = event
+        self.setDaemon(True)
 
     def run(self):
         
         search = WhoisSearch()
-        search.dname = self.data
+        search.dname = self._obj.m_textctrl_domain.GetValue()
         search.whois_search()
-        self.obj.SetValue(search.response())
-            
-    def abort(self):
-        print "Stopping Thread"
-        self.daemon = True
-
-
-class Controller():
-    
-    def __init__(self):
+        self._obj.m_textctrl_results.SetValue(search.response())
         
-        return
+        self._obj.m_listbox_history.Append(search.dname)
+        
+        #UIEvents(self, None).set_history(search.dname, search.response())
+        
+        print(dir(self))
+
+
+class GUIEvents():
+     
+    def __init__(self, obj, parent):
+         
+        self._obj = obj
+        self.history = []
+         
+    def get_history(self, data):
+         
+        return self.history
+        
+    def set_history(self, domain, response):
+         
+        self.history[domain, response]
+        
