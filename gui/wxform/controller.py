@@ -13,29 +13,30 @@ class SingleSearchThread(Thread):
         Thread.__init__(self)
         self._window_obj = window_obj
         self.setDaemon(True)
+        self.history_list_counter = 0
+        self.history = { }
         
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         self.logger.debug('SingleSearchThread constructor: __init__()')
-        #self.gui_event = GUIEvent()
-        self.history_list_counter = 0
-        self.history = { }
         
     def run(self):
        
         self.logger.debug('called SingleSearchThread().run')
         
         try:
+            
             self.logger.debug('trying search thread')
             
             if self._window_obj.history_select == True:
+                
                 domain_history_list_no = self._window_obj.m_listbox_history.GetSelection()
                 self.logger.debug('history select enabled. using %s' % (domain_history_list_no))
                 self._window_obj.history_select = False
                 
                 try:
                     domain_history =  str(self.get_history(domain_history_list_no))
-                    wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID, domain_history))
+                    wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID, domain_history, 2))
                 except Exception, e: 
                     wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_ERROR_ID, str(e)))
                 
@@ -47,9 +48,10 @@ class SingleSearchThread(Thread):
                 search.whois_search()
                 self.set_history(self.history_list_counter, search.response())
                 self.history_list_counter += 1
-                print('history counter=%s' % self.history_list_counter)
-                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.HISTORY_DISPLAY_EVT_ID, search.dname))
-                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID, search.response(), search.whois_info.is_domain_alive()))
+                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.HISTORY_DISPLAY_EVT_ID, 
+                                                           search.dname))
+                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID,  
+                                                           search.response(), search.whois_info.is_domain_alive()))
                 
         except Exception, e:
             
@@ -76,8 +78,7 @@ class SingleSearchThread(Thread):
 class ResultEvent(wx.PyEvent):
     
     def __init__(self, event_id, *args):
-        
-        print(args)
+
         self.event_id = event_id
         wx.PyEvent.__init__(self)
         self.SetEventType(self.event_id)
