@@ -116,12 +116,28 @@ class MyFrame ( wx.Frame ):
 		bSizer11 = wx.BoxSizer( wx.VERTICAL )
 		
 		bSizer11.SetMinSize( wx.Size( 200,-1 ) ) 
+		bSizer181 = wx.BoxSizer( wx.HORIZONTAL )
+		
 		self.m_staticText7 = wx.StaticText( self.m_panel_single_search, wx.ID_ANY, u"History", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText7.Wrap( -1 )
-		bSizer11.Add( self.m_staticText7, 0, wx.ALL, 5 )
+		bSizer181.Add( self.m_staticText7, 0, wx.ALL, 5 )
 		
-		self.m_listbox_historyChoices = []
-		self.m_listbox_history = wx.ListBox( self.m_panel_single_search, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, self.m_listbox_historyChoices, wx.LB_NEEDED_SB|wx.LB_SINGLE )
+		self.m_staticText13 = wx.StaticText( self.m_panel_single_search, wx.ID_ANY, u"(Clear)", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText13.Wrap( -1 )
+		self.m_staticText13.Hide()
+		
+		bSizer181.Add( self.m_staticText13, 0, wx.ALL, 5 )
+		
+		self.m_button_clear_history = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"(Clear History)", wx.DefaultPosition, wx.DefaultSize, 0|wx.NO_BORDER )
+		self.m_button_clear_history.SetToolTipString( u"Clear history list" )
+		
+		bSizer181.Add( self.m_button_clear_history, 0, 0, 5 )
+		
+		
+		bSizer11.Add( bSizer181, 0, wx.EXPAND, 5 )
+		
+		m_listbox_historyChoices = []
+		self.m_listbox_history = wx.ListBox( self.m_panel_single_search, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listbox_historyChoices, wx.LB_NEEDED_SB|wx.LB_SINGLE )
 		self.m_listbox_history.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 90, False, wx.EmptyString ) )
 		
 		bSizer11.Add( self.m_listbox_history, 1, wx.ALL|wx.EXPAND, 5 )
@@ -132,40 +148,39 @@ class MyFrame ( wx.Frame ):
 		
 		bSizer3.Add( gSizerResultsArea, 1, wx.EXPAND, 5 )
 		
-		gSizerBottomButtons = wx.GridSizer( 0, 3, 1, 1 )
+		gSizerBottomButtons = wx.GridSizer( 0, 2, 1, 1 )
 		
-		bSizer18 = wx.BoxSizer( wx.VERTICAL )
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.m_button_print1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Print", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer18.Add( self.m_button_print1, 0, wx.ALL, 5 )
 		
+		self.m_button_save1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer18.Add( self.m_button_save1, 0, wx.ALL, 5 )
+		
+		self.m_button_quit1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Quit", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer18.Add( self.m_button_quit1, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
 		
 		gSizerBottomButtons.Add( bSizer18, 0, 0, 5 )
 		
-		bSizer191 = wx.BoxSizer( wx.VERTICAL )
+		bSizer21 = wx.BoxSizer( wx.VERTICAL )
 		
-		self.m_button_save1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer191.Add( self.m_button_save1, 0, wx.ALL, 5 )
-		
-		
-		gSizerBottomButtons.Add( bSizer191, 0, 0, 5 )
-		
-		bSizer20 = wx.BoxSizer( wx.VERTICAL )
-		
-		self.m_button_quit1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Quit", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer20.Add( self.m_button_quit1, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		self.m_static_is_alive = wx.StaticText( self.m_panel_single_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 110,-1 ), wx.ALIGN_RIGHT )
+		self.m_static_is_alive.Wrap( -1 )
+		bSizer21.Add( self.m_static_is_alive, 0, wx.ALIGN_RIGHT|wx.ALL|wx.FIXED_MINSIZE, 5 )
 		
 		
-		gSizerBottomButtons.Add( bSizer20, 0, 0, 5 )
+		gSizerBottomButtons.Add( bSizer21, 1, wx.EXPAND|wx.ALIGN_RIGHT, 5 )
 		
 		
-		bSizer3.Add( gSizerBottomButtons, 0, 0, 5 )
+		bSizer3.Add( gSizerBottomButtons, 0, wx.EXPAND, 5 )
 		
 		
 		self.m_panel_single_search.SetSizer( bSizer3 )
 		self.m_panel_single_search.Layout()
 		bSizer3.Fit( self.m_panel_single_search )
-		self.m_notebooktab.AddPage( self.m_panel_single_search, u"Single Search", False )
+		self.m_notebooktab.AddPage( self.m_panel_single_search, u"Single Search", True )
 		self.m_panel_multi_search = wx.Panel( self.m_notebooktab, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer19 = wx.BoxSizer( wx.VERTICAL )
 		
@@ -251,7 +266,7 @@ class MyFrame ( wx.Frame ):
 		self.m_panel_multi_search.SetSizer( bSizer19 )
 		self.m_panel_multi_search.Layout()
 		bSizer19.Fit( self.m_panel_multi_search )
-		self.m_notebooktab.AddPage( self.m_panel_multi_search, u"Multi Search", True )
+		self.m_notebooktab.AddPage( self.m_panel_multi_search, u"Multi Search", False )
 		
 		bSizerMainWindow.Add( self.m_notebooktab, 1, wx.EXPAND |wx.ALL, 5 )
 		
@@ -270,6 +285,8 @@ class MyFrame ( wx.Frame ):
 		self.m_notebooktab.Bind( wx.EVT_SET_FOCUS, self.set_preveiw_results )
 		self.m_textctrl_domain.Bind( wx.EVT_TEXT_ENTER, self.do_whois_search )
 		self.m_button_single_search.Bind( wx.EVT_BUTTON, self.do_whois_search )
+		self.m_button_clear_history.Bind( wx.EVT_BUTTON, self.clear_history )
+		self.m_listbox_history.Bind( wx.EVT_LISTBOX_DCLICK, self.do_history_search )
 		self.m_button_print1.Bind( wx.EVT_BUTTON, self.do_print_results )
 		self.m_button_save1.Bind( wx.EVT_BUTTON, self.do_save_results )
 		self.m_button_quit1.Bind( wx.EVT_BUTTON, self.close_app )
@@ -307,6 +324,16 @@ class MyFrame ( wx.Frame ):
 	def do_whois_search( self, event ):
 		event.Skip()
 	
+	
+	def clear_history( self, event ):
+		event.Skip()
+	
+	def do_history_search( self, event ):
+		event.Skip()
+	
+	
+	
+	
 	def open_file_select( self, event ):
 		event.Skip()
 	
@@ -319,3 +346,7 @@ class MyFrame ( wx.Frame ):
 	def do_multi_search( self, event ):
 		event.Skip()
 	
+	
+	
+	
+
