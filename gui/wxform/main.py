@@ -83,12 +83,17 @@ class MainGUI( mwhois2.MyFrame ):
 		self.m_textctrl_domain.Clear()
 		self.m_button_single_search.Enable(True)
 		
-		if event.data[1] == CONST.DOMAIN_DEAD:
-			self.m_static_is_alive.SetForegroundColour('Green')
-			self.m_static_is_alive.SetLabel('Available')
+		if event.data[1] == 2:
+			self.m_static_is_alive.SetLabel('')
+		
 		else:
-			self.m_static_is_alive.SetForegroundColour('Red')
-			self.m_static_is_alive.SetLabel('Not Available')
+			if event.data[1] == CONST.DOMAIN_DEAD:
+				self.m_static_is_alive.SetForegroundColour('Green')
+				self.m_static_is_alive.SetLabel('Available')
+			else:
+				self.m_static_is_alive.SetForegroundColour('Red')
+				self.m_static_is_alive.SetLabel('Not Available')
+		
 		self.worker = None
 		
 	def do_whois_search_error( self, event ):
