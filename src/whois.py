@@ -47,17 +47,17 @@ class WhoisInfo(WhoisServerMap):
             #server_map = self.backup_server_map
         
         try:
-           if self.domain != None:
-               self.logger.debug('%s domain is set', self.domain)
-               self.get_domain_tld()
+            if self.domain != None:
+                self.logger.debug('%s domain is set', self.domain)
+                self.get_domain_tld()
            
-           self.whoisserver =  self.all_server_map[self.tld][list_number]
-           #self.whoisserver =  server_map[self.tld]
-           self.logger.debug('return %s', self.whoisserver)
+            self.whoisserver =  self.all_server_map[self.tld][list_number]
+            #self.whoisserver =  server_map[self.tld]
+            self.logger.debug('return %s', self.whoisserver)
            
-           #self.logger.info('Querying %s' % self.whoisserver)
+            #self.logger.info('Querying %s' % self.whoisserver)
            
-           return self.whoisserver
+            return self.whoisserver
         
         except:
             
