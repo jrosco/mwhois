@@ -21,7 +21,8 @@ class WhoisSearch():
         self.deadonly = deadonly
         self.debug = debug
         self.sleep = time_to_sleep
-      
+        self.whois_server = None
+        
         if self.debug == True:
             logging.basicConfig(level=logging.DEBUG)
         else: 
@@ -38,6 +39,9 @@ class WhoisSearch():
         self.whois_info = WhoisInfo()
         self.whois_info.domain = self.dname
         
+        if self.whois_server == None:self.whois_server = self.whois_info.get_whois_server()
+        else:self.whois_info.whoisserver = self.whois_server
+            
         self.connection = WhoisServerConnection(self.whois_info)
         self.connection.sleep = self.sleep
         self.connection.connection()
@@ -192,7 +196,5 @@ class WhoisSearch():
         self.logger.debug('called emails()')
         
         return self.whois_info.get_all_emails()
-    
-    
     
         
