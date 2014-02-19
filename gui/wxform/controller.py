@@ -6,6 +6,7 @@ import logging
 
 from mwhois.whosearch import WhoisSearch
 
+
 class SingleSearchThread(Thread):
     
     def __init__(self, window_obj):
@@ -44,6 +45,7 @@ class SingleSearchThread(Thread):
                 
                 search = WhoisSearch()
                 search.dname = self._window_obj.m_textctrl_domain.GetValue()
+                search.whois_server = self._window_obj.m_combobox_whoisserver.GetValue()
                 self.logger.debug('doing a whois search via whois servers')
                 search.whois_search()
                 self.set_history(self.history_list_counter, search.response())
@@ -73,8 +75,43 @@ class SingleSearchThread(Thread):
         self.logger.debug('set %s' % (self.history))
         return
 
-            
 
+            
+class MultiSearchThread(Thread):
+    
+    def __init__(self, window_obj):
+       
+        Thread.__init__(self)
+        self._window_obj = window_obj
+        self.setDaemon(True)
+        
+        logging.basicConfig(level=logging.DEBUG)
+        self.logger = logging.getLogger(__name__)
+        self.logger.debug('MultiSearchThread constructor: __init__()')
+        
+    def run(self):
+        
+        self.logger.debug('called MultiSearchThread().run')
+        
+        search = WhoisSearch()
+        search.wordlist = self._window_obj.m_textctrl_file.GetValue()
+        search.tld = 'com'
+        if self._window_obj.m_checkbox_dead.GetValue() == True: search.deadonly = True
+        search.sleep = float(self._window_obj.m_textctrl_sleep.GetValue())
+        multi = search.whois_multi_search()
+        
+        try:
+            
+            for multi_list in multi:
+            
+                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.MULTI_SEARCH_EVT_RESULT_ID, multi_list))
+        
+        except Exception, error:
+            
+            wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.MULTI_SEARCH_EVT_ERROR_ID, error))
+            
+            
+            
 class ResultEvent(wx.PyEvent):
     
     def __init__(self, event_id, *args):

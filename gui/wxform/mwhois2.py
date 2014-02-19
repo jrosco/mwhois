@@ -31,6 +31,7 @@ class MyFrame ( wx.Frame ):
 		
 		self.m_menuItem_print = wx.MenuItem( self.m_menu_file, wx.ID_ANY, u"Print", wx.EmptyString, wx.ITEM_NORMAL )
 		self.m_menu_file.AppendItem( self.m_menuItem_print )
+		self.m_menuItem_print.Enable( False )
 		
 		self.m_menuItem_close = wx.MenuItem( self.m_menu_file, wx.ID_ANY, u"Close", wx.EmptyString, wx.ITEM_NORMAL )
 		self.m_menu_file.AppendItem( self.m_menuItem_close )
@@ -59,7 +60,7 @@ class MyFrame ( wx.Frame ):
 		self.m_staticTextDomainLabel.Wrap( -1 )
 		bSizer4.Add( self.m_staticTextDomainLabel, 0, wx.ALL, 5 )
 		
-		self.m_textctrl_domain = wx.TextCtrl( self.m_panel_single_search, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.Size( 255,-1 ), 0 )
+		self.m_textctrl_domain = wx.TextCtrl( self.m_panel_single_search, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.Size( 255,-1 ), wx.TE_PROCESS_ENTER )
 		self.m_textctrl_domain.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 90, False, wx.EmptyString ) )
 		
 		bSizer4.Add( self.m_textctrl_domain, 0, wx.ALL, 5 )
@@ -73,9 +74,9 @@ class MyFrame ( wx.Frame ):
 		self.m_staticTextWhoisServerLabel.Wrap( -1 )
 		bSizer7.Add( self.m_staticTextWhoisServerLabel, 0, wx.ALL, 5 )
 		
-		m_combobox_whoisserverChoices = [ u"whois.server.net", u"whois.server.org", u"whois.server.edu", u"whois.server.guru", u"whois.server.com" ]
-		self.m_combobox_whoisserver = wx.ComboBox( self.m_panel_single_search, wx.ID_ANY, u"whois.server.guru", wx.DefaultPosition, wx.Size( 255,-1 ), m_combobox_whoisserverChoices, wx.CB_READONLY )
-		self.m_combobox_whoisserver.SetSelection( 3 )
+		m_combobox_whoisserverChoices = []
+		self.m_combobox_whoisserver = wx.ComboBox( self.m_panel_single_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 255,-1 ), m_combobox_whoisserverChoices, wx.CB_READONLY )
+		self.m_combobox_whoisserver.SetSelection( 0 )
 		self.m_combobox_whoisserver.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 90, 90, False, wx.EmptyString ) )
 		
 		bSizer7.Add( self.m_combobox_whoisserver, 0, wx.ALL|wx.EXPAND, 5 )
@@ -153,6 +154,8 @@ class MyFrame ( wx.Frame ):
 		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.m_button_print1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Print", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button_print1.Hide()
+		
 		bSizer18.Add( self.m_button_print1, 0, wx.ALL, 5 )
 		
 		self.m_button_save1 = wx.Button( self.m_panel_single_search, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -188,7 +191,7 @@ class MyFrame ( wx.Frame ):
 		
 		self.m_staticText71 = wx.StaticText( self.m_panel_multi_search, wx.ID_ANY, u"Wordlist", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText71.Wrap( -1 )
-		bSizer24.Add( self.m_staticText71, 0, wx.ALL, 5 )
+		bSizer24.Add( self.m_staticText71, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 		
 		self.m_textctrl_file = wx.TextCtrl( self.m_panel_multi_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 255,-1 ), 0 )
 		bSizer24.Add( self.m_textctrl_file, 0, wx.ALL, 5 )
@@ -196,13 +199,29 @@ class MyFrame ( wx.Frame ):
 		self.m_button_open = wx.Button( self.m_panel_multi_search, wx.ID_ANY, u"Open", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer24.Add( self.m_button_open, 0, wx.ALL, 5 )
 		
-		m_combo_tldChoices = []
-		self.m_combo_tld = wx.ComboBox( self.m_panel_multi_search, wx.ID_ANY, u"TLD", wx.DefaultPosition, wx.DefaultSize, m_combo_tldChoices, 0 )
+		self.m_staticText11 = wx.StaticText( self.m_panel_multi_search, wx.ID_ANY, u"TLD:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText11.Wrap( -1 )
+		bSizer24.Add( self.m_staticText11, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		m_combo_tldChoices = [ u"com", u"net", u"edu", u"org", u"gov" ]
+		self.m_combo_tld = wx.ComboBox( self.m_panel_multi_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 80,-1 ), m_combo_tldChoices, wx.CB_READONLY|wx.CB_SORT )
 		bSizer24.Add( self.m_combo_tld, 0, wx.ALL, 5 )
 		
-		m_combo_cctldChoices = []
-		self.m_combo_cctld = wx.ComboBox( self.m_panel_multi_search, wx.ID_ANY, u"ccTLD", wx.DefaultPosition, wx.DefaultSize, m_combo_cctldChoices, 0 )
+		self.m_staticText12 = wx.StaticText( self.m_panel_multi_search, wx.ID_ANY, u"and/or ccTLD:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText12.Wrap( -1 )
+		bSizer24.Add( self.m_staticText12, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		m_combo_cctldChoices = [ u"au", u"ca", u"uk" ]
+		self.m_combo_cctld = wx.ComboBox( self.m_panel_multi_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 80,-1 ), m_combo_cctldChoices, wx.CB_READONLY|wx.CB_SORT )
 		bSizer24.Add( self.m_combo_cctld, 0, wx.ALL, 5 )
+		
+		self.m_staticText131 = wx.StaticText( self.m_panel_multi_search, wx.ID_ANY, u"or gTLD:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText131.Wrap( -1 )
+		bSizer24.Add( self.m_staticText131, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		m_combo_gtldChoices = [ u"guru", u"store", u"3d" ]
+		self.m_combo_gtld = wx.ComboBox( self.m_panel_multi_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 150,-1 ), m_combo_gtldChoices, wx.CB_READONLY|wx.CB_SORT )
+		bSizer24.Add( self.m_combo_gtld, 0, wx.ALL, 5 )
 		
 		
 		bSizer19.Add( bSizer24, 0, wx.EXPAND, 5 )
@@ -227,7 +246,7 @@ class MyFrame ( wx.Frame ):
 		self.m_staticText10.Wrap( -1 )
 		bSizer26.Add( self.m_staticText10, 0, wx.ALL, 5 )
 		
-		self.m_textctrl_sleep = wx.TextCtrl( self.m_panel_multi_search, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 40,-1 ), 0 )
+		self.m_textctrl_sleep = wx.TextCtrl( self.m_panel_multi_search, wx.ID_ANY, u"0", wx.DefaultPosition, wx.Size( 40,-1 ), 0 )
 		self.m_textctrl_sleep.SetToolTipString( u"Number of seconds to sleep between whois queries" )
 		
 		bSizer26.Add( self.m_textctrl_sleep, 0, wx.ALL, 5 )
@@ -248,6 +267,8 @@ class MyFrame ( wx.Frame ):
 		bSizer28 = wx.BoxSizer( wx.HORIZONTAL )
 		
 		self.m_button_print2 = wx.Button( self.m_panel_multi_search, wx.ID_ANY, u"Print", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button_print2.Hide()
+		
 		bSizer28.Add( self.m_button_print2, 0, wx.ALL, 5 )
 		
 		self.m_button_save2 = wx.Button( self.m_panel_multi_search, wx.ID_ANY, u"Save", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -283,6 +304,7 @@ class MyFrame ( wx.Frame ):
 		self.Bind( wx.EVT_MENU, self.close_app, id = self.m_menuItem_close.GetId() )
 		self.Bind( wx.EVT_MENU, self.open_about_dialog, id = self.m_menuItem_about.GetId() )
 		self.m_notebooktab.Bind( wx.EVT_SET_FOCUS, self.set_preveiw_results )
+		self.m_textctrl_domain.Bind( wx.EVT_TEXT, self.do_whois_map )
 		self.m_textctrl_domain.Bind( wx.EVT_TEXT_ENTER, self.do_whois_search )
 		self.m_button_single_search.Bind( wx.EVT_BUTTON, self.do_whois_search )
 		self.m_button_clear_history.Bind( wx.EVT_BUTTON, self.clear_history )
@@ -291,8 +313,9 @@ class MyFrame ( wx.Frame ):
 		self.m_button_save1.Bind( wx.EVT_BUTTON, self.do_save_results )
 		self.m_button_quit1.Bind( wx.EVT_BUTTON, self.close_app )
 		self.m_button_open.Bind( wx.EVT_BUTTON, self.open_file_select )
+		self.m_combo_tld.Bind( wx.EVT_COMBOBOX, self.on_tld_combo_select )
+		self.m_combo_gtld.Bind( wx.EVT_COMBOBOX, self.on_gtld_combo_select )
 		self.m_checkbox_dead.Bind( wx.EVT_CHECKBOX, self.set_dead_only )
-		self.m_textctrl_sleep.Bind( wx.EVT_TEXT, self.set_sleep )
 		self.m_button_begin.Bind( wx.EVT_BUTTON, self.do_multi_search )
 		self.m_button_print2.Bind( wx.EVT_BUTTON, self.do_print_results )
 		self.m_button_save2.Bind( wx.EVT_BUTTON, self.do_save_results )
@@ -321,6 +344,9 @@ class MyFrame ( wx.Frame ):
 	def set_preveiw_results( self, event ):
 		event.Skip()
 	
+	def do_whois_map( self, event ):
+		event.Skip()
+	
 	def do_whois_search( self, event ):
 		event.Skip()
 	
@@ -337,10 +363,13 @@ class MyFrame ( wx.Frame ):
 	def open_file_select( self, event ):
 		event.Skip()
 	
-	def set_dead_only( self, event ):
+	def on_tld_combo_select( self, event ):
 		event.Skip()
 	
-	def set_sleep( self, event ):
+	def on_gtld_combo_select( self, event ):
+		event.Skip()
+	
+	def set_dead_only( self, event ):
 		event.Skip()
 	
 	def do_multi_search( self, event ):
