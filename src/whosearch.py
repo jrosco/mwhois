@@ -72,10 +72,10 @@ class WhoisSearch():
         self.logger.debug('called whois_multi_search()')
         
         self.whois_info = WhoisInfo()
-        self.connection = WhoisServerConnection(self.whois_info)
-        self.connection.sleep = self.sleep
         self.whois_info.tld = self.tld
         
+        self.connection = WhoisServerConnection(self.whois_info)
+        self.connection.sleep = self.sleep
         
         try:
             
@@ -93,6 +93,7 @@ class WhoisSearch():
             else:
                 self.whois_info.domain = line.rstrip() + "." + self.tld
             
+            self.whois_server = self.whois_info.get_whois_server()
             self.connection.connection()
             
             alive = self.whois_info.is_domain_alive()
