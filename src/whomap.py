@@ -5,119 +5,118 @@ import re
 class WhoisServerMap(object):
         
     def __init__(self):
-        
-        
+
         self.list_of_emails = r'[\w.-]+@[\w.-]+'
         
         #Structure
-        # ['first_server, 'second _server', 'status', 'exceeded']
+        # ['first_server, 'second _server', 'status', 'exceeded', 'tld_type']
         
-        self.all_server_map = { 'ac': ['whois.nic.ac','', 'is available'    ,''], \
-                        'aero': ['whois.aero','', 'NOT FOUND' ,''], \
-                        'af': ['whois.nic.af','', 'No Object Found',''], \
-                        'ag': ['whois.nic.ag','', 'NOT FOUND' ,''], \
-                        'am': ['whois.nic.am','', 'No match' ,''], \
-                        'as': ['whois.nic.as','', 'Not Registered' ,''], \
-                        'at': ['whois.nic.at','', 'nothing found' ,''], \
-                        'au': ['whois.aunic.net','', 'No Data Found' ,''], \
-                        'be': ['whois.dns.be','', 'Status: [   AVAILABLE' ,''], \
-                        'biz': ['whois.biz','', 'Not found' ,''], \
-                        'bj': ['whois.nic.bj','', ''], \
-                        'br': ['whois.registro.br','', 'No match for' ,''], \
-                        'bz': ['whois.belizenic.bz','', 'No Match' ,''], \
-                        'ca': ['whois.cira.ca','whois.domainpeople.com', 'Domain status: .*available' ,''], \
-                        'cat': ['whois.cat','', ''], \
-                        'cc': ['whois.nic.cc','', 'No match' ,''], \
-                        'cd': ['whois.nic.cd','', 'Domain Status: Available' ,''], \
-                        'ch': ['whois.nic.ch','', 'not have an entry' ,''], \
-                        'ci': ['whois.nic.ci','', ''], \
-                        'cl': ['whois.nic.cl','', 'no existe' ,''], \
-                        'cn': ['whois.cnnic.net.cn','', 'no matching record' ,''], \
-                        'com': ['whois.verisign-grs.com','whois.domain.com', 'No match for' ,'You have exceeded your quota of queries'], \
-                        'coop': ['whois.nic.coop','', ''], \
-                        'cx': ['whois.nic.cx','', 'No Object Found' ,''], \
-                        'cz': ['whois.nic.cz','', 'No data found' ,''], \
-                        'de': ['whois.denic.de','', 'Status: free' ,'access control limit exceeded'], \
-                        'dk': ['whois.dk-hostmaster.dk','', 'No entries found' ,''], \
-                        'edu': ['whois.educause.edu','', 'No Match' ,''], \
-                        'ee': ['whois.eenet.ee','', ''], \
-                        'eu': ['whois.eu','', 'AVAILABLE'], \
-                        'fi': ['whois.ficora.fi','', ''], \
-                        'fr': ['whois.nic.fr','', 'No entries found' ,''], \
-                        'gf': ['whois.internic.net','', 'No match for domain' ,''], \
-                        'gg': ['whois.channelisles.net','', ''], \
-                        'gov': ['whois.dotgov.gov','', 'No match',''], \
-                        'gr': ['whois.ripe.net','', 'no entries found' ,''], \
-                        'graphics' : ['whois.donuts.co','','Domain not found',''], \
-                        'guru' : ['whois.donuts.co','','Domain not found',''], \
-                        'hk': ['whois.hkirc.net.hk','', 'The domain has not been registered.' ,''], \
-                        'hn': ['whois2.afilias-grs.net','', ''], \
-                        'hu': ['whois.nic.hu','', ''], \
-                        'ie': ['whois.domainregistry.ie','', 'Not Registered ' ,''], \
-                        'il': ['whois.isoc.org.il','', '% No data was found' ,''], \
-                        'in': ['whois.inregistry.net','', ''], \
-                        'info': ['whois.afilias.info','', 'NOT FOUND' ,''], \
-                        'int': ['whois.iana.org','', ''], \
-                        'io': ['whois.nic.io','', ''], \
-                        'is': ['whois.isnic.is','', 'No entries found' ,''], \
-                        'it': ['whois.nic.it','', 'AVAILABLE' ,''], \
-                        'jp': ['whois.jprs.jp','', 'No match!!' ,''], \
-                        'ke': ['whois.kenic.or.ke','', ''], \
-                        'kr': ['whois.nic.or.kr','', 'is not registered' ,''], \
-                        'kz': ['whois.nic.kz','', 'Nothing found for this query' ,''], \
-                        'li': ['whois.nic.li','', 'not have an entry' ,''], \
-                        'lt': ['whois.domreg.lt','', ''], \
-                        'lu': ['whois.dns.lu','', '% No such domain' ,''], \
-                        'lv': ['whois.nic.lv','', ''], \
-                        'me': ['me.whois-servers.net', '', '', ''], \
-                        'mg': ['whois.nic.mg','', ''], \
-                        'mil': ['whois.nic.mil','', ''], \
-                        'mn': ['whois.nic.mn','', ''], \
-                        'ms': ['whois.adamsnames.tc','', 'is not registered' ,''], \
-                        'museum': ['whois.museum','', ''], \
-                        'mx': ['whois.nic.mx','', 'Object_Not_Found' ,''], \
-                        'my': ['whois.mynic.net.my','', ''], \
-                        'na': ['whois.na-nic.com.na','', ''], \
-                        'name': ['whois.nic.name','', 'No match' ,''], \
-                        'net': ['whois.markmonitor.com','whois.internic.net', 'No match for' ,''], \
-                        'nl': ['whois.domain-registry.nl','', 'is free' ,''], \
-                        'no': ['whois.norid.no','', '% No match' ,''], \
-                        'nu': ['whois.nic.nu','', 'not found' ,''], \
-                        'nz': ['whois.srs.net.nz','', '220 Available' ,''], \
-                        'org': ['whois.publicinterestregistry.net','whois.domain.com', 'NOT FOUND' ,'WHOIS LIMIT EXCEEDED'], \
-                        'pl': ['whois.dns.pl','', 'No information available' ,''], \
-                        'pm': ['whois.nic.pm','', ''], \
-                        'pr': ['whois.uprr.pr','', ''], \
-                        'pro': ['whois.registrypro.pro','', ''], \
-                        're': ['whois.nic.re','', ''], \
-                        'ro': ['whois.rotld.ro','', 'No entries found' ,''], \
-                        'ru': ['whois.ripn.net','', 'No entries found' ,''], \
-                        'se': ['whois.iis.se','', 'not found' ,''], \
-                        'sg': ['whois.nic.net.sg','', 'Domain Not Found' ,''], \
-                        'sh': ['whois.nic.sh','', 'is available' ,''], \
-                        'si': ['whois.arnes.si','', 'No entries found' ,''], \
-                        'st': ['whois.nic.st','', 'No entries found' ,''], \
-                        'technology' : ['whois.donuts.co','','Domain not found',''], \
-                        'tf': ['whois.nic.tf','', ''], \
-                        'tj': ['whois.nic.tj','', 'no match' ,''], \
-                        'tk': ['whois.dot.tk','', 'domain name not known' ,''], \
-                        'tl': ['whois.nic.tl','', ''], \
-                        'tm': ['whois.nic.tm','', 'is available' ,''], \
-                        'to': ['monarch.tonic.to','', 'No match for' ,''], \
-                        'today' : ['whois.donuts.co','','Domain not found',''], \
-                        'tr': ['whois.nic.tr','', ''], \
-                        'tv': ['whois.nic.tv','', 'No match for' ,''], \
-                        'tw': ['whois.twnic.net.tw','', ''], \
-                        'ua': ['whois.net.ua','', ''], \
-                        'ug': ['whois.co.ug','', 'No entries found' ,''], \
-                        'uk': ['whois.nic.uk','', 'no match' ,''], \
-                        'us': ['whois.nic.us','', 'Not found' ,''], \
-                        'uz': ['whois.cctld.uz','', ''], \
-                        've': ['whois.nic.ve','', ''], \
-                        'wf': ['whois.nic.wf','', ''], \
-                        'ws': ['whois.nic.ws','', 'No match for' ,''], \
-                        'yt': ['whois.nic.yt','', 'No entries found' ,''], \
-                        'xxx': ['whois.nic.xxx','whois.internic.net','NOT FOUND','']}
+        self.all_server_map = {'ac': ['whois.nic.ac','', 'is available'    ,'','cctld'], \
+                        'aero': ['whois.aero','', 'NOT FOUND' ,'','stld'], \
+                        'af': ['whois.nic.af','', 'No Object Found','','cctld'], \
+                        'ag': ['whois.nic.ag','', 'NOT FOUND' ,'','cctld'], \
+                        'am': ['whois.nic.am','', 'No match' ,'','cctld'], \
+                        'as': ['whois.nic.as','', 'Not Registered' ,'','cctld'], \
+                        'at': ['whois.nic.at','', 'nothing found' ,'','cctld'], \
+                        'au': ['whois.aunic.net','', 'No Data Found' ,'','cctld'], \
+                        'be': ['whois.dns.be','', 'Status:    AVAILABLE' ,'','cctld'], \
+                        'biz': ['whois.biz','', 'Not found' ,'','tld'], \
+                        'bj': ['whois.nic.bj','', '','','cctld'], \
+                        'br': ['whois.registro.br','', 'No match for' ,'','cctld'], \
+                        'bz': ['whois.belizenic.bz','', 'No Match' ,'','cctld'], \
+                        'ca': ['whois.cira.ca','whois.domainpeople.com', 'Domain status: .*available' ,'','cctld'], \
+                        'cat': ['whois.cat','', '','','stld'], \
+                        'cc': ['whois.nic.cc','', 'No match' ,'','cctld'], \
+                        'cd': ['whois.nic.cd','', 'Domain Status: Available' ,'','cctld'], \
+                        'ch': ['whois.nic.ch','', 'not have an entry' ,'','cctld'], \
+                        'ci': ['whois.nic.ci','', '','','cctld'], \
+                        'cl': ['whois.nic.cl','', 'no existe' ,'','cctld'], \
+                        'cn': ['whois.cnnic.net.cn','', 'no matching record' ,'','cctld'], \
+                        'com': ['whois.verisign-grs.com','whois.domain.com', 'No match for' ,'You have exceeded your quota of queries','tld'], \
+                        'coop': ['whois.nic.coop','', '','','gtld'], \
+                        'cx': ['whois.nic.cx','', 'No Object Found' ,'','cctld'], \
+                        'cz': ['whois.nic.cz','', 'No data found' ,'','cctld'], \
+                        'de': ['whois.denic.de','', 'Status: free' ,'access control limit exceeded','cctld'], \
+                        'dk': ['whois.dk-hostmaster.dk','', 'No entries found' ,'','cctld'], \
+                        'edu': ['whois.educause.edu','', 'No Match' ,'','tld'], \
+                        'ee': ['whois.eenet.ee','', '','','cctld'], \
+                        'eu': ['whois.eu','', 'AVAILABLE','','cctld'], \
+                        'fi': ['whois.ficora.fi','', '','','cctld'], \
+                        'fr': ['whois.nic.fr','', 'No entries found' ,'','cctld'], \
+                        'gf': ['whois.internic.net','', 'No match for domain' ,'','cctld'], \
+                        'gg': ['whois.channelisles.net','', '', '','cctld'], \
+                        'gov': ['whois.dotgov.gov','', 'No match','','tld'], \
+                        'gr': ['whois.ripe.net','', 'no entries found' ,'','cctld'], \
+                        'graphics' : ['whois.donuts.co','','Domain not found','','gtld'], \
+                        'guru' : ['whois.donuts.co','','Domain not found','','gtld'], \
+                        'hk': ['whois.hkirc.net.hk','', 'The domain has not been registered.' ,'','cctld'], \
+                        'hn': ['whois2.afilias-grs.net','', '','','cctld'], \
+                        'hu': ['whois.nic.hu','', '','','','cctld'], \
+                        'ie': ['whois.domainregistry.ie','', 'Not Registered ' ,'','cctld'], \
+                        'il': ['whois.isoc.org.il','', '% No data was found' ,'','cctld'], \
+                        'in': ['whois.inregistry.net','', '','','cctld'], \
+                        'info': ['whois.afilias.info','', 'NOT FOUND' ,'','tld'], \
+                        'int': ['whois.iana.org','', '','','stld'], \
+                        'io': ['whois.nic.io','', '','','cctld'], \
+                        'is': ['whois.isnic.is','', 'No entries found' ,'','cctld'], \
+                        'it': ['whois.nic.it','', 'AVAILABLE' ,'','cctld'], \
+                        'jp': ['whois.jprs.jp','', 'No match!!' ,'','cctld'], \
+                        'ke': ['whois.kenic.or.ke','', '','','cctld'], \
+                        'kr': ['whois.nic.or.kr','', 'is not registered' ,'','cctld'], \
+                        'kz': ['whois.nic.kz','', 'Nothing found for this query' ,'','cctld'], \
+                        'li': ['whois.nic.li','', 'not have an entry' ,'','cctld'], \
+                        'lt': ['whois.domreg.lt','', '','','cctld'], \
+                        'lu': ['whois.dns.lu','', '% No such domain' ,'','cctld'], \
+                        'lv': ['whois.nic.lv','', '','','cctld'], \
+                        'me': ['me.whois-servers.net', '', '', '','cctld'], \
+                        'mg': ['whois.nic.mg','', '','','cctld'], \
+                        'mil': ['whois.nic.mil','', '','','stld'], \
+                        'mn': ['whois.nic.mn','', '','','cctld'], \
+                        'ms': ['whois.adamsnames.tc','', 'is not registered' ,'','cctld'], \
+                        'museum': ['whois.museum','', '','','gtld'], \
+                        'mx': ['whois.nic.mx','', 'Object_Not_Found' ,'','cctld'], \
+                        'my': ['whois.mynic.net.my','', '','','cctld'], \
+                        'na': ['whois.na-nic.com.na','', '','','cctld'], \
+                        'name': ['whois.nic.name','', 'No match' ,'','gtld'], \
+                        'net': ['whois.internic.net','whois.markmonitor.com', 'No match for' ,'','tld'], \
+                        'nl': ['whois.domain-registry.nl','', 'is free' ,'','cctld'], \
+                        'no': ['whois.norid.no','', '% No match' ,'','cctld'], \
+                        'nu': ['whois.nic.nu','', 'not found' ,'','cctld'], \
+                        'nz': ['whois.srs.net.nz','', '220 Available' ,'','cctld'], \
+                        'org': ['whois.publicinterestregistry.net','whois.domain.com', 'NOT FOUND' ,'WHOIS LIMIT EXCEEDED','tld'], \
+                        'pl': ['whois.dns.pl','', 'No information available' ,'','cctld'], \
+                        'pm': ['whois.nic.pm','', '','','cctld'], \
+                        'pr': ['whois.uprr.pr','', '','','cctld'], \
+                        'pro': ['whois.registrypro.pro','', '','','gtld'], \
+                        're': ['whois.nic.re','', '','','cctld'], \
+                        'ro': ['whois.rotld.ro','', 'No entries found' ,'','cctld'], \
+                        'ru': ['whois.ripn.net','', 'No entries found' ,'','cctld'], \
+                        'se': ['whois.iis.se','', 'not found' ,'','cctld'], \
+                        'sg': ['whois.nic.net.sg','', 'Domain Not Found' ,'','cctld'], \
+                        'sh': ['whois.nic.sh','', 'is available' ,'','cctld'], \
+                        'si': ['whois.arnes.si','', 'No entries found' ,'','cctld'], \
+                        'st': ['whois.nic.st','', 'No entries found' ,'','cctld'], \
+                        'technology' : ['whois.donuts.co','','Domain not found','','gtld'], \
+                        'tf': ['whois.nic.tf','', '','','cctld'], \
+                        'tj': ['whois.nic.tj','', 'no match' ,'','cctld'], \
+                        'tk': ['whois.dot.tk','', 'domain name not known' ,'','cctld'], \
+                        'tl': ['whois.nic.tl','', '','','cctld'], \
+                        'tm': ['whois.nic.tm','', 'is available' ,'','cctld'], \
+                        'to': ['monarch.tonic.to','', 'No match for' ,'','cctld'], \
+                        'today' : ['whois.donuts.co','','Domain not found','','gtld'], \
+                        'tr': ['whois.nic.tr','', '','','cctld'], \
+                        'tv': ['whois.nic.tv','', 'No match for' ,'','cctld'], \
+                        'tw': ['whois.twnic.net.tw','', '','','cctld'], \
+                        'ua': ['whois.net.ua','', 'No entries found','', 'cctld'], \
+                        'ug': ['whois.co.ug','', 'No entries found' ,'','cctld'], \
+                        'uk': ['whois.nic.uk','', 'No match' ,'','cctld'], \
+                        'us': ['whois.nic.us','', 'Not found' ,'','cctld'], \
+                        'uz': ['whois.cctld.uz','', '','','cctld'], \
+                        've': ['whois.nic.ve','', '','','cctld'], \
+                        'wf': ['whois.nic.wf','', '','','cctld'], \
+                        'ws': ['whois.nic.ws','', 'No match for' ,'','cctld'], \
+                        'yt': ['whois.nic.yt','', 'No entries found' ,'','cctld'], \
+                        'xxx': ['whois.nic.xxx','whois.internic.net','NOT FOUND','','gtld'] }
         
         
         self.all_info_map = { 'ac' : ['N/A', 'Expiry :\s*(.+)', 'N/A', 'N/A', 'N/A'], \
@@ -226,4 +225,3 @@ class WhoisServerMap(object):
                          'ws' : ['Creation Date\s*(.+)', 'Expiration Date:\s*(.+)', 'Updated Date:\s*(.+)', 'Registrant\s*(.+)', 'Name Server:\s*(.+)'], \
                          'yt' : ['created:\s*(.+)', 'anniversary:\s*(.+)', 'last-update:\s*(.+)', 'N/A', 'N/A' ], \
                          'xxx': ['Creation Date:\s*(.+)','Updated Date:\s*(.+)','Expiry Date:\s*(.+)','Registrant\s*(.+)','Name Server:\s*(.+)']}
-           

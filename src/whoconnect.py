@@ -27,7 +27,7 @@ class WhoisServerConnection():
         
         self.logger.debug('called connection()')
         
-        if self.whoinfo.whoisserver != None or self.whoinfo.whoiserver != '':
+        if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver != '':
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)
@@ -39,7 +39,7 @@ class WhoisServerConnection():
             
             except socket.error as e:
                 self.logger.error('socket: open socket error %s', e)
-                sock.close();#sys.exit()
+                sock.close()
                 
             try:
                 self.logger.debug('connecting to server: %s', self.whoinfo.whoisserver)
@@ -47,7 +47,7 @@ class WhoisServerConnection():
             
             except socket.error as e:
                 self.logger.error('socket: connect socket error %s', e, exc_info=True)
-                sock.close();#sys.exit()
+                sock.close()
                 
             try:
                 self.logger.debug('socket: now sending data to server (data:%s)', self.whoinfo.domain)
@@ -55,7 +55,7 @@ class WhoisServerConnection():
             
             except socket.error as e:
                 self.logger.error('socket: send error %s', e, exc_info=True)
-                sock.close();#sys.exit()
+                sock.close()
                     
             try:
                 
@@ -75,7 +75,7 @@ class WhoisServerConnection():
             
             except WhoException as e:
                     self.logger.error(e, exc_info=True)
-                    sock.close();#sys.exit()
+                    sock.close()
         else:
                 self.logger.debug('no whois server is set :( ')
         

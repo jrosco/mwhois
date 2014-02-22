@@ -1,15 +1,12 @@
 #!/usr/bin/env python 
 
-import os
-import sys
-import types
 import logging
-import types
+from types import ListType
 
 from whoconnect import WhoisServerConnection
 from whois import WhoisInfo
-from whomap import WhoisServerMap
 import const as CONST
+
 
 class WhoisSearch():
     
@@ -23,15 +20,14 @@ class WhoisSearch():
         self.sleep = time_to_sleep
         self.whois_server = None
         
-        if self.debug == True:
+        if self.debug is True:
             logging.basicConfig(level=logging.DEBUG)
         else: 
             logging.basicConfig(level=logging.INFO)
             
         self.logger = logging.getLogger(__name__)
         self.logger.debug('constructor: __init__()')
-        
-    
+
     def whois_search(self):
         
         self.logger.debug('called whois_search()')
@@ -39,7 +35,7 @@ class WhoisSearch():
         self.whois_info = WhoisInfo()
         self.whois_info.domain = self.dname
         
-        if self.whois_server == None:
+        if self.whois_server is None:
             self.whois_server = self.whois_info.get_whois_server()
         else:
             self.whois_info.get_domain_tld()
@@ -87,7 +83,8 @@ class WhoisSearch():
             search_list = self.wordlist
             
         for line in search_list:
-            if ('.' in line):
+
+            if '.' in line:
                 self.whois_info.domain = line
                 #self.tld = w.get_domain_tld()
             else:
@@ -104,7 +101,8 @@ class WhoisSearch():
                 self.connection.connection()
                 alive = self.whois_info.is_domain_alive()
 #             else:
-#                 self.logger.info("sorry your out of luck, you have been denied by both whois servers, please try again later....better luck next time")
+#                 self.logger.info("sorry your out of luck, you have been denied by both whois servers, \
+#                   please try again later....better luck next time")
 #                 sys.exit()
               
             if alive == CONST.DOMAIN_DEAD:
@@ -114,15 +112,14 @@ class WhoisSearch():
                 d_list = [CONST.DOMAIN_ALIVE, self.whois_info.domain]
                 yield d_list
 
-        if type(search_list) is types.ListType:
+        if type(search_list) is ListType:
             return
         else:
             self.logger.debug('closing file object')
             search_list.close()    
         
         return 
-    
- 
+
     def deeper_search(self):
         
         self.logger.debug('called deeper_search()')
@@ -149,15 +146,19 @@ class WhoisSearch():
         self.wordlist = d_list
         x = self.whois_multi_search()
         return x     
-    
+
+    def get_tld_type(self):
+        
+        self.logger.debug('called get_tld_type()')
+        
+        return self.whois_info.get_tld_type()
     
     def creation_date(self):
         
         self.logger.debug('called creation_date()')
         
         return self.whois_info.get_whois_attr(CONST.CDATE)
-    
-    
+
     def expiry_date(self):
         
         self.logger.debug('called expiry_date()')
@@ -169,8 +170,7 @@ class WhoisSearch():
         self.logger.debug('called update_date()')
         
         return self.whois_info.get_whois_attr(CONST.UPDATE)
-    
-    
+
     def registrant(self):
         
         self.logger.debug('called registrant()')
@@ -200,5 +200,3 @@ class WhoisSearch():
         self.logger.debug('called emails()')
         
         return self.whois_info.get_all_emails()
-    
-        
