@@ -41,7 +41,7 @@ class WhoisServerMap(object):
                         'dk': ['whois.dk-hostmaster.dk','', 'No entries found' ,''], \
                         'edu': ['whois.educause.edu','', 'No Match' ,''], \
                         'ee': ['whois.eenet.ee','', ''], \
-                        'eu': ['whois.eu','', ''], \
+                        'eu': ['whois.eu','', 'AVAILABLE'], \
                         'fi': ['whois.ficora.fi','', ''], \
                         'fr': ['whois.nic.fr','', 'No entries found' ,''], \
                         'gf': ['whois.internic.net','', 'No match for domain' ,''], \
