@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-from numpy.oldnumeric.ma import domain_check_interval
 
-import wx 
+import wx
 from threading import *
 import logging
 
