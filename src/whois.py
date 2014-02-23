@@ -32,19 +32,15 @@ class WhoisInfo(WhoisServerMap):
 
         self.logger.debug('called get_whois_server() domain = %s', self.domain)
 
-        self.logger.debug('clearing previous server used')
-
         if self.second_server is False:
 
             self.logger.debug('no second server needed')
             list_number = 0
-            #server_map = self.server_map
 
         else:
 
             self.logger.debug('second server needed, must have exceeded limit!!')
             list_number = 1
-            #server_map = self.backup_server_map
 
         try:
             if self.domain is not None:
@@ -57,15 +53,14 @@ class WhoisInfo(WhoisServerMap):
 
             #self.logger.info('Querying %s' % self.whoisserver)
 
-            return self.whoisserver
-
-        except:
+        except WhoException, e:
 
             if self.second_server is True:
                 self.logger.info("problem mapping second whois server")
             else:
                 self.logger.info("problem mapping whois server with %s please use a different tld to search for.",
                                  self.tld)
+        return self.whoisserver
 
     def tld_not_found_text(self):
 
@@ -77,7 +72,7 @@ class WhoisInfo(WhoisServerMap):
 
             return self.not_found
 
-        except:
+        except WhoException, e:
             self.logger.error("dead domain text not found")
 
     def exceeded_limit(self):
@@ -88,8 +83,7 @@ class WhoisInfo(WhoisServerMap):
             self.exceeded = self.all_server_map[self.tld][3]
             self.logger.debug('return exceeded text = %s for tld %s', self.exceeded, self.tld)
 
-
-        except:
+        except WhoException, e:
 
             self.logger.debug("exceeded text not found")
 
