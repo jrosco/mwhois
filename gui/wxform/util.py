@@ -2,6 +2,7 @@
 
 from mwhois.whomap import WhoisServerMap
 
+
 class WhoisClientUtil():
   
     def map_whois_server(self, domain):
@@ -47,6 +48,3 @@ class WhoisClientUtil():
         
         gtld.sort()
         return gtld
-
-        
-        
