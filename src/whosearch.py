@@ -62,7 +62,6 @@ class WhoisSearch():
             
             return self.whois_info.response
 
-    
     def whois_multi_search(self):
         
         self.logger.debug('called whois_multi_search()')
@@ -85,7 +84,7 @@ class WhoisSearch():
         for line in search_list:
 
             if '.' in line:
-                self.whois_info.domain = line
+                self.whois_info.domain = line.strip()
                 #self.tld = w.get_domain_tld()
             else:
                 self.whois_info.domain = line.rstrip() + "." + self.tld
@@ -95,7 +94,7 @@ class WhoisSearch():
             
             alive = self.whois_info.is_domain_alive()
             
-            if alive == CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts != 1:
+            if alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts != 1:
                 self.whois_info.second_server = True
                 self.connection.no_of_attempts = 1
                 self.connection.connection()
@@ -105,10 +104,10 @@ class WhoisSearch():
 #                   please try again later....better luck next time")
 #                 sys.exit()
               
-            if alive == CONST.DOMAIN_DEAD:
+            if alive is CONST.DOMAIN_DEAD:
                 d_list = [CONST.DOMAIN_DEAD, self.whois_info.domain]
                 yield d_list
-            elif alive == CONST.DOMAIN_ALIVE and self.deadonly == False or self.deadonly == None:
+            elif alive is CONST.DOMAIN_ALIVE and self.deadonly is False or self.deadonly is None:
                 d_list = [CONST.DOMAIN_ALIVE, self.whois_info.domain]
                 yield d_list
 
