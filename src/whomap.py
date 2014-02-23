@@ -59,7 +59,7 @@ class WhoisServerMap(object):
                                'in': ['whois.inregistry.net', '', '', '', 'cctld'],
                                'info': ['whois.afilias.info', '', 'NOT FOUND', 'WHOIS LIMIT EXCEEDED', 'tld'],
                                'int': ['whois.iana.org', '', '', '', 'stld'],
-                               'io': ['whois.nic.io', '', '', '', 'cctld'],
+                               'io': ['whois.nic.io', '', 'is available', '', 'cctld'],
                                'is': ['whois.isnic.is', '', 'No entries found', '', 'cctld'],
                                'it': ['whois.nic.it', '', 'AVAILABLE', '', 'cctld'],
                                'jp': ['whois.jprs.jp', '', 'No match!!', '', 'cctld'],

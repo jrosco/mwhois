@@ -94,7 +94,7 @@ class WhoisSearch():
             
             alive = self.whois_info.is_domain_alive()
             
-            if alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts != 1:
+            if alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1:
                 self.whois_info.second_server = True
                 self.connection.no_of_attempts = 1
                 self.connection.connection()

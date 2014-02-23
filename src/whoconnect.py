@@ -1,13 +1,9 @@
 #!/usr/bin/env python 
 
-import re
 import socket
 import time
-import sys
 import logging
 
-import const as CONST
-from whois import WhoisInfo
 from exception import WhoException
 
 
@@ -27,7 +23,7 @@ class WhoisServerConnection():
         
         self.logger.debug('called connection()')
         
-        if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver != '':
+        if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)
@@ -78,5 +74,5 @@ class WhoisServerConnection():
                     sock.close()
         else:
                 self.logger.debug('no whois server is set :( ')
-        
+
         return
