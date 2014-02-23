@@ -4,6 +4,9 @@ from mwhois.whomap import WhoisServerMap
 
 
 class WhoisClientUtil():
+
+    def __init__(self):
+        pass
   
     def map_whois_server(self, domain):
         

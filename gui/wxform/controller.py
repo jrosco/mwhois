@@ -26,37 +26,45 @@ class SingleSearchThread(Thread):
     def run(self):
        
         self.logger.debug('called SingleSearchThread().run')
-        
+
+        search = WhoisSearch()
+
         try:
             
             self.logger.debug('trying search thread')
             
             if self._window_obj.history_select is True:
-                
-                domain_history_list_no = self._window_obj.m_listbox_history.GetSelection()
-                self.logger.debug('history select enabled. using %s' % domain_history_list_no)
-                self._window_obj.history_select = False
-                
-                try:
-                    domain_history = str(self.get_history(domain_history_list_no))
-                    wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID,
-                                                               domain_history, 2))
-                except Exception, e: 
-                    wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_ERROR_ID, str(e)))
+
+                self.logger.debug('history select enabled.')
+                history_items = self._window_obj.m_listbox_history.GetItems()
+                search.dname = history_items[self._window_obj.m_listbox_history.GetSelection()]
+
+                #TODO Have history search use stored results. Need to have history data stored in a list type
+                # domain_history_list_no = self._window_obj.m_listbox_history.GetSelection()
+                # self.logger.debug('history select enabled. using %s' % domain_history_list_no)
+                # self._window_obj.history_select = False
+                #
+                # try:
+                #     domain_history = str(self.get_history(domain_history_list_no))
+                #     wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID,
+                #                                                domain_history, 2))
+                # except Exception, e:
+                #     wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_ERROR_ID, str(e)))
                 
             else:
-                
-                search = WhoisSearch()
                 search.dname = self._window_obj.m_textctrl_domain.GetValue()
                 search.whois_server = self._window_obj.m_combobox_whoisserver.GetValue()
-                self.logger.debug('doing a whois search via whois servers')
-                search.whois_search()
-                self.set_history(self.history_list_counter, search.response())
-                self.history_list_counter += 1
-                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.HISTORY_DISPLAY_EVT_ID, 
-                                                           search.dname))
-                wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID,  
-                                                           search.response(), search.whois_info.is_domain_alive()))
+
+            self.logger.debug('doing a whois search via whois servers')
+            search.whois_search()
+
+            #self.set_history(self.history_list_counter, search.response())
+            #self.history_list_counter += 1
+
+            wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.HISTORY_DISPLAY_EVT_ID,
+                                                       search.dname))
+            wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_RESULT_ID,
+                                                       search.response(), search.whois_info.is_domain_alive()))
                 
         except Exception, e:
             
@@ -105,7 +113,7 @@ class MultiSearchThread(Thread):
         elif tld != '':search.tld = tld
         elif cctld != '':search.tld = cctld
         elif gtld != '':search.tld = gtld
-        else:search.tld = None
+        #else:search.tld = 'com'
             
         if self._window_obj.m_checkbox_dead.GetValue() is True: search.deadonly = True
         

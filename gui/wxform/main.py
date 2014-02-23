@@ -76,6 +76,10 @@ class MainGUI(mframe.MyFrame):
         self.m_button_single_search.Enable(False)
         self.m_textctrl_results.Clear()
 
+        # if not self.m_textctrl_domain.GetValue():
+        #     self.m_textctrl_results.SetValue('Please enter a domain')
+        #     self.m_button_single_search.Enable(True)
+
         if not self.s_worker:
             print('self.worker is None')
             self.s_worker = SingleSearchThread(self)
@@ -88,6 +92,7 @@ class MainGUI(mframe.MyFrame):
         self.m_textctrl_domain.Clear()
         self.m_combobox_whoisserver.Clear()
         self.m_button_single_search.Enable(True)
+        self.m_combobox_whoisserver.SetValue('')
 
         if event.data[1] == 2:
             self.m_static_is_alive.SetLabel('')
@@ -130,8 +135,6 @@ class MainGUI(mframe.MyFrame):
 
     def do_whois_multi_search_result(self, event):
 
-        #self.m_button_begin.Enable(True)
-
         if event.data[0] is 1:
             status = 'Not Available'
             status_color = wx.RED
@@ -154,15 +157,20 @@ class MainGUI(mframe.MyFrame):
     def do_history_search(self, event):
 
         self.history_select = True
-        #self.do_whois_search(self)
+        self.do_whois_search(self)
 
     def do_display_history_search(self, event):
 
-        self.m_listbox_history.Append(event.data[0])
+        if self.history_select is False:
+            self.m_listbox_history.Append(event.data[0])
 
     def clear_history(self, event):
 
         self.m_listbox_history.Clear()
+
+    def do_list_search(self, event):
+        #TODO Implement this
+        pass
 
     def do_whois_map(self, event):
 
@@ -182,7 +190,7 @@ class MainGUI(mframe.MyFrame):
 
     def show_rightclick_menu(self, event):
 
-        #TODO Enable when ready for release
+        #TODO Enable when ready to start testing again
         # if self.m_panel_multi_search is self.FindFocus():
         #     self.m_listctrl_multiOnContextMenu(event)
         # else:
@@ -198,6 +206,7 @@ class MainGUI(mframe.MyFrame):
 
         self.m_button_begin.Enable(True)
         self.m_button_stop_multi.Enable(False)
+        self.m_static_mutil_status.SetLabel('Finished')
         self.m_worker = None
 
     def close_app(self, event):
