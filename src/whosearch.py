@@ -5,6 +5,7 @@ from types import ListType
 
 from whoconnect import WhoisServerConnection
 from whois import WhoisInfo
+from exception import *
 import const as CONST
 
 
@@ -19,7 +20,10 @@ class WhoisSearch():
         self.debug = debug
         self.sleep = time_to_sleep
         self.whois_server = None
-        
+
+        self.whois_info = WhoisInfo()
+        self.connection = WhoisServerConnection(self.whois_info)
+
         if self.debug is True:
             logging.basicConfig(level=logging.DEBUG)
         else: 
@@ -31,8 +35,7 @@ class WhoisSearch():
     def whois_search(self):
         
         self.logger.debug('called whois_search()')
-        
-        self.whois_info = WhoisInfo()
+
         self.whois_info.domain = self.dname
         
         if self.whois_server is None:
@@ -40,21 +43,20 @@ class WhoisSearch():
         else:
             self.whois_info.get_domain_tld()
             self.whois_info.whoisserver = self.whois_server
-            
-        self.connection = WhoisServerConnection(self.whois_info)
+
         self.connection.sleep = self.sleep
         self.connection.connection()
         
         status = self.whois_info.is_domain_alive()
         
-        if status == CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts != 1:
+        if status is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1:
             
             self.logger.debug('lets try a another server shall we. Attempts = %s', self.connection.no_of_attempts)
             self.whois_info.second_server = True
             self.connection.no_of_attempts = 1
             self.connection.connection()
         
-        if status == CONST.DOMAIN_DEAD:
+        if status is CONST.DOMAIN_DEAD:
             
             return "No information about domain %s" % self.dname
         
@@ -63,13 +65,10 @@ class WhoisSearch():
             return self.whois_info.response
 
     def whois_multi_search(self):
-        
+
         self.logger.debug('called whois_multi_search()')
-        
-        self.whois_info = WhoisInfo()
+
         self.whois_info.tld = self.tld
-        
-        self.connection = WhoisServerConnection(self.whois_info)
         self.connection.sleep = self.sleep
         
         try:
@@ -77,7 +76,7 @@ class WhoisSearch():
             self.logger.debug('trying opening wordlist as a file')
             search_list = open(self.wordlist, 'r')
             
-        except:
+        except WhoException:
             self.logger.debug('ok it\'s not a file object must be a list type. ')
             search_list = self.wordlist
             
@@ -85,7 +84,6 @@ class WhoisSearch():
 
             if '.' in line:
                 self.whois_info.domain = line.strip()
-                #self.tld = w.get_domain_tld()
             else:
                 self.whois_info.domain = line.rstrip() + "." + self.tld
             
@@ -128,13 +126,13 @@ class WhoisSearch():
         
         try:
             search_list = open(self.wordlist, 'r')
-        except:
+        except WhoException:
             search_list = self.wordlist
         
         for line in search_list:
             d_line = line.rstrip() + "." + self.tld
             try: socket.getaddrinfo(d_line, socket.AF_INET, 0, socket.SOCK_STREAM)
-            except Exception:
+            except WhoException:
                 d_list.append(line)
         
         if type(search_list) is ListType:
@@ -143,7 +141,7 @@ class WhoisSearch():
             search_list.close()
         
         self.wordlist = d_list
-        x = self.whois_multi_search()
+        x = self.whois_multi_search
         return x     
 
     def get_tld_type(self):

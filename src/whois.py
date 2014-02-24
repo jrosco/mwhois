@@ -53,7 +53,7 @@ class WhoisInfo(WhoisServerMap):
 
             #self.logger.info('Querying %s' % self.whoisserver)
 
-        except WhoException, e:
+        except WhoException:
 
             if self.second_server is True:
                 self.logger.info("problem mapping second whois server")
@@ -145,7 +145,7 @@ class WhoisInfo(WhoisServerMap):
             for item in re.findall(whois_attr, self.response):
                 whois_attr_list.append(item)
 
-        except WhoException, e:
+        except WhoException:
 
             self.logger.info('No attr %s', self.whois_attr)
 
@@ -167,16 +167,19 @@ class WhoisInfo(WhoisServerMap):
         self.exceeded_limit()
 
         if re.search(self.exceeded, self.response) and self.exceeded != '':
+
             self.second_server = True
             self.logger.info('%s you have exceeded your quota of queries (oops)', self.domain)
             self.logger.info('Lets try a different server...')
+
             return CONST.DOMAIN_SEARCH_EXCEEDED
 
         if re.search(self.not_found, self.response):
-            #self.second_server = True
+
             self.logger.debug('%s domain is dead', self.domain)
             return CONST.DOMAIN_DEAD
 
         else:
+
             self.logger.debug('%s domain is alive', self.domain)
             return CONST.DOMAIN_ALIVE
