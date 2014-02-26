@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import wx
+
 import mwhois.const as CONST
 
 import mframe
@@ -239,11 +240,3 @@ class MainGUI(mframe.MyFrame):
 
     def set_preveiw_results(self, event):
         pass
-
-
-""" Main run """
-if __name__ == "__main__":
-    app = wx.App(False)
-    frame = MainGUI(None)
-    frame.Show(True)
-    app.MainLoop()
