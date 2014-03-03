@@ -102,9 +102,18 @@ class MultiSearchThread(Thread):
         
         self.logger.debug('called MultiSearchThread().run')
         
-        search = WhoisSearch()
-        search.wordlist = self._window_obj.m_textctrl_file.GetValue()
-        
+        search = WhoisSearch(debug=True)
+
+        #TODO If multi list box has values use it else get file from file textbox
+        if len(self._window_obj.m_list_multi_list.GetItems()):
+            self.logger.debug('using mutil gui listbox')
+            search.wordlist = self._window_obj.m_list_multi_list.GetItems()
+        else:
+            self.logger.debug('using mutil word file textbox')
+            search.wordlist = self._window_obj.m_textctrl_file.GetValue()
+
+        print(search.wordlist)
+
         tld = self._window_obj.m_combo_tld.GetValue()
         cctld = self._window_obj.m_combo_cctld.GetValue()
         gtld = self._window_obj.m_combo_gtld.GetValue()
@@ -117,7 +126,7 @@ class MultiSearchThread(Thread):
             
         if self._window_obj.m_checkbox_dead.GetValue() is True: search.deadonly = True
         
-        if self._window_obj.m_textctrl_sleep.GetValue() == '':
+        if not len(self._window_obj.m_textctrl_sleep.GetValue()):
             self._window_obj.m_textctrl_sleep.SetValue('0')
 
         search.sleep = float(self._window_obj.m_textctrl_sleep.GetValue())
@@ -150,7 +159,7 @@ class MultiSearchThread(Thread):
 
         except Exception, error:
 
-            self.logger.debug('error in MultiSearchThread()')
+            self.logger.debug('error in MultiSearchThread() %s' % error)
             wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.MULTI_SEARCH_EVT_ERROR_ID, error))
 
         self.logger.debug('cleanup MultiSearchThread()')
@@ -176,7 +185,7 @@ class GUIEvent():
      
     def __init__(self, win_obj):
          
-        self.history = { }
+        self.history = {}
         self._win_obj = win_obj
         
         self.logger = logging.getLogger(__name__)
@@ -192,7 +201,7 @@ class GUIEvent():
         
         self.logger.debug('called set_history()')
         self.history.update({domain_history:response})
-        self.logger.debug('return %s' % (self.history))
+        self.logger.debug('return %s' % self.history)
         return
     
     def set_tld_list(self):

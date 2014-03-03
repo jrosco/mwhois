@@ -14,7 +14,7 @@ if sys.platform == "win32":
     base = "Win32GUI"
 
 setup(  name = "mwhois",
-        version='1.0b',
+        version='1.0',
         author='jrosco',
         description = "Multi Whois Client",
         license='GPL',

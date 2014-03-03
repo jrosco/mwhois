@@ -14,6 +14,7 @@ from controller import GUIEvent
 class MainGUI(mframe.MyFrame):
 
     def __init__(self, parent):
+
         mframe.MyFrame.__init__(self, parent)
         self.s_worker = None
         self.m_worker = None
@@ -21,7 +22,11 @@ class MainGUI(mframe.MyFrame):
         self.m_textctrl_domain.SetFocus()
         self.dialog = wx.FileDialog(None, style=wx.OPEN)
 
-        """App Startup functions"""
+        """Set icon"""
+        ico = wx.Icon('../images/mwhois.ico', wx.BITMAP_TYPE_ICO)
+        self.SetIcon(ico)
+
+        """ App Startup functions"""
         GUIEvent(self).set_tld_list()
         # self.m_listctrl_multi.InsertColumn(0, 'Status', width=150)
         # self.m_listctrl_multi.InsertColumn(1, 'Domain', width=150)
@@ -202,6 +207,19 @@ class MainGUI(mframe.MyFrame):
 
         self.m_worker.abort()
         self.do_cleanup()
+
+    def do_add_multi_list(self, event):
+
+        multi_list_domain = self.m_text_multi_list.GetValue()
+
+        if len(multi_list_domain):
+            self.m_list_multi_list.Append(self.m_text_multi_list.GetValue())
+
+        self.m_text_multi_list.Clear()
+
+    def do_clear_multi_list(self, event):
+
+        self.m_list_multi_list.Clear()
 
     def do_cleanup(self, *event):
 
