@@ -13,16 +13,18 @@ class WhoisClientUtil():
         tld = domain.split('.')
         server = WhoisServerMap().all_server_map
     
-        for keys,values in server.items():
-            if keys == tld[-1]:return values[0], values[1]
-            else:continue
+        for keys, values in server.items():
+            if keys == tld[-1]:
+                return values[0], values[1]
+            else:
+                continue
             
     def get_tld(self):
         
         get_tld = WhoisServerMap().all_server_map
-        tld = ['','co']
+        tld = ['', 'co']
         
-        for keys,values in get_tld.items():
+        for keys, values in get_tld.items():
             if values[4] == 'tld':
                 tld.append(keys)
         tld.sort()
@@ -33,7 +35,7 @@ class WhoisClientUtil():
         get_cctld = WhoisServerMap().all_server_map
         cctld = ['']
         
-        for keys,values in get_cctld.items():
+        for keys, values in get_cctld.items():
             if values[4] == 'cctld':
                 cctld.append(keys)
         
@@ -45,7 +47,7 @@ class WhoisClientUtil():
         get_gtld = WhoisServerMap().all_server_map
         gtld = ['']
         
-        for keys,values in get_gtld.items():
+        for keys, values in get_gtld.items():
             if values[4] == 'gtld':
                 gtld.append(keys)
         
