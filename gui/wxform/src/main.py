@@ -128,7 +128,7 @@ class MainGUI(mframe.MyFrame):
         self.m_listctrl_multi.ClearAll()
 
         """ Testing """
-        self.m_listctrl_multi.InsertColumn(0, 'Status', width=255)
+        self.m_listctrl_multi.InsertColumn(0, 'Status', width=150)
         self.m_listctrl_multi.InsertColumn(1, 'Domain', width=255)
         self.m_listctrl_multi.InsertColumn(2, 'Server', width=255)
         # self.m_listctrl_multi.InsertColumn(2, 'Creation Date', width=150)
