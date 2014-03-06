@@ -3,10 +3,10 @@
 import logging
 from types import ListType
 
-from whoconnect import WhoisServerConnection
-from whois import WhoisInfo
-from exception import *
-import const as CONST
+from mwhois.whoconnect import WhoisServerConnection
+from mwhois.whois import WhoisInfo
+from mwhois.exception import *
+import mwhois.const as CONST
 
 
 class WhoisSearch():
@@ -71,14 +71,22 @@ class WhoisSearch():
         self.whois_info.tld = self.tld
         self.connection.sleep = self.sleep
         
-        try:
-            
-            self.logger.debug('trying opening wordlist as a file')
-            search_list = open(self.wordlist, 'r')
-            
-        except WhoException:
+        if type(self.wordlist) is ListType:
             self.logger.debug('ok it\'s not a file object must be a list type. ')
             search_list = self.wordlist
+        else:
+            self.logger.debug('trying opening wordlist as a file')
+            search_list = open(self.wordlist, 'r')
+
+        #TODO remove later, may not be needed. Also need to test WhoException Class
+        # try:
+        #
+        #     self.logger.debug('trying opening wordlist as a file')
+        #     search_list = open(self.wordlist, 'r')
+        #
+        # except WhoException, e:
+        #     self.logger.debug('ok it\'s not a file object must be a list type. ')
+        #     search_list = self.wordlist
             
         for line in search_list:
 
