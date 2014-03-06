@@ -7,8 +7,9 @@ build_exe_options = {}
 # GUI applications require a different base on Windows (the default is for a
 # console application).
 base = None
-target_name = 'mwhois'
-#targetDir = 'build'
+
+#IMPORTANT: Make sure the target_name has the .exe at end of name .e.g example.exe
+target_name = 'mwhois.exe'
 
 if sys.platform == "win32":
     base = "Win32GUI"
