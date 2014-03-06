@@ -44,7 +44,6 @@ class MyFrame(wx.Frame):
         self.m_menu_help = wx.Menu()
         self.m_menuItem_about = wx.MenuItem(self.m_menu_help, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL)
         self.m_menu_help.AppendItem(self.m_menuItem_about)
-        self.m_menuItem_about.Enable(False)
 
         self.m_menubar_top.Append(self.m_menu_help, u"Help")
 
@@ -513,19 +512,16 @@ class MyFrame(wx.Frame):
     def do_list_search(self, event):
         event.Skip()
 
-
     def do_add_multi_list(self, event):
         event.Skip()
 
-
     def do_clear_multi_list(self, event):
         event.Skip()
-
 
     def m_listbox_historyOnContextMenu(self, event):
         self.m_listbox_history.PopupMenu(self.m_rightclick_menu_single, event.GetPosition())
 
     def m_listctrl_multiOnContextMenu(self, event):
         self.m_listctrl_multi.PopupMenu(self.m_rightclick_menu_multi, event.GetPosition())
-		
+
 

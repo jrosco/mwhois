@@ -3,6 +3,7 @@
 import wx
 
 import mwhois.const as CONST
+from mdialog import AboutDialog
 
 import mframe
 from controller import SingleSearchThread, MultiSearchThread
@@ -23,7 +24,7 @@ class MainGUI(mframe.MyFrame):
         self.dialog = wx.FileDialog(None, style=wx.OPEN)
 
         """Set icon"""
-        ico = wx.Icon('../images/mwhois.ico', wx.BITMAP_TYPE_ICO)
+        ico = wx.Icon('images/mwhois.ico', wx.BITMAP_TYPE_ICO)
         self.SetIcon(ico)
 
         """ App Startup functions"""
@@ -254,7 +255,13 @@ class MainGUI(mframe.MyFrame):
         pass
 
     def open_about_dialog(self, event):
-        pass
+
+        about = wx.App(False)
+        about_frame = AboutDialog(self, -1, "")
+        about.SetTopWindow(about_frame)
+        about_frame.CentreOnParent()
+        about_frame.Show()
+        about.MainLoop()
 
     def set_preveiw_results(self, event):
         pass
