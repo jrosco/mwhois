@@ -9,7 +9,7 @@ It's a good way to search for domains that are available to buy.'''
 setup( name='mwhois-cleint',
        version=version,
        long_description=long_description,
-       author='Joel Cumberland',
+       author='jrosco',
        author_email='joel_c@zoho.com',
        license='GPL',
        package_dir={'mwhois-client': 'src'},
