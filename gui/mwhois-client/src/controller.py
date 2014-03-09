@@ -68,7 +68,7 @@ class SingleSearchThread(Thread):
                 
         except Exception, e:
             
-            print('error %s' % str(e))
+            self.logger.error('error %s' % str(e))
             wx.PostEvent(self._window_obj, ResultEvent(self._window_obj.SINGLE_SEARCH_EVT_ERROR_ID, str(e)))
 
     def get_history(self, position):
@@ -111,8 +111,6 @@ class MultiSearchThread(Thread):
         else:
             self.logger.debug('using mutil word file textbox')
             search.wordlist = self._window_obj.m_textctrl_file.GetValue()
-
-        print(search.wordlist)
 
         tld = self._window_obj.m_combo_tld.GetValue()
         cctld = self._window_obj.m_combo_cctld.GetValue()
