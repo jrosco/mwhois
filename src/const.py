@@ -1,22 +1,41 @@
+#Mwhois attributes
 DOMAIN_FOUND = "Domain Taken"
 DOMAIN_NOT_FOUND = "Domain Available"
 DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
 DOMAIN_SEARCH_EXCEEDED=2
+
+#Search codes
 SINGLE_TYPE = 1
 BASIC_TYPE = 2
 ADV_TYPE = 3
-DEFAULT_TLD='com'
+
+#Terminal colours
 HEADER = '\033[95m'
 OKBLUE = '\033[94m'
 OKGREEN = '\033[92m'
 WARNING = '\033[93m'
 FAIL = '\033[91m'
 ENDC = '\033[0m'
+
+#Whois server attributes
 CDATE = 200
 EDATE = 201
 UPDATE = 202
 REGISTRANT = 203
 NAMESERVER = 204
 WHOIS_STATUS = 205
+
+#TLD Codes
+DEFAULT_TLD = 'com'
+TLD_STANDARD = 100
+CCTLD_STANDARD = 102
+STLD_STANDARD = 103
+GTLD_STANDARD = 104
+#Other gltd codes
+GTLD_DONUTS = 105
+GTLD_UNITED=106
+GTLD_UNIREG=107
+
+
