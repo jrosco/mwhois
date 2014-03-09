@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from mwhois.whomap import WhoisServerMap
+import mwhois.const as CONST
 
 
 class WhoisClientUtil():
@@ -25,7 +26,7 @@ class WhoisClientUtil():
         tld = ['', 'co']
         
         for keys, values in get_tld.items():
-            if values[4] == 'tld':
+            if values[4] is CONST.TLD_STANDARD:
                 tld.append(keys)
         tld.sort()
         return tld
@@ -36,7 +37,7 @@ class WhoisClientUtil():
         cctld = ['']
         
         for keys, values in get_cctld.items():
-            if values[4] == 'cctld':
+            if values[4] is CONST.CCTLD_STANDARD:
                 cctld.append(keys)
         
         cctld.sort()
@@ -48,7 +49,13 @@ class WhoisClientUtil():
         gtld = ['']
         
         for keys, values in get_gtld.items():
-            if values[4] == 'gtld':
+            if values[4] is CONST.GTLD_STANDARD:
+                gtld.append(keys)
+            elif values[4] is CONST.GTLD_DONUTS:
+                gtld.append(keys)
+            elif values[4] is CONST.GTLD_UNITED:
+                gtld.append(keys)
+            elif values[4] is CONST.GTLD_UNIREG:
                 gtld.append(keys)
         
         gtld.sort()
