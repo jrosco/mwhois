@@ -88,7 +88,6 @@ class MainGUI(mframe.MyFrame):
         #     self.m_button_single_search.Enable(True)
 
         if not self.s_worker:
-            print('self.worker is None')
             self.s_worker = SingleSearchThread(self)
             self.s_worker.start()
 
