@@ -101,13 +101,26 @@ class WhoisInfo(WhoisServerMap):
 
     def get_list_supported_tlds(self):
 
+        self.logger.debug('called get_list_supported_tlds()')
+
         return self.all_server_map
 
     def get_tld_type(self):
 
-        self.tld_type = self.all_server_map[self.tld[4]]
-        return self.tld_type
+        self.logger.debug('called get_tld_type()')
 
+        try:
+
+            self.tld_type = self.all_server_map[self.tld]
+            self.logger.debug('tld type is %s' % self.tld_type)
+
+        except WhoException, e:
+
+            self.logger.error('tld type error: %s' % e)
+
+        return self.tld_type[4]
+
+    #TODO: Fix typo should be named get_response()
     def get_repsonse(self):
 
         self.logger.debug('called get_repsonse()')
@@ -117,6 +130,13 @@ class WhoisInfo(WhoisServerMap):
     def get_whois_attr(self, whois_attr):
 
         self.logger.debug('called get_whois_attr()')
+
+        if self.get_tld_type() is CONST.GTLD_DONUTS:
+            self.tld = CONST.GTLD_DONUTS
+        elif self.get_tld_type() is CONST.GTLD_UNITED:
+            self.tld = CONST.GTLD_UNITED
+        elif self.get_tld_type() is CONST.GTLD_UNIREG:
+            self.tld = CONST.GTLD_UNIREG
 
         try:
 
