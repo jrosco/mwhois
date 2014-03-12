@@ -11,8 +11,8 @@ Dependencies
 Features 
 * Search for single/multiple domains with direct connection to a large list of  whois servers  
 * Show only available domains 
-* 105 searchable TLDS 
-* 4 new gTLDS .graphics, .guru, .technology, .today
+* 100+ searchable TLDS
+* 30+ gTLDS e.g .graphics, .guru, .technology, .today etc
 * Search second whois server if first one fails (limited to certain tld's)
 
 Features to come
