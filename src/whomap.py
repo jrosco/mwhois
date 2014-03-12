@@ -99,7 +99,7 @@ class WhoisServerMap(object):
                                'pl': ['whois.dns.pl', '', 'No information available', '', CONST.CCTLD_STANDARD],
                                'pm': ['whois.nic.pm', '', '', '', CONST.CCTLD_STANDARD],
                                'pr': ['whois.uprr.pr', '', '', '', CONST.CCTLD_STANDARD],
-                               'pro': ['whois.registrypro.pro', '', '', '', CONST.GTLD_STANDARD],
+                               'pro': ['whois.registrypro.pro', '', 'NOT FOUND', '', CONST.GTLD_STANDARD],
                                're': ['whois.nic.re', '', '', '', CONST.CCTLD_STANDARD],
                                'ro': ['whois.rotld.ro', '', 'No entries found', '', CONST.CCTLD_STANDARD],
                                'ru': ['whois.ripn.net', '', 'No entries found', '', CONST.CCTLD_STANDARD],
