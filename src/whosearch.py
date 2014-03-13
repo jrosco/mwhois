@@ -49,10 +49,13 @@ class WhoisSearch():
         
         status = self.whois_info.is_domain_alive()
         
-        if status is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1:
-            
-            self.logger.debug('lets try a another server shall we. Attempts = %s', self.connection.no_of_attempts)
-            self.whois_info.second_server = True
+        if status is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1 \
+                or status is CONST.DOMAIN_STATUS_UNKNOWN:
+
+            if status is CONST.DOMAIN_SEARCH_EXCEEDED:
+                self.logger.debug('lets try a another server shall we. Attempts = %s', self.connection.no_of_attempts)
+                self.whois_info.second_server = True
+
             self.connection.no_of_attempts = 1
             self.connection.connection()
         
@@ -100,8 +103,12 @@ class WhoisSearch():
             
             alive = self.whois_info.is_domain_alive()
             
-            if alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1:
-                self.whois_info.second_server = True
+            if alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1 \
+                    or alive is CONST.DOMAIN_STATUS_UNKNOWN:
+
+                if alive is CONST.DOMAIN_SEARCH_EXCEEDED:
+                    self.whois_info.second_server = True
+
                 self.connection.no_of_attempts = 1
                 self.connection.connection()
                 alive = self.whois_info.is_domain_alive()
@@ -115,6 +122,9 @@ class WhoisSearch():
                 yield d_list
             elif alive is CONST.DOMAIN_ALIVE and self.deadonly is False or self.deadonly is None:
                 d_list = [CONST.DOMAIN_ALIVE, self.whois_info.domain]
+                yield d_list
+            elif alive is CONST.DOMAIN_STATUS_UNKNOWN and self.deadonly is False or self.deadonly is None:
+                d_list = [CONST.DOMAIN_STATUS_UNKNOWN, self.whois_info.domain]
                 yield d_list
 
         if type(search_list) is ListType:

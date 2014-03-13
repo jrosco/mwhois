@@ -186,6 +186,10 @@ class WhoisInfo(WhoisServerMap):
         self.tld_not_found_text()
         self.exceeded_limit()
 
+        if not self.response:
+            self.logger.error('%s status is unknown, try again' % self.domain)
+            return CONST.DOMAIN_STATUS_UNKNOWN
+
         if re.search(self.exceeded, self.response) and self.exceeded != '':
 
             self.second_server = True
