@@ -48,6 +48,7 @@ class WhoisServerMap(object):
                                'dk': ['whois.dk-hostmaster.dk', '', 'No entries found', '', CONST.CCTLD_STANDARD],
                                'edu': ['whois.educause.edu', '', 'No Match', '', CONST.TLD_STANDARD],
                                'ee': ['whois.eenet.ee', '', '', '', CONST.CCTLD_STANDARD],
+                               'es': ['whois.nic.es', '', '', '', CONST.CCTLD_STANDARD],
                                'eu': ['whois.eu', '', 'AVAILABLE', '', CONST.CCTLD_STANDARD],
                                'fi': ['whois.ficora.fi', '', '', '', CONST.CCTLD_STANDARD],
                                'fr': ['whois.nic.fr', '', 'No entries found', '', CONST.CCTLD_STANDARD],
