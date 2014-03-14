@@ -4,7 +4,6 @@ import re
 import logging
 
 from whomap import WhoisServerMap
-import util
 import const as CONST
 from exception import WhoException
 
@@ -28,8 +27,6 @@ class WhoisInfo(WhoisServerMap):
         self.emails = ''
         self.second_server = False
         self.tld_type = ''
-
-        self.mwhois_util = util.MWhoisUtil()
 
     def get_whois_server(self):
 
@@ -75,8 +72,10 @@ class WhoisInfo(WhoisServerMap):
 
             return self.not_found
 
-        except WhoException, e:
+        except Exception, e:
+
             self.logger.error("dead domain text not found")
+            raise WhoException(e)
 
     def exceeded_limit(self):
 
@@ -86,9 +85,10 @@ class WhoisInfo(WhoisServerMap):
             self.exceeded = self.all_server_map[self.tld][3]
             self.logger.debug('return exceeded text = %s for tld %s', self.exceeded, self.tld)
 
-        except WhoException, e:
+        except Exception, e:
 
             self.logger.debug("exceeded text not found")
+            raise WhoException(e)
 
         return self.exceeded
 
@@ -112,14 +112,17 @@ class WhoisInfo(WhoisServerMap):
 
         self.logger.debug('called get_tld_type()')
 
+        print(self.tld)
+
         try:
 
             self.tld_type = self.all_server_map[self.tld]
             self.logger.debug('tld type is %s' % self.tld_type)
 
-        except WhoException, e:
+        except Exception, e:
 
             self.logger.error('tld type error: %s' % e)
+            raise WhoException(e)
 
         return self.tld_type[4]
 
@@ -150,7 +153,7 @@ class WhoisInfo(WhoisServerMap):
                 whois_attr = self.all_info_map[self.tld][1]
 
             elif whois_attr is CONST.UPDATE:
-                whois_attr = self.mwhois_util.parser_date(whois_attr)
+                whois_attr = self.all_info_map[self.tld][2]
 
             elif whois_attr is CONST.REGISTRANT:
                 whois_attr = self.all_info_map[self.tld][3]
@@ -168,9 +171,9 @@ class WhoisInfo(WhoisServerMap):
             for item in re.findall(whois_attr, self.response):
                 whois_attr_list.append(item)
 
-        except WhoException:
-
+        except Exception, e:
             self.logger.info('No attr %s', self.whois_attr)
+            raise WhoException(e)
 
         return whois_attr_list
 

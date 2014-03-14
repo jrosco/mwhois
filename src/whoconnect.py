@@ -18,6 +18,7 @@ class WhoisServerConnection():
         self.whoinfo = whoinfo
         self.sleep = 0
         self.no_of_attempts = 0
+        self.timeout = 10
         
     def connection(self):
         
@@ -30,11 +31,15 @@ class WhoisServerConnection():
             
             try:
                 self.logger.debug('socket: creating socket: fingers crossed ')
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)        
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
+
+                sock.settimeout(self.timeout)
+
                 self.logger.debug('socket: %s', sock)
             
             except socket.error as e:
-                self.logger.error('socket: open socket error %s', e)
+                #self.logger.error('socket: open socket error %s', e)
+                raise WhoException(e)
                 sock.close()
                 
             try:
@@ -42,7 +47,8 @@ class WhoisServerConnection():
                 sock.connect((self.whoinfo.whoisserver, 43))
             
             except socket.error as e:
-                self.logger.error('socket: connect socket error %s', e, exc_info=True)
+                #self.logger.error('socket: connect socket error %s', e, exc_info=True)
+                raise WhoException(e)
                 sock.close()
                 
             try:
@@ -50,7 +56,8 @@ class WhoisServerConnection():
                 sock.send(self.whoinfo.domain + '\r\n')
             
             except socket.error as e:
-                self.logger.error('socket: send error %s', e, exc_info=True)
+                #self.logger.error('socket: send error %s', e, exc_info=True)
+                raise WhoException(e)
                 sock.close()
                     
             try:
@@ -69,8 +76,8 @@ class WhoisServerConnection():
                 self.logger.debug('socket: closing socket object %s', sock)
                 sock.close()
             
-            except WhoException as e:
-                    self.logger.error(e, exc_info=True)
+            except Exception as e:
+                    raise WhoException(e)
                     sock.close()
         else:
                 self.logger.debug('no whois server is set :( ')
