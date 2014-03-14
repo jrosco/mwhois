@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import time
+import exception
 
 
 class MWhoisUtil():
@@ -15,8 +16,6 @@ class MWhoisUtil():
         Convert any date string found in WHOIS to a time object.
         """
 
-        date_str2 = str(date_str)
-
         known_formats = [
             '%d-%b-%Y', # 02-jan-2000
             '%Y-%m-%d', # 2000-01-02
@@ -27,8 +26,15 @@ class MWhoisUtil():
 
         for date_format in known_formats:
             try:
-                return time.strptime(date_str2.strip(), date_format)
+                return time.strptime(date_str.strip(), date_format)
             except ValueError, e:
                 pass
 
-        return date_str2
+        return
+
+    @staticmethod
+    def get_formatted_date(date_str):
+
+        date_obj = MWhoisUtil.parser_date(date_str)
+        full_date = '%s-%s-%s' % (date_obj.tm_year, date_obj.tm_mon, date_obj.tm_mday)
+        return full_date

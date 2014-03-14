@@ -175,21 +175,29 @@ class WhoisSearch():
         
         attribute = self.whois_info.get_whois_attr(CONST.CDATE)
 
-        cdate = util.MWhoisUtil().parser_date(attribute)
+        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
 
-        return cdate
+        return date_obj
 
     def expiry_date(self):
         
         self.logger.debug('called expiry_date()')
         
-        return self.whois_info.get_whois_attr(CONST.EDATE)
+        attribute  =self.whois_info.get_whois_attr(CONST.EDATE)
+
+        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+
+        return date_obj
     
     def update_date(self):
         
         self.logger.debug('called update_date()')
         
-        return self.whois_info.get_whois_attr(CONST.UPDATE)
+        attribute = self.whois_info.get_whois_attr(CONST.UPDATE)
+
+        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+
+        return date_obj
 
     def registrant(self):
         
