@@ -4,6 +4,7 @@ import re
 import logging
 
 from whomap import WhoisServerMap
+import util
 import const as CONST
 from exception import WhoException
 
@@ -27,6 +28,8 @@ class WhoisInfo(WhoisServerMap):
         self.emails = ''
         self.second_server = False
         self.tld_type = ''
+
+        self.mwhois_util = util.MWhoisUtil()
 
     def get_whois_server(self):
 
@@ -147,7 +150,7 @@ class WhoisInfo(WhoisServerMap):
                 whois_attr = self.all_info_map[self.tld][1]
 
             elif whois_attr is CONST.UPDATE:
-                whois_attr = self.all_info_map[self.tld][2]
+                whois_attr = self.mwhois_util.parser_date(whois_attr)
 
             elif whois_attr is CONST.REGISTRANT:
                 whois_attr = self.all_info_map[self.tld][3]
