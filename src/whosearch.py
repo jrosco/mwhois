@@ -7,6 +7,7 @@ from mwhois.whoconnect import WhoisServerConnection
 from mwhois.whois import WhoisInfo
 from mwhois.exception import *
 import mwhois.const as CONST
+import util
 
 
 class WhoisSearch():
@@ -172,7 +173,11 @@ class WhoisSearch():
         
         self.logger.debug('called creation_date()')
         
-        return self.whois_info.get_whois_attr(CONST.CDATE)
+        attribute = self.whois_info.get_whois_attr(CONST.CDATE)
+
+        cdate = util.MWhoisUtil().parser_date(attribute)
+
+        return cdate
 
     def expiry_date(self):
         
