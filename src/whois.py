@@ -112,8 +112,6 @@ class WhoisInfo(WhoisServerMap):
 
         self.logger.debug('called get_tld_type()')
 
-        print(self.tld)
-
         try:
 
             self.tld_type = self.all_server_map[self.tld]
