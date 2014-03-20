@@ -115,13 +115,14 @@ class WhoisInfo(WhoisServerMap):
         try:
 
             self.tld_type = self.all_server_map[self.tld]
-            self.logger.debug('tld type is %s' % self.tld_type)
+            self.logger.debug('tld type is %s' % self.tld_type[4])
 
-        except Exception, e:
+        #TODO Fix this exception handling
+        except:
 
-            self.logger.error('tld type error: %s' % e)
-            raise WhoException(e)
+            pass
 
+        print(self.tld_type[4])
         return self.tld_type[4]
 
     #TODO: Fix typo should be named get_response()
