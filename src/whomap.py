@@ -5,6 +5,17 @@ import const as CONST
 #domain whois server info found at http://www.iana.org/domains/root/db
 #gtld launch dates http://www.sedo.com/us/new-gtlds/gtld-launch-dates/
 
+
+"""
+Still to Add
+.uno	unodominio.com x
+.ceo	peoplebrowsr.com x
+.berlin	whois.nic.berlin
+.ruhr	whois.nic.ruhr
+
+
+"""
+
 class WhoisServerMap(object):
 
     def __init__(self):
@@ -132,39 +143,58 @@ class WhoisServerMap(object):
                                'xxx': ['whois.nic.xxx', 'whois.internic.net', 'NOT FOUND', '', CONST.GTLD_STANDARD],
 
                                 #Add Extra gTLD's
+                                'academy': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'bike': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'builders': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'camera': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                #'camp': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'camp': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'cab': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'careers': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'center': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'clothing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'construction': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'contractors': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'company': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'computer': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 #'cool': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'diamonds': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'directory': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'domains': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'education': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'enterprises': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'email': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'equipment': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'estate': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'gallery': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'glass': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'holdings': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'kicthen': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'land': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'lighting': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'limo': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 #'ninja': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
+                                'institute': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'management': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'menu': ['whois.nic.menu', '', 'No Data Found', '', CONST.GTLD_STANDARD],
                                 'photography': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'photos': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'plumbing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'recipes': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'rentals': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'repair': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'sexy': ['whois.uniregistry.net', '', 'is available for registration', '', CONST.GTLD_UNIREG],
                                 'shoes': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'singles': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'systems': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'support': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'soultions': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'tips': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'training': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'ventures': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'voyage': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'tattoo': ['whois.uniregistry.net', '', 'is available for registration', '',
-                                           CONST.GTLD_STANDARD]
+                                           CONST.GTLD_STANDARD],
+                                #'uno': ['unodominio.com', '', '', '', CONST.GTLD_STANDARD]
                                 }
 
         self.all_info_map = {'ac': ['N/A', 'Expiry :s*(.+)', 'N/A', 'N/A', 'N/A'],
@@ -299,7 +329,10 @@ class WhoisServerMap(object):
                                      'Registrants*(.+)', 'Name Server:s*(.+)'],
 
                              #Standard gtld's
-                             'tattoo': ['', '', '', '', ''],
+                             'menu': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
+                                      'Registrants*(.+)', 'N/A'],
+                             'tattoo': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             #'uno': ['', '', '', '', ''],
 
                              #Used for all whois.donuts.co gtld's whois server
                              CONST.GTLD_DONUTS: ['Creation Date:s*(.+)', 'Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
