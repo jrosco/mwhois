@@ -19,11 +19,27 @@ class WhoisServerConnection():
         self.sleep = 0
         self.no_of_attempts = 0
         self.timeout = 10
+        self.proxy = False
+        self.proxy_host = None
+        self.proxy_port = 0
+        self.proxy_type = None
+        self.proxy_user = None
+        self.proxy_password = None
         
     def connection(self):
-        
+
         self.logger.debug('called connection()')
-        
+
+        if self.proxy is True:
+            try:
+                import socks
+                self.logger.debug('called setup proxy()')
+                socks.setdefaultproxy(proxytype=self.proxy_type, addr=self.proxy_host, port=self.proxy_port,
+                                      username=self.proxy_user, password=self.proxy_password)
+                socket.socket = socks.socksocket
+            except Exception, e:
+                raise WhoException(e)
+
         if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
             
             self.logger.debug('sleep for %f', self.sleep)
