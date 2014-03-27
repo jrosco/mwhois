@@ -35,7 +35,7 @@
 # s.connection.proxy_type = CONST.PROXY_TYPE_SOCKS5
 # s.whois_search()
 # print(s.response())
-# 
+# #
 # """Print Whois attributes returned as a list"""
 # print(s.creation_date())
 # print(s.expiry_date())

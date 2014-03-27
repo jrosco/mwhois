@@ -3,7 +3,6 @@
 import socket
 import time
 import logging
-
 from exception import WhoException
 
 
