@@ -354,7 +354,7 @@ class WhoisServerMap(object):
                              'tm': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'to': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'tr': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-                             'tv': ['Creation Dates*(.+)', 'N/A', 'Updated Date:s*(.+)', 'N/A', 'Name Server:s*(.+)'],
+                             'tv': ['Creation Date:s*(.+)', 'N/A', 'Updated Date:s*(.+)', 'N/A', 'Name Server:s*(.+)'],
                              'tw': ['Record created ons*(.+)', 'expires ons*(.+)', 'N/A', 'Registrants*(.+)', 'N/A'],
                              'ua': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'ug': ['Registered:s*(.+)', 'Expiry:             s*(.+)', 'Updated:s*(.+)', 'N/A',
@@ -376,9 +376,12 @@ class WhoisServerMap(object):
                                       'Registrants*(.+)', 'N/A'],
                              'buzz': ['Registration Date:s*(.+)', 'Expiration Date:s*(.+)', 'Last Updated Date:s*(.+)',
                                       'Updated by Registrar:s*(.+)', 'Name Server:s*(.+)'],
-                             'build': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-                             'club': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-                             'kiwi': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'build': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date::s*(.+)',
+                                       'Registrant Name:s*(.+)', 'N/A'],
+                             'club': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date::s*(.+)',
+                                      'Domain Last Updated Date::s*(.+)', 'Last Updated by Registrar: :s*(.+)', 'N/A'],
+                             'kiwi': ['Creation Date:s*(.+)', 'Registry Expiry Date: ', 'Updated Date:s*(.+)',
+                                      'Registrant ID:', 'Name Server:s*(.+)'],
                              'luxury': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'onl': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'qpon': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
@@ -387,7 +390,7 @@ class WhoisServerMap(object):
 
                              #Used for all whois.donuts.co gtld's whois server
                              CONST.GTLD_DONUTS: ['Creation Date:s*(.+)', 'Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
-                                     'Registrants*(.+)', 'Name Server:s*(.+)'],
+                                                 'Registrants*(.+)', 'Name Server:s*(.+)'],
 
                              #Used for all whois.unitedtld.com gtld's whois server
                              CONST.GTLD_UNITED: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
