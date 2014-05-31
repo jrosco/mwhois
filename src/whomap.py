@@ -4,7 +4,7 @@ import const as CONST
 
 #domain whois server info found at http://www.iana.org/domains/root/db
 #gtld launch dates http://www.sedo.com/us/new-gtlds/gtld-launch-dates/
-
+#Wiki with info about domain names tld's https://wiki.rrpproxy.net/Main_Page
 
 """
 Still to Add
@@ -201,16 +201,16 @@ class WhoisServerMap(object):
                                 #More gTLDs
                                 'agency': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'bargains': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'boutique': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_STANDARD],
-                                'build': ['whois.nic.build', '', '', '', CONST.GTLD_STANDARD],
-                                'buzz': ['buzznames.biz', '', '', '', CONST.GTLD_DONUTS],
-                                'cheap': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_STANDARD],
-                                'club': ['whois.nic.club', '', '', '',  CONST.GTLD_DONUTS],
+                                'boutique': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'build': ['whois.nic.build', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+                                'buzz': ['whois.nic.buzz', '', 'Not found', '', CONST.GTLD_STANDARD],
+                                'cheap': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'club': ['whois.nic.club', '', 'Not found', '',  CONST.GTLD_STANDARD],
                                 'codes': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'coffee': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'cool': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_UNITED],
-                                'dance' :['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
-                                'democrat': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'cool': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'dance': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
+                                'democrat': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
                                 'expert': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'exposed': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'farm': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
@@ -223,16 +223,16 @@ class WhoisServerMap(object):
                                 'holiday': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'house': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'international': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_STANDARD],
-                                'kiwi': ['whois.dot-kiwi.com', '', '', '', CONST.GTLD_UNIREG],
+                                'kiwi': ['whois.dot-kiwi.com', '', 'Not Registered', '', CONST.GTLD_STANDARD],
                                 'link': ['whois.uniregistry.net', '', 'is available for registration', '',
-                                         CONST.GTLD_STANDARD],
-                                'luxury': ['whois.nic.luxury', '', '', '', CONST.GTLD_DONUTS],
-                                'marketing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_STANDARD],
-                                'onl': ['whois.afilias-srs.net', '', '', '', CONST.GTLD_UNIREG],
+                                         CONST.GTLD_UNIREG],
+                                'luxury': ['whois.nic.luxury', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+                                'marketing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'onl': ['whois.afilias-srs.net', '', 'NOT FOUND', '', CONST.GTLD_STANDARD],
                                 'pics': ['whois.uniregistry.net', '', 'is available for registration', '',
-                                         CONST.GTLD_DONUTS],
+                                         CONST.GTLD_UNIREG],
                                 'properties': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'qpon': ['dotqpon.com', '', '', '', CONST.GTLD_DONUTS],
+                                'qpon': ['whois.nic.qpon', '', 'Not found', '', CONST.GTLD_STANDARD],
                                 'solar': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'viajes': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'watch': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
@@ -374,7 +374,18 @@ class WhoisServerMap(object):
                              #Standard gtld's
                              'menu': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
                                       'Registrants*(.+)', 'N/A'],
+                             'buzz': ['Registration Date:s*(.+)', 'Expiration Date:s*(.+)', 'Last Updated Date:s*(.+)',
+                                      'Updated by Registrar:s*(.+)', 'Name Server:s*(.+)'],
+                             'build': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'club': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'kiwi': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'luxury': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'onl': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             'qpon': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'tattoo': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+
+
+
                              #'uno': ['', '', '', '', ''],
 
                              #Used for all whois.donuts.co gtld's whois server
