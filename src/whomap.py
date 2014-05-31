@@ -383,9 +383,6 @@ class WhoisServerMap(object):
                              'onl': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'qpon': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'tattoo': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-
-
-
                              #'uno': ['', '', '', '', ''],
 
                              #Used for all whois.donuts.co gtld's whois server
