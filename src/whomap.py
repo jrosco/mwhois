@@ -205,7 +205,10 @@ class WhoisServerMap(object):
                                 'agency': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'bargains': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'boutique': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'build': ['whois.nic.build', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
+                                #TODO: Server not responding
+                                #'build': ['whois.nic.build', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
                                 'buzz': ['whois.nic.buzz', '', 'Not found', '', CONST.GTLD_STANDARD],
                                 'cheap': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'club': ['whois.nic.club', '', 'Not found', '',  CONST.GTLD_STANDARD],
@@ -384,12 +387,12 @@ class WhoisServerMap(object):
                                       'Updated by Registrar:s*(.+)', 'Name Server:s*(.+)'],
                              'build': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date::s*(.+)',
                                        'Registrant Name:s*(.+)', 'N/A'],
-                             'club': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date::s*(.+)',
-                                      'Domain Last Updated Date::s*(.+)', 'Last Updated by Registrar: :s*(.+)', 'N/A'],
+                             'club': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date:s*(.+)',
+                                      'Domain Last Updated Date:s*(.+)', 'Last Updated by Registrar:s*(.+)', 'N/A'],
                              'kiwi': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
                                       'Registrant ID:', 'Name Server:s*(.+)'],
                              'luxury': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-                             'onl': ['Creation Date:s*(.+)', 'Registry Expiry Date: ', 'Updated Date:s*(.+)',
+                             'onl': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
                                      'Registrant ID:', 'Name Server:s*(.+)'],
                              'qpon': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date: s*(.+)',
                                       'Domain Last Updated Date: s*(.+)', 'Last Updated by Registrar:s*(.+)', 'N/A'],
