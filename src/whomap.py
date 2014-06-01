@@ -176,7 +176,10 @@ class WhoisServerMap(object):
                                 #'ninja': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
                                 'institute': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'management': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'menu': ['whois.nic.menu', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
+                                #TODO: Server not responding
+                                #'menu': ['whois.nic.menu', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
                                 'photography': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'photos': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'plumbing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
@@ -226,7 +229,10 @@ class WhoisServerMap(object):
                                 'kiwi': ['whois.dot-kiwi.com', '', 'Not Registered', '', CONST.GTLD_STANDARD],
                                 'link': ['whois.uniregistry.net', '', 'is available for registration', '',
                                          CONST.GTLD_UNIREG],
-                                'luxury': ['whois.nic.luxury', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
+                                #TODO: Server not responding
+                                #'luxury': ['whois.nic.luxury', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+
                                 'marketing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'onl': ['whois.afilias-srs.net', '', 'NOT FOUND', '', CONST.GTLD_STANDARD],
                                 'pics': ['whois.uniregistry.net', '', 'is available for registration', '',
@@ -380,7 +386,7 @@ class WhoisServerMap(object):
                                        'Registrant Name:s*(.+)', 'N/A'],
                              'club': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date::s*(.+)',
                                       'Domain Last Updated Date::s*(.+)', 'Last Updated by Registrar: :s*(.+)', 'N/A'],
-                             'kiwi': ['Creation Date:s*(.+)', 'Registry Expiry Date: ', 'Updated Date:s*(.+)',
+                             'kiwi': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
                                       'Registrant ID:', 'Name Server:s*(.+)'],
                              'luxury': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'onl': ['Creation Date:s*(.+)', 'Registry Expiry Date: ', 'Updated Date:s*(.+)',
