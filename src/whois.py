@@ -122,7 +122,6 @@ class WhoisInfo(WhoisServerMap):
 
             pass
 
-        print(self.tld_type[4])
         return self.tld_type[4]
 
     #TODO: Fix typo should be named get_response()
