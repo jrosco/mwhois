@@ -173,7 +173,7 @@ class WhoisServerMap(object):
                                 'land': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'lighting': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'limo': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                #'ninja': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
+                                'ninja': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
                                 'institute': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'management': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
 
