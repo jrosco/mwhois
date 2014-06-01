@@ -144,7 +144,8 @@ class WhoisServerMap(object):
                                'xxx': ['whois.nic.xxx', 'whois.internic.net', 'NOT FOUND', '', CONST.GTLD_STANDARD],
 
                                 #Add Extra gTLD's
-                                'academy': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'academy': ['whois.donuts.co', '', 'Domain not found',
+                                            'Your request is being rate limited', CONST.GTLD_DONUTS],
                                 'bike': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'builders': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'camera': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
@@ -225,7 +226,7 @@ class WhoisServerMap(object):
                                 'kiwi': ['whois.dot-kiwi.com', '', 'Not Registered', '', CONST.GTLD_STANDARD],
                                 'link': ['whois.uniregistry.net', '', 'is available for registration', '',
                                          CONST.GTLD_UNIREG],
-                                'luxury': ['whois.nic.menu', '', 'No Data Found', '', CONST.GTLD_STANDARD],
+                                'luxury': ['whois.nic.luxury', '', 'No Data Found', '', CONST.GTLD_STANDARD],
                                 'marketing': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'onl': ['whois.afilias-srs.net', '', 'NOT FOUND', '', CONST.GTLD_STANDARD],
                                 'pics': ['whois.uniregistry.net', '', 'is available for registration', '',
@@ -372,7 +373,7 @@ class WhoisServerMap(object):
 
                              #Standard gtld's
                              'menu': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
-                                      'Registrants*(.+)', 'N/A'],
+                                      'Registrant:s*(.+)', 'N/A'],
                              'buzz': ['Registration Date:s*(.+)', 'Expiration Date:s*(.+)', 'Last Updated Date:s*(.+)',
                                       'Updated by Registrar:s*(.+)', 'Name Server:s*(.+)'],
                              'build': ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)', 'Updated Date::s*(.+)',
@@ -383,8 +384,9 @@ class WhoisServerMap(object):
                                       'Registrant ID:', 'Name Server:s*(.+)'],
                              'luxury': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              'onl': ['Creation Date:s*(.+)', 'Registry Expiry Date: ', 'Updated Date:s*(.+)',
-                                      'Registrant ID:', 'Name Server:s*(.+)'],
-                             'qpon': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                                     'Registrant ID:', 'Name Server:s*(.+)'],
+                             'qpon': ['Domain Registration Date:s*(.+)', 'Domain Expiration Date: s*(.+)',
+                                      'Domain Last Updated Date: s*(.+)', 'Last Updated by Registrar:s*(.+)', 'N/A'],
                              'tattoo': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              #'uno': ['', '', '', '', ''],
 
