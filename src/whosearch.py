@@ -175,7 +175,10 @@ class WhoisSearch():
         
         attribute = self.whois_info.get_whois_attr(CONST.CDATE)
 
-        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        try:
+            date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        except:
+            date_obj = 'N/A'
 
         return date_obj
 
@@ -185,7 +188,10 @@ class WhoisSearch():
         
         attribute  =self.whois_info.get_whois_attr(CONST.EDATE)
 
-        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        try:
+            date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        except:
+            date_obj = 'N/A'
 
         return date_obj
     
@@ -195,7 +201,10 @@ class WhoisSearch():
         
         attribute = self.whois_info.get_whois_attr(CONST.UPDATE)
 
-        date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        try:
+            date_obj = util.MWhoisUtil.get_formatted_date(attribute[0])
+        except:
+            date_obj = 'N/A'
 
         return date_obj
 
