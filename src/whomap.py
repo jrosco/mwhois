@@ -221,7 +221,7 @@ class WhoisServerMap(object):
                                 'exposed': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'farm': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'florist': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'foundation': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_UNIREG],
+                                'foundation': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'gift': ['whois.uniregistry.net', '', 'is available for registration', '',
                                          CONST.GTLD_UNIREG],
                                 'guitars': ['whois.uniregistry.net', '', 'is available for registration', '',
@@ -404,8 +404,11 @@ class WhoisServerMap(object):
                                                  'Registrants*(.+)', 'Name Server:s*(.+)'],
 
                              #Used for all whois.unitedtld.com gtld's whois server
-                             CONST.GTLD_UNITED: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
+                             CONST.GTLD_UNITED: ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)',
+                                                 'Updated Date:s*(.+)', 'Registrant Name:*(.+)', 'Name Server:s*(.+)'],
 
+                             #TODO: Not showing dates when parsed
                              #Used for all whois.uniregistry.net  gtld's whois server
-                             CONST.GTLD_UNIREG: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A']
+                             CONST.GTLD_UNIREG: ['Creation Date:s*(.+)', 'Registry Expiry Date:s*(.+)',
+                                                 'Updated Date:s*(.+)', 'Registrant Name:*(.+)', 'Name Server:s*(.+)']
                              }
