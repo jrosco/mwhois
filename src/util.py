@@ -35,6 +35,7 @@ class MWhoisUtil():
     @staticmethod
     def get_formatted_date(date_str):
 
+        #TODO: Add a case to map months numbers to english display .e.g 07 = "July"
         date_obj = MWhoisUtil.parser_date(date_str)
         full_date = '%s-%s-%s' % (date_obj.tm_year, date_obj.tm_mon, date_obj.tm_mday)
         return full_date
