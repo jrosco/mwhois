@@ -113,11 +113,14 @@ class WhoisSearch():
                 self.connection.no_of_attempts = 1
                 self.connection.connection()
                 alive = self.whois_info.is_domain_alive()
-#             else:
-#                 self.logger.info("sorry your out of luck, you have been denied by both whois servers, \
-#                   please try again later....better luck next time")
-#                 sys.exit()
-              
+
+            #TODO: Testing exceeded logic####################################################################33
+            else:
+                self.logger.info("sorry your out of luck, you have been denied by both whois servers")
+                d_list = [CONST.DOMAIN_STATUS_UNKNOWN, self.whois_info.domain]
+                yield d_list
+            #TODO:###########################################################################################33
+
             if alive is CONST.DOMAIN_DEAD:
                 d_list = [CONST.DOMAIN_DEAD, self.whois_info.domain]
                 yield d_list
