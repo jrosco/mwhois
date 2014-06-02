@@ -9,7 +9,7 @@ from exception import WhoException
 class WhoisServerConnection():
     
     def __init__(self, whoinfo):
-        
+
         self.logger = logging.getLogger(__name__)
 
         self.logger.debug('constructor: __init__()')
@@ -27,7 +27,7 @@ class WhoisServerConnection():
         
     def connection(self):
 
-        self.logger.debug('called connection()')
+        self.logger.debug('called connection(%s)' % self.whoinfo.whoisserver)
 
         if self.proxy is True:
             try:
@@ -39,7 +39,16 @@ class WhoisServerConnection():
             except Exception, e:
                 raise WhoException(e)
 
-        if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
+        #TODO: Remove this after testing #############################################
+        if not str(self.whoinfo.whoisserver):
+            self.logger.debug('Server not found')
+        else:
+            self.logger.debug('Server found (%s)' % self.whoinfo.whoisserver)
+        #TODO: #######################################################################
+
+        #TODO: Testing .coffee connection exceeded issue
+        if str(self.whoinfo.whoisserver):
+        #if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)
