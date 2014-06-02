@@ -53,6 +53,7 @@ class WhoisSearch():
         if status is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is not 1 \
                 or status is CONST.DOMAIN_STATUS_UNKNOWN:
 
+            #TODO: I don't think this statement is ever reached?? Need to test
             if status is CONST.DOMAIN_SEARCH_EXCEEDED:
                 self.logger.debug('lets try a another server shall we. Attempts = %s', self.connection.no_of_attempts)
                 self.whois_info.second_server = True

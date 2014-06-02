@@ -200,6 +200,9 @@ class WhoisInfo(WhoisServerMap):
             self.logger.info('%s you have exceeded your quota of queries (oops)', self.domain)
             self.logger.info('Lets try a different server...')
 
+            """ Clear whoiserver for next/second check, so it doesn't affect next/second check """
+            self.whoisserver = ''
+
             return CONST.DOMAIN_SEARCH_EXCEEDED
 
         if re.search(self.not_found, self.response):
