@@ -204,7 +204,8 @@ class WhoisServerMap(object):
                                 #More gTLDs
                                 'agency': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'bargains': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
-                                'boutique': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+                                'boutique': ['whois.donuts.co', '', 'Domain not found',
+                                             'Your request is being rate limited.', CONST.GTLD_DONUTS],
 
                                 #TODO: Server not responding
                                 #'build': ['whois.nic.build', '', 'No Data Found', '', CONST.GTLD_STANDARD],
@@ -214,7 +215,7 @@ class WhoisServerMap(object):
                                 'club': ['whois.nic.club', '', 'Not found', '',  CONST.GTLD_STANDARD],
                                 'codes': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'coffee': ['whois.donuts.co', '', 'Domain not found',
-                                           'Your request is being rate limited. ', CONST.GTLD_DONUTS],
+                                           'Your request is being rate limited.', CONST.GTLD_DONUTS],
                                 'cool': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
                                 'dance': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
                                 'democrat': ['whois.unitedtld.com', '', 'Domain not found', '', CONST.GTLD_UNITED],
