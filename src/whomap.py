@@ -34,7 +34,7 @@ class WhoisServerMap(object):
                                'am': ['whois.nic.am', '', 'No match', '', CONST.CCTLD_STANDARD],
                                'as': ['whois.nic.as', '', 'Not Registered', '', CONST.CCTLD_STANDARD],
                                'at': ['whois.nic.at', '', 'nothing found', '', CONST.CCTLD_STANDARD],
-                               'au': ['whois.aunic.net', 'whois-check.ausregistry.net.au', 'No Data Found',
+                               'au': ['whois.aunic.net', 'whois-check.ausregistry.net.au', 'No Data Found|^Available',
                                       'BLACKLISTED', CONST.CCTLD_STANDARD],
                                'be': ['whois.dns.be', '', 'Status:    AVAILABLE', '', CONST.CCTLD_STANDARD],
                                'biz': ['whois.biz', '', 'Not found', '', CONST.TLD_STANDARD],

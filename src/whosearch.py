@@ -57,9 +57,6 @@ class WhoisSearch():
                 self.logger.debug('lets try a another server shall we. Attempts = %s', self.connection.no_of_attempts)
                 self.whois_info.second_server = True
 
-            #TODO: Testing... (remove)
-            #self.whois_server = self.whois_info.get_whois_server()
-
             self.connection.no_of_attempts = 1
             self.connection.connection()
         
@@ -112,15 +109,14 @@ class WhoisSearch():
 
                 if alive is CONST.DOMAIN_SEARCH_EXCEEDED:
                     self.whois_info.second_server = True
-
-                self.whois_server = self.whois_info.get_whois_server()
+                    self.whois_server = self.whois_info.get_whois_server()
 
                 self.connection.no_of_attempts = 1
                 self.connection.connection()
                 alive = self.whois_info.is_domain_alive()
 
             #TODO: Testing exceeded logic####################################################################33
-            elif self.connection.no_of_attempts is 1:
+            elif alive is CONST.DOMAIN_SEARCH_EXCEEDED and self.connection.no_of_attempts is 1:
                 self.logger.info("sorry your out of luck, you have been denied by both whois servers")
                 d_list = [CONST.DOMAIN_SEARCH_EXCEEDED, self.whois_info.domain]
                 yield d_list

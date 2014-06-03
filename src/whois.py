@@ -48,10 +48,7 @@ class WhoisInfo(WhoisServerMap):
                 self.get_domain_tld()
 
             self.whoisserver = self.all_server_map[self.tld][list_number]
-            #self.whoisserver =  server_map[self.tld]
             self.logger.debug('return %s', self.whoisserver)
-
-            #self.logger.info('Querying %s' % self.whoisserver)
 
         except WhoException:
 
@@ -199,9 +196,6 @@ class WhoisInfo(WhoisServerMap):
             self.second_server = True
             self.logger.info('%s you have exceeded your quota of queries (oops)', self.domain)
             self.logger.info('Lets try a different server...')
-
-            """ Clear whoiserver for next/second check, so it doesn't affect next/second check """
-            #self.whoisserver = ''
 
             return CONST.DOMAIN_SEARCH_EXCEEDED
 
