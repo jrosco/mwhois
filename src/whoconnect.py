@@ -39,16 +39,7 @@ class WhoisServerConnection():
             except Exception, e:
                 raise WhoException(e)
 
-        #TODO: Remove this after testing #############################################
-        if not str(self.whoinfo.whoisserver):
-            self.logger.debug('Server not found')
-        else:
-            self.logger.debug('Server found (%s)' % self.whoinfo.whoisserver)
-        #TODO: #######################################################################
-
-        #TODO: Testing .coffee connection exceeded issue
         if str(self.whoinfo.whoisserver):
-        #if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)
