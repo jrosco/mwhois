@@ -201,7 +201,7 @@ class WhoisInfo(WhoisServerMap):
             self.logger.info('Lets try a different server...')
 
             """ Clear whoiserver for next/second check, so it doesn't affect next/second check """
-            self.whoisserver = ''
+            #self.whoisserver = ''
 
             return CONST.DOMAIN_SEARCH_EXCEEDED
 
