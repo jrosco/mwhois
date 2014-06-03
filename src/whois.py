@@ -48,10 +48,7 @@ class WhoisInfo(WhoisServerMap):
                 self.get_domain_tld()
 
             self.whoisserver = self.all_server_map[self.tld][list_number]
-            #self.whoisserver =  server_map[self.tld]
             self.logger.debug('return %s', self.whoisserver)
-
-            #self.logger.info('Querying %s' % self.whoisserver)
 
         except WhoException:
 

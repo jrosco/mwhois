@@ -9,7 +9,7 @@ from exception import WhoException
 class WhoisServerConnection():
     
     def __init__(self, whoinfo):
-        
+
         self.logger = logging.getLogger(__name__)
 
         self.logger.debug('constructor: __init__()')
@@ -27,7 +27,7 @@ class WhoisServerConnection():
         
     def connection(self):
 
-        self.logger.debug('called connection()')
+        self.logger.debug('called connection(%s)' % self.whoinfo.whoisserver)
 
         if self.proxy is True:
             try:
@@ -39,7 +39,7 @@ class WhoisServerConnection():
             except Exception, e:
                 raise WhoException(e)
 
-        if self.whoinfo.whoisserver is not None or self.whoinfo.whoiserver is not '':
+        if str(self.whoinfo.whoisserver):
             
             self.logger.debug('sleep for %f', self.sleep)
             time.sleep(self.sleep)

@@ -1,7 +1,8 @@
 #Mwhois attributes
 DOMAIN_FOUND = "Domain Taken"
 DOMAIN_NOT_FOUND = "Domain Available"
-DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain" 
+DOMAIN_FOUND_ADV = "Domain Found but could be Parked, a Dead Site or a Redirected Domain"
+DONUTS_WHOIS_EXCEEDED_TXT = 'Your request is being rate limited.'
 DOMAIN_DEAD = 0
 DOMAIN_ALIVE = 1
 DOMAIN_SEARCH_EXCEEDED = 2
