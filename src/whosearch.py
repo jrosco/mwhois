@@ -87,16 +87,6 @@ class WhoisSearch():
         else:
             self.logger.debug('trying opening wordlist as a file')
             search_list = open(self.wordlist, 'r')
-
-        #TODO remove later, may not be needed. Also need to test WhoException Class
-        # try:
-        #
-        #     self.logger.debug('trying opening wordlist as a file')
-        #     search_list = open(self.wordlist, 'r')
-        #
-        # except WhoException, e:
-        #     self.logger.debug('ok it\'s not a file object must be a list type. ')
-        #     search_list = self.wordlist
             
         for line in search_list:
 
