@@ -110,7 +110,7 @@ class WhoisServerMap(object):
                                'nu': ['whois.nic.nu', '', 'not found', '', CONST.CCTLD_STANDARD],
                                'nz': ['whois.srs.net.nz', '', '220 Available', '', CONST.CCTLD_STANDARD],
                                'org': ['whois.publicinterestregistry.net', 'whois.domain.com', 'NOT FOUND',
-                                       'WHOIS LIMIT EXCEEDED', CONST.TLD_STANDARD],
+                                       'WHOIS LIMI|Lookup refused', CONST.TLD_STANDARD],
                                'pl': ['whois.dns.pl', '', 'No information available', '', CONST.CCTLD_STANDARD],
                                'pm': ['whois.nic.pm', '', '', '', CONST.CCTLD_STANDARD],
                                'pr': ['whois.uprr.pr', '', '', '', CONST.CCTLD_STANDARD],
