@@ -46,7 +46,13 @@ class WhoisSearch():
             self.whois_info.whoisserver = self.whois_server
 
         self.connection.sleep = self.sleep
-        self.connection.connection()
+
+        try:
+            self.connection.connection()
+        except WhoException, e:
+            self.logger.info('connection issue [ %s ]' % e)
+            self.whois_info.second_server = True
+            self.whois_server = self.whois_info.get_whois_server()
         
         status = self.whois_info.is_domain_alive()
         
@@ -100,7 +106,13 @@ class WhoisSearch():
                 self.whois_info.domain = line.rstrip() + "." + self.tld
             
             self.whois_server = self.whois_info.get_whois_server()
-            self.connection.connection()
+
+            try:
+                self.connection.connection()
+            except WhoException, e:
+                self.logger.info('connection issue [ %s ]' % e)
+                self.whois_info.second_server = True
+                self.whois_server = self.whois_info.get_whois_server()
             
             alive = self.whois_info.is_domain_alive()
             
