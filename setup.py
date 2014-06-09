@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = '0.1.0b'
+version = '0.1.1b'
 
 long_description = '''\
 mwhois is a small python whois search module capable of finding multiple available domains via a file or list type. 
