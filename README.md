@@ -14,11 +14,11 @@ Features
 * 100+ searchable TLDS
 * 30+ gTLDS e.g .graphics, .guru, .technology, .today etc
 * Search second whois server if first one fails (limited to certain tld's)
+* Connect to whois server via a proxy
 
 Features to come
 * TODO: Caching results for quicker responses and avoid exceeding query limits
 * TODO: Print results to csv and pdf
-* TODO: Ability to connect to whois server via a proxy
 
 How to use mwhois python module 
 ---
