@@ -77,11 +77,16 @@ Usage
 #  
 # """Single domain search"""
 # from mwhois.whosearch import WhoisSearch
-#  
-# s = WhoisSearch(dname='google.org')
+# import mwhois.const as CONST
+#
+# s = WhoisSearch(dname='google.org', debug=False)
+# s.connection.proxy = True
+# s.connection.proxy_host = '127.0.0.1'
+# s.connection.proxy_port = 1107
+# s.connection.proxy_type = CONST.PROXY_TYPE_SOCKS5
 # s.whois_search()
 # print(s.response())
-# 
+# #
 # """Print Whois attributes returned as a list"""
 # print(s.creation_date())
 # print(s.expiry_date())
