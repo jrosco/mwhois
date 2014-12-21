@@ -7,6 +7,7 @@ m-whois is a small python whois search module capable of finding multiple availa
 Dependencies
 * Python >= 2.7.3 (Python 3 not supported yet) Download from http://www.python.org/download/
 * Note: If you want to run the example GUI application you'll need the python module wx (can still run cmd.py without this module, but only with command line support) Download wx from http://wxpython.org/
+* To use the proxy feature you'll need the pysocks module installed. Down from https://pypi.python.org/pypi/PySocks/ 
 
 Features 
 * Search for single/multiple domains with direct connection to a large list of  whois servers  
