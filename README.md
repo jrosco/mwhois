@@ -1,4 +1,4 @@
-![](https://raw2.github.com/jrosco/mwhois/master/media/logo.png) 
+![](https://github.com/jrosco/mwhois/blob/gh-pages/images/octocat-icon.png) 
 =====
 *** 
 
@@ -31,8 +31,8 @@ Install
    or
    Download Zip File to the right (https://github.com/jrosco/mwhois/archive/master.zip)
 2. If you downloaded zip file ("unzip mwhois-master.zip" and "cd mwhois-master/src"
-3. If you used git clone ("cd mwhois/src")
-4. Now Run: python setup.py install
+3. If you used git clone ("cd mwhois/")
+4. Now Run: python setup.py install (you'll need correct permissions to install module. For linux use the sudo command)
 5. See examples below on how to use this these modules (These are also shown in examples/examples.py)
 
 Examples 
