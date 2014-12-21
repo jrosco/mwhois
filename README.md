@@ -1,4 +1,3 @@
-![](https://github.com/jrosco/mwhois/blob/gh-pages/images/octocat-icon.png) 
 =====
 *** 
 
