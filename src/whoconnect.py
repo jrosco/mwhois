@@ -32,13 +32,11 @@ class WhoisServerConnection():
         if self.proxy is True:
             try:
                 import socks
-                print self.proxy_host
-                print self.proxy_port
                 self.logger.debug('called setup proxy()')
-                socks.setdefaultproxy(proxy_type=self.proxy_type, addr=self.proxy_host, port=self.proxy_port,
-                                      username=self.proxy_user, password=self.proxy_password)
+                socks.set_default_proxy(proxy_type=self.proxy_type, addr=self.proxy_host, port=self.proxy_port,
+                                        username=self.proxy_user, password=self.proxy_password)
                 socket.socket = socks.socksocket
-            except Exception, e:
+            except socket.error, e:
                 raise WhoException(e)
 
         if str(self.whoinfo.whoisserver):
