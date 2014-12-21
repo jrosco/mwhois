@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="mwhois - beta : mwhois is a small python whois search module capable of finding multiple available domains via a file or list type. It&#39;s a good way to search for domains that are available to buy.">
+    <meta name="description" content="mwhois module - v0.1.1b : mwhois is a small python whois search module capable of finding multiple available domains via a file or list type. It&#39;s a good way to search for domains that are available to buy.">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>mwhois - beta</title>
+    <title>mwhois module - v0.1.1b</title>
   </head>
 
   <body>
@@ -18,7 +18,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/jrosco/mwhois">View on GitHub</a>
 
-          <h1 id="project_title">mwhois - beta</h1>
+          <h1 id="project_title">mwhois module - v0.1.1b</h1>
           <h2 id="project_tagline">mwhois is a small python whois search module capable of finding multiple available domains via a file or list type. It&#39;s a good way to search for domains that are available to buy.</h2>
 
             <section id="downloads">
@@ -37,6 +37,8 @@
 
 <hr>
 
+<p>m-whois is a small python whois search module capable of finding multiple available domains via a file or list type. It's a good way to search for domains that are available to buy. (<a href="http://jrosco.github.io/mwhois">http://jrosco.github.io/mwhois</a>)</p>
+
 <p>Dependencies</p>
 
 <ul>
@@ -52,9 +54,10 @@
 <li>Search for single/multiple domains with direct connection to a large list of  whois servers<br>
 </li>
 <li>Show only available domains </li>
-<li>105 searchable TLDS </li>
-<li>4 new gTLDS .graphics, .guru, .technology, .today</li>
+<li>100+ searchable TLDS</li>
+<li>30+ gTLDS e.g .graphics, .guru, .technology, .today etc</li>
 <li>Search second whois server if first one fails (limited to certain tld's)</li>
+<li>Connect to whois server via a proxy</li>
 </ul>
 
 <p>Features to come</p>
@@ -62,7 +65,6 @@
 <ul>
 <li>TODO: Caching results for quicker responses and avoid exceeding query limits</li>
 <li>TODO: Print results to csv and pdf</li>
-<li>TODO: Ability to connect to whois server via a proxy</li>
 </ul>
 
 <h2>
@@ -130,11 +132,16 @@ python examples/cmd.py -t com -i files/wordlist-sample
 #  
 # """Single domain search"""
 # from mwhois.whosearch import WhoisSearch
-#  
-# s = WhoisSearch(dname='google.org')
+# import mwhois.const as CONST
+#
+# s = WhoisSearch(dname='google.org', debug=False)
+# s.connection.proxy = True
+# s.connection.proxy_host = '127.0.0.1'
+# s.connection.proxy_port = 1107
+# s.connection.proxy_type = CONST.PROXY_TYPE_SOCKS5
 # s.whois_search()
 # print(s.response())
-# 
+# #
 # """Print Whois attributes returned as a list"""
 # print(s.creation_date())
 # print(s.expiry_date())
@@ -195,7 +202,7 @@ python examples/cmd.py -t com -i files/wordlist-sample
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">mwhois - beta maintained by <a href="https://github.com/jrosco">jrosco</a></p>
+        <p class="copyright">mwhois module - v0.1.1b maintained by <a href="https://github.com/jrosco">jrosco</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
