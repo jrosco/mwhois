@@ -59,6 +59,7 @@ class WhoisServerConnection():
                 
             try:
                 self.logger.debug('connecting to server: %s', self.whoinfo.whoisserver)
+                str(self.whoinfo.whoisserver)
                 sock.connect((self.whoinfo.whoisserver, 43))
             
             except socket.error as e:
