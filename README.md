@@ -85,10 +85,11 @@ Usage
 # from mwhois.whosearch import WhoisSearch
 # import mwhois.const as CONST
 #
-# s = WhoisSearch(dname='google.org', debug=False)
-# s.connection.proxy = True
+# s = WhoisSearch(dname='iama.ninja', debug=False)
+# """ Enable proxy below by setting s.connection.proxy to True """
+# s.connection.proxy = False
 # s.connection.proxy_host = '127.0.0.1'
-# s.connection.proxy_port = 1107
+# s.connection.proxy_port = 8080
 # s.connection.proxy_type = CONST.PROXY_TYPE_SOCKS5
 # s.whois_search()
 # print(s.response())
