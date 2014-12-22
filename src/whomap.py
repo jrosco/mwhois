@@ -24,7 +24,7 @@ class WhoisServerMap(object):
 
         """
         Structure
-        ['first_server', 'second _server', 'status', 'exceeded', 'tld_type']
+        'tld': ['first_server', 'second _server', 'status', 'exceeded', 'tld_type']
         """
 
         self.all_server_map = {'ac': ['whois.nic.ac', '', 'is available', '', CONST.CCTLD_STANDARD],
