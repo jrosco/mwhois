@@ -24,7 +24,7 @@ class WhoisServerMap(object):
 
         """
         Structure
-        ['first_server', 'second _server', 'status', 'exceeded', 'tld_type']
+        'tld': ['first_server', 'second _server', 'status', 'exceeded', 'tld_type']
         """
 
         self.all_server_map = {'ac': ['whois.nic.ac', '', 'is available', '', CONST.CCTLD_STANDARD],
@@ -314,7 +314,40 @@ class WhoisServerMap(object):
                                           CONST.DONUTS_WHOIS_EXCEEDED_TXT, CONST.GTLD_DONUTS],
                                 'works': ['whois.donuts.co', '', 'Domain not found',
                                           CONST.DONUTS_WHOIS_EXCEEDED_TXT, CONST.GTLD_DONUTS],
-                                'zone': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS]
+                                'zone': ['whois.donuts.co', '', 'Domain not found', '', CONST.GTLD_DONUTS],
+
+                               #RightSide GTLD's
+                               'dentist': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'software': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'actor': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'engineer': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'consulting': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'haus': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'market': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'mortgage': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'attorney': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'social': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'democrat': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'dance': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'gives': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'army': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'futbol': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'republican': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'degree': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'immobilien': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'rehab': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'moda': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'ninja': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'navy': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'kaufen': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'rocks': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'lawyer': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'pub': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'vet': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'forsale': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'auction': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'rip': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
+                               'band': ['whois.rightside.co', '', 'Domain not found', '', CONST.GTLD_RIGHTSIDE],
                                 }
 
         self.all_info_map = {'ac': ['N/A', 'Expiry :s*(.+)', 'N/A', 'N/A', 'N/A'],
@@ -466,6 +499,10 @@ class WhoisServerMap(object):
                                       'Domain Last Updated Date: s*(.+)', 'Last Updated by Registrar:s*(.+)', 'N/A'],
                              'tattoo': ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
                              #'uno': ['', '', '', '', ''],
+
+                             #Used for all whois.rightside.co gtld's whois server
+                             CONST.GTLD_RIGHTSIDE: ['Creation Date:s*(.+)', 'Expiry Date:s*(.+)', 'Updated Date:s*(.+)',
+                                                 'Registrants*(.+)', 'Name Server:s*(.+)'],
 
                              #Used for all whois.donuts.co gtld's whois server
                              CONST.GTLD_DONUTS: ['Creation Date:s*(.+)', 'Expiry Date:s*(.+)', 'Updated Date:s*(.+)',

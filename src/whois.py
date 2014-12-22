@@ -138,6 +138,8 @@ class WhoisInfo(WhoisServerMap):
             self.tld = CONST.GTLD_UNITED
         elif self.get_tld_type() is CONST.GTLD_UNIREG:
             self.tld = CONST.GTLD_UNIREG
+        elif self.get_tld_type() is CONST.GTLD_RIGHTSIDE:
+            self.tld = CONST.GTLD_RIGHTSIDE
 
         try:
 
