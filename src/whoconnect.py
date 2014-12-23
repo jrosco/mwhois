@@ -91,6 +91,8 @@ class WhoisServerConnection():
                 
                 self.logger.debug('socket: closing socket object %s', sock)
                 sock.close()
+                """ Reset the proxy """
+                socks.socksocket.default_proxy = None
             
             except Exception as e:
                     raise WhoException(e)
