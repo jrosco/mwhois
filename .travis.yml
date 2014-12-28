@@ -7,3 +7,4 @@ install: pip install PySocks
 install: python setup.py install
 # command to run tests, e.g. python setup.py test
 script: python examples/cmd.py insp.com
+script: python examples/cmd.py -t com -i examples/wordlist.txt
